@@ -1,17 +1,15 @@
 Priority
-    2B: Config
-    1B: Basic Library
-    2M: General Library
-    1M: Specific Library
-    50k: Registrations (e.g. wands)
-    
-    <10k: scripts that won't be imported
+    2B:     Config
+    100M~1B:Library
+    1M:     Specific Library
+    50k:    Registrations (e.g. wands)
+    <10k:   scripts that won't be imported
 
     recipes:
-        2k:	preloading
-        1k:	massive recipe registering.	e.g. Smeltry Alloying Contamination  (Chapter2)
+        2k:	    preloading
+        1k:	    massive recipes
         500:	techban
-        0:	normal
+        0:	    normal
         -100:	fix
         <-200:	fixes after release
 
