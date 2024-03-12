@@ -1,0 +1,14 @@
+The modpack has several difficulties:
+    Easy, Normal, Hard, Lunatic, Ultra.
+When you enter the survival world, after your confirmation, the world is binded onto the current difficulty.
+The current difficulty is in scripts/Config.zs. (static DIFF as int) Rewrite the variable to change the difficulty. You need to save the file, and restart the game.
+
+The survival world is always binded to the selected difficulty. When it's found that the current difficulty is not the world difficulty, there will be error messages.
+    Usually, you are suggested to fix the [current difficulty], and restart the game.
+        Unfortunately, your automations might have run into problems as you entered the world with wrong difficulty, since the recipes don't match.
+    If you persist to play in the new difficulty, type "/syncDifficulty".
+        This doesn't change the quest difficulty. If you want to change the quest difficulty, enable FTBQuest Editing mode.
+        It's not suggested to change the world difficulty, since many recipes will have changed.
+
+On the other hand, non-survival world don't have this problem.
+You can type "/setTestWorld true" to change the world into a non-survival world.

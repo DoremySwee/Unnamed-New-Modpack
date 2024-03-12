@@ -1,5 +1,5 @@
-#relodable
-#priority 2000000000
+#reloadable
+#priority 1000000000
 static DEV as bool = true;
 static ALPHA as bool = true;
 //0: Easy, 1: Normal, 2: Hard, 3: Lunatic, 4: Ultra
