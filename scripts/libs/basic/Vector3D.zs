@@ -2,7 +2,7 @@
 #priority 1000000009
 import crafttweaker.util.Math;
 import crafttweaker.data.IData;
-import scripts.advanced.libs.Data;
+import scripts.libs.basic.Data;
 
 import crafttweaker.world.IBlockPos;
 import crafttweaker.world.IVector3d;

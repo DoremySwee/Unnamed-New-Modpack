@@ -6,7 +6,7 @@ import crafttweaker.liquid.ILiquidStack as IL;
 import crafttweaker.item.IIngredient as In;
 import crafttweaker.item.IItemStack as It;
 import thaumcraft.aspect.CTAspectStack as ASt;
-import scripts.advanced.libs.Vector3D as V;
+import scripts.libs.basic.Vector3D as V;
 import crafttweaker.data.IData;
 function test(){
     print("test");
@@ -205,7 +205,7 @@ zenClass TE{
     }
 }
 static te as TE = TE();
-zenClass IE{
+/*zenClass IE{
     zenConstructor(){}
     function alloy(output as It, input as In, input2 as In, time as int = 1000){
         mods.immersiveengineering.AlloySmelter.addRecipe(output, input, input2, time);
@@ -275,7 +275,7 @@ zenClass IE{
         mods.immersiveengineering.Squeezer.addRecipe(output2, output, input, energy);
     }
 }
-static ie as IE = IE();
+static ie as IE = IE();*/
 zenClass AE2{
     zenConstructor(){}
     function grind(output as It, input as It, turns as int = 8){
@@ -421,7 +421,7 @@ zenClass ExU{
     }
 }
 static exu as ExU = ExU();
-zenClass CC{
+/*zenClass CC{
     zenConstructor(){}
     function flawless(output as It, inputs as In[]){
         mods.calculator.flawless.addRecipe(inputs[0], inputs[1], inputs[2], inputs[3], output);
@@ -436,7 +436,7 @@ zenClass CC{
         mods.calculator.scientific.addRecipe(inputs[0], inputs[1], output);
     }
 }
-static cc as CC = CC();
+static cc as CC = CC();*/
 zenClass TC{
     zenConstructor(){}
     static recipeNum as int[] = [0] as int[];
@@ -461,7 +461,7 @@ zenClass TC{
     }
     function shaped(output as It, inputs as In[][], vis as int, aspects as int[]){
         mods.thaumcraft.ArcaneWorkbench.registerShapedRecipe(getId(),"FIRSTSTEPS",vis,
-            scripts.recipes.libs.Aspects.aspect6(aspects),
+            scripts.libs.recipe.Aspects.aspect6(aspects),
             output,inputs);
     }
     function shaped(output as It, inputs as In[][], vis as int, aspects as ASt[], research as string){
@@ -469,7 +469,7 @@ zenClass TC{
     }
     function shaped(output as It, inputs as In[][], vis as int, aspects as int[], research as string){
         mods.thaumcraft.ArcaneWorkbench.registerShapedRecipe(getId(),research,vis,
-            scripts.recipes.libs.Aspects.aspect6(aspects),
+            scripts.libs.recipe.Aspects.aspect6(aspects),
             output,inputs);
     }
     function shapeless(output as It, inputs as In[], vis as int = 0){
@@ -481,7 +481,7 @@ zenClass TC{
     }
     function shapeless(output as It, inputs as In[], vis as int, aspects as int[], research as string = "FIRSTSTEPS"){
         mods.thaumcraft.ArcaneWorkbench.registerShapelessRecipe(getId(),research,vis,
-            scripts.recipes.libs.Aspects.aspect6(aspects),
+            scripts.libs.recipe.Aspects.aspect6(aspects),
             output,inputs);
     }
     function crucible(output as It, input as In, aspects as ASt[] = [] as ASt[], research as string = "FIRSTSTEPS"){

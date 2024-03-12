@@ -1,7 +1,7 @@
 #reloadable
 #priority 100000000
 import crafttweaker.entity.IEntityDefinition;
-import scripts.recipes.libs.Transcript as T;
+import scripts.libs.recipe.Transcript as T;
 import crafttweaker.item.IItemDefinition;
 import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemStack;
@@ -93,8 +93,8 @@ function removeGrind(dust as IItemStack, ingot as IItemStack, ore as IItemStack)
     recipes.removeShapeless(dust,[ingot],true);
     recipes.removeShapeless(dust,[ore],true);
     mods.bloodmagic.AlchemyTable.removeRecipe([ore,<bloodmagic:cutting_fluid>]);
-    mods.immersiveengineering.Crusher.removeRecipesForInput(ore);
-    mods.immersiveengineering.Crusher.removeRecipesForInput(ingot);
+    //mods.immersiveengineering.Crusher.removeRecipesForInput(ore);
+    //mods.immersiveengineering.Crusher.removeRecipesForInput(ingot);
     mods.thermalexpansion.Pulverizer.removeRecipe(ore);
     mods.thermalexpansion.Pulverizer.removeRecipe(ingot);
     mods.enderio.SagMill.removeRecipe(ore);

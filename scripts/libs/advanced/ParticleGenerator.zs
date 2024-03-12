@@ -1,9 +1,9 @@
 #reloadable
 #priority 1000000004
 
-import scripts.advanced.libs.Vector3D as V;
-import scripts.advanced.libs.Misc as M;
-import scripts.advanced.libs.Data as D;
+import scripts.libs.basic.Vector3D as V;
+import scripts.libs.advanced.Misc as M;
+import scripts.libs.basic.Data as D;
 
 import crafttweaker.player.IPlayer;
 import crafttweaker.world.IWorld;

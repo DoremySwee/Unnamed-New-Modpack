@@ -1,7 +1,7 @@
 #reloadable
 #priority 100000020
 import thaumcraft.aspect.CTAspectStack;
-import scripts.advanced.libs.Data as D;
+import scripts.libs.basic.Data as D;
 import thaumcraft.aspect.CTAspect;
 import crafttweaker.data.IData;
 

@@ -1,7 +1,7 @@
 #reloadable
 #priority 100000000
 import crafttweaker.item.IIngredient as I;
-static dev as bool= scripts.Config.dev;
+static dev as bool= scripts.Config.DEV;
 static whiteSpaces as string[]=["\n","\r"," ","\t"];
 function read1d(pattern as string, map as I[string])as I[]{
     var result as I[] = [] as I[];
