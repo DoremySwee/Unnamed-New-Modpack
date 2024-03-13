@@ -1,0 +1,24 @@
+{
+	x: -11.0d,
+	y: 5.0d,
+	text: [
+		"还需要一个接水的装置"
+	],
+	dependencies: [
+		"47741c73"
+	],
+	tasks: [{
+		uid: "556c3796",
+		type: "item",
+		items: [{
+			item: "tconstruct:casting"
+		}]
+	},
+	{
+		uid: "fac64a10",
+		type: "item",
+		items: [{
+			item: "tconstruct:faucet"
+		}]
+	}]
+}

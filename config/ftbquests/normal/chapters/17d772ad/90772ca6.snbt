@@ -1,0 +1,19 @@
+{
+	x: -14.0d,
+	y: 1.0d,
+	text: [
+		"Lunatic没有凝聚板合成熔炉的配方，强制使用隐藏浇筑法合成魔力池",
+		"Ultra需要在基岩处使用石头+基岩粉合成魔力池，不过一次能造更多",
+		"这两个难度熔炉都位于机巧箱之后"
+	],
+	dependencies: [
+		"9217672f"
+	],
+	tasks: [{
+		uid: "5f9f6a00",
+		type: "item",
+		items: [{
+			item: "minecraft:furnace"
+		}]
+	}]
+}

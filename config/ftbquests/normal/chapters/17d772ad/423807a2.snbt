@@ -1,0 +1,24 @@
+{
+	x: -11.0d,
+	y: 0.0d,
+	text: [
+		"高难度没有该透镜奖励"
+	],
+	dependencies: [
+		"9217672f"
+	],
+	rewards: [{
+		uid: "cbf9d7dc",
+		type: "item",
+		item: {
+			id: "botania:lens",
+			Damage: 15s,
+			tag: {}
+		}
+	},
+	{
+		uid: "5a5af97b",
+		type: "item",
+		item: "botania:spreader 1 1"
+	}]
+}

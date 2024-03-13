@@ -1,0 +1,15 @@
+{
+	x: -5.5d,
+	y: -4.5d,
+	text: [
+		"树叶上的凝聚板……",
+		"合成的是【假冒伪劣的风符文】"
+	],
+	dependencies: [
+		"0aa00f4d"
+	],
+	tasks: [{
+		uid: "ac7def9f",
+		type: "checkmark"
+	}]
+}

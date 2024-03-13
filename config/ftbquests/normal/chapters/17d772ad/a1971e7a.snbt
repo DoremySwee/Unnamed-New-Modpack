@@ -1,0 +1,102 @@
+{
+	title: "搜刮",
+	icon: "botania:terrasword",
+	x: -16.0d,
+	y: -0.5d,
+	text: [
+		"有的物品是可以复制的"
+	],
+	dependencies: [
+		"6e520a54"
+	],
+	tasks: [{
+		uid: "77e055c6",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:nether_quartz_wrench"
+		}],
+		count: 2L,
+		ignore_damage: true,
+		ignore_nbt: 1b
+	},
+	{
+		uid: "bdc87698",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:part 1 220"
+		}]
+	},
+	{
+		uid: "163e6b25",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:part 1 240"
+		}]
+	},
+	{
+		uid: "3fc26f08",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:part 1 31"
+		}]
+	},
+	{
+		uid: "86ab365d",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:part 1 260"
+		}]
+	},
+	{
+		uid: "502cb30a",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:creative_energy_cell"
+		}],
+		count: 8L
+	},
+	{
+		uid: "f5b77099",
+		type: "item",
+		items: [{
+			item: "minecraft:sticky_piston"
+		}],
+		count: 8L
+	},
+	{
+		uid: "e8ce4f58",
+		type: "item",
+		items: [{
+			item: "minecraft:piston"
+		}],
+		count: 8L
+	},
+	{
+		uid: "d7d99c45",
+		type: "item",
+		items: [{
+			item: "minecraft:lever"
+		}],
+		count: 8L
+	},
+	{
+		uid: "ce56e7cc",
+		type: "item",
+		items: [{
+			id: "botania:terrasword",
+			tag: {
+				Unbreakable: 1
+			}
+		}],
+		count: 2L,
+		ignore_damage: true,
+		ignore_nbt: 1b
+	},
+	{
+		uid: "3095e673",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:inscriber"
+		}]
+	}]
+}

@@ -1,0 +1,19 @@
+{
+	x: -4.5d,
+	y: 0.0d,
+	dependencies: [
+		"615dd0fd"
+	],
+	tasks: [{
+		uid: "9442ca50",
+		type: "item",
+		items: [{
+			item: "botania:cocoon"
+		}]
+	}],
+	rewards: [{
+		uid: "5c03e590",
+		type: "item",
+		item: "minecraft:feather"
+	}]
+}

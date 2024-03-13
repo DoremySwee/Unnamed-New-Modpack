@@ -1,0 +1,23 @@
+{
+	x: -6.0d,
+	y: 4.0d,
+	dependencies: [
+		"f7228ede"
+	],
+	tasks: [{
+		uid: "58b94add",
+		type: "item",
+		items: [{
+			item: "minecraft:dye 1 15"
+		}]
+	},
+	{
+		uid: "349a4529",
+		type: "item",
+		items: [{
+			item: "minecraft:iron_pickaxe"
+		}],
+		ignore_damage: true,
+		ignore_nbt: 1b
+	}]
+}

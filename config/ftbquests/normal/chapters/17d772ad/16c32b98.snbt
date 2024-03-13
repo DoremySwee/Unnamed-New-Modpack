@@ -1,0 +1,17 @@
+{
+	x: -8.5d,
+	y: -4.5d,
+	dependencies: [
+		"fdc9bd01"
+	],
+	tasks: [{
+		uid: "068341bf",
+		type: "item",
+		items: [{
+			id: "botania:lens",
+			Damage: 14s,
+			tag: {}
+		}],
+		ignore_nbt: 1b
+	}]
+}

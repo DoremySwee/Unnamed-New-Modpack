@@ -1,0 +1,13 @@
+{
+	x: 8.0d,
+	y: 0.0d,
+	shape: "hexagon",
+	size: 2.0d,
+	tasks: [{
+		uid: "fe2bef2b",
+		type: "item",
+		items: [{
+			item: "minecraft:iron_ingot"
+		}]
+	}]
+}

@@ -1,0 +1,39 @@
+{
+	x: -13.0d,
+	y: -0.5d,
+	dependencies: [
+		"a1971e7a"
+	],
+	tasks: [{
+		uid: "b7aede30",
+		type: "item",
+		items: [{
+			item: "minecraft:stone_pickaxe"
+		}],
+		ignore_damage: true,
+		ignore_nbt: 1b
+	},
+	{
+		uid: "4c3fe780",
+		type: "item",
+		items: [{
+			item: "minecraft:cobblestone"
+		}],
+		count: 8L
+	},
+	{
+		uid: "416165b6",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:quartz_block"
+		}],
+		count: 64L
+	},
+	{
+		uid: "5106a6e8",
+		type: "item",
+		items: [{
+			item: "botania:terraplate"
+		}]
+	}]
+}

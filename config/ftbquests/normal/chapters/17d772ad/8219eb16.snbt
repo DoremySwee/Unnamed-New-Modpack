@@ -1,0 +1,14 @@
+{
+	x: -3.5d,
+	y: -6.0d,
+	text: [
+		"用黑曜石合成【假冒伪劣地符文】"
+	],
+	dependencies: [
+		"562db7df"
+	],
+	tasks: [{
+		uid: "d2cae09d",
+		type: "checkmark"
+	}]
+}

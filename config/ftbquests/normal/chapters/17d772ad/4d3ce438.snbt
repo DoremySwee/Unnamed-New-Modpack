@@ -1,0 +1,14 @@
+{
+	x: -10.5d,
+	y: -2.0d,
+	dependencies: [
+		"9217672f"
+	],
+	tasks: [{
+		uid: "48f1ff37",
+		type: "item",
+		items: [{
+			item: "minecraft:dirt"
+		}]
+	}]
+}

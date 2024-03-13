@@ -1,0 +1,17 @@
+{
+	x: -11.5d,
+	y: -3.0d,
+	text: [
+		"只要你有锄头……"
+	],
+	dependencies: [
+		"4d3ce438"
+	],
+	tasks: [{
+		uid: "babbb5e7",
+		type: "item",
+		items: [{
+			item: "minecraft:dirt 1 1"
+		}]
+	}]
+}
