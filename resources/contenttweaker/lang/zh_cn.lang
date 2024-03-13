@@ -1,1 +1,3 @@
 modpack.general.difficulty.world_error=这个世界和游戏运行的难度不符！请查看scripts问价夹下的“难度.txt”以正常游戏！
+modpack.general.difficulty.confirm1=你正在创建一个生存世界。生存世界的游戏难度一经设定不建议再修改。你确定要将难度设置为【
+modpack.general.difficulty.confirm2=】吗？如果确定了，就请输入“\syncDifficulty”，开始你的旅程吧！

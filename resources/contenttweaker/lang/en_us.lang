@@ -1,1 +1,3 @@
 modpack.general.difficulty.world_error=The world has different difficulty as the game! Check scripts/difficulty.txt for details!
+modpack.general.difficulty.confirm1=You are creating a survival world. It's not suggested to change its difficulty after created. Are you sure you are going to play a [
+modpack.general.difficulty.confirm2=] world? If so, type "\syncDifficulty", and start the game.
