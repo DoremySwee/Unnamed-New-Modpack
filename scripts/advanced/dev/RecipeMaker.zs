@@ -3,6 +3,7 @@ import scripts.libs.recipe.Mapping as Mp;
 import scripts.libs.basic.Data as D;
 import scripts.libs.advanced.Misc as M;
 import crafttweaker.item.IIngredient;
+import crafttweaker.item.IItemStack;
 import crafttweaker.data.IData;
 
 var wand=<minecraft:iron_axe>;
@@ -12,7 +13,16 @@ if(scripts.Config.DEV){
     events.onPlayerInteractBlock(function(event as crafttweaker.event.PlayerInteractBlockEvent){
         if(event.player.world.remote)return;
         if(!isNull(event.block)&& (event.block.definition.id == "appliedenergistics2:smooth_sky_stone_chest" || event.block.definition.id =="appliedenergistics2:sky_stone_chest")){
-            var list = M.getItemsInChest(event.block);
+            var list as IItemStack[] = [];
+            if(true){
+                var map = event.block.data.inv.asMap();
+                for k,v in map{
+                    if(isNull(v))continue;
+                    if(v.asMap() has "id"){
+                        list=list+v.asStack();
+                    }
+                }
+            }
             var logstring as string="";
             print("Items in chest:");
             print("as list:");
