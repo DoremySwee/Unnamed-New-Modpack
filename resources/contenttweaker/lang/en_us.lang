@@ -2,3 +2,8 @@ modpack.general.difficulty.world_error=The world has different difficulty as the
 modpack.general.difficulty.confirm1=You are creating a survival world. It's not suggested to change its difficulty after created. Are you sure you are going to play a [
 modpack.general.difficulty.confirm2=] world? If so, type "\syncDifficulty", and start the game.
 modpack.chat.alphaversion=The modpack is alpha version. Issue https://github.com/DoremySwee/Unnamed-New-Modpack if you encounter any problem.
+
+modpack.tooltip.dup0=Can be duplicated through crafting!
+modpack.tooltip.dupMana=Can be duplicated at mana pool!
+modpack.tooltip.dupSpark=Can be duplicated by combining with spark!
+modpack.tooltip.dupInscribe=Can be duplicated at Inscriber (AE2)!

@@ -7,7 +7,7 @@ import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemStack;
 import crafttweaker.data.IData;
 function dup(item as IItemStack, recipe as bool = true){
-    item.addTooltip(format.aqua(format.italic(game.localize("description.crt.tooltip.dup0"))));
+    item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.dup0"))));
     if(recipe){
         if(item.maxStackSize>7)
             recipes.addShapeless(item*8, [item]);
@@ -16,12 +16,12 @@ function dup(item as IItemStack, recipe as bool = true){
     }
 }
 function dupMana(item as IItemStack, mana as int = 100, recipe as bool = true){
-    item.addTooltip(format.aqua(format.italic(game.localize("description.crt.tooltip.dupMana"))));
+    item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.dupMana"))));
     if(recipe && mana>0 )
         T.bot.infusion(item*4, item, mana);
 }
 function dupSpark(item as IItemStack, recipe as bool = true){
-    item.addTooltip(format.aqua(format.italic(game.localize("description.crt.tooltip.dupSpark"))));
+    item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.dupSpark"))));
     if(recipe)
         recipes.addShapeless(item*8, [item, <botania:spark>]);
 }

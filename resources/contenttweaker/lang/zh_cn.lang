@@ -2,3 +2,8 @@ modpack.general.difficulty.world_error=这个世界和游戏运行的难度不�
 modpack.general.difficulty.confirm1=你正在创建一个生存世界。生存世界的游戏难度一经设定不建议再修改。你确定要将难度设置为【
 modpack.general.difficulty.confirm2=】吗？如果确定了，就请输入“\syncDifficulty”，开始你的旅程吧！
 modpack.chat.alphaversion=您下载的整合包是alpha版，即测试版。如果遇到任何问题请加群881296266
+
+modpack.tooltip.dup0=可以通过合成复制！
+modpack.tooltip.dupMana=可以在魔力池复制！
+modpack.tooltip.dupSpark=可以与火花结合复制！
+modpack.tooltip.dupInscribe=可以在压印器复制！
