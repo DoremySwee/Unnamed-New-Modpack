@@ -414,7 +414,7 @@ static arc as FXGenerator = FXGenerator("arc")
     .setRender(function(player as IPlayer, data as IData)as void{
     })
     .regi();
-*/
+*
 events.onItemToss(function(event as crafttweaker.event.ItemTossEvent){
      var H = V.STAR_A;
     var player = event.player;
@@ -434,4 +434,5 @@ events.onItemToss(function(event as crafttweaker.event.ItemTossEvent){
         +V.asData(V.scale(H.vertexes[side[1]],0.02),"vB")
         +V.asData(V.getPos(player),"A")+V.asData(V.getPos(player),"B"));
     }
-});//*/
+});
+/**/
