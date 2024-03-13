@@ -53,7 +53,7 @@ syncDifficulty.execute = function(command, server, sender, args) {
     );
 };
 syncDifficulty.register();
-//TODO:Initialization
+//Initialization
 function confirmDifficulty(p as IPlayer)as void{
     var w1 = p.world;
     if(w1.isRemote())return;
