@@ -1,6 +1,6 @@
 {
 	x: -11.0d,
-	y: 0.0d,
+	y: -0.5d,
 	text: [
 		"高难度没有该透镜奖励"
 	],
@@ -15,10 +15,5 @@
 			Damage: 15s,
 			tag: {}
 		}
-	},
-	{
-		uid: "5a5af97b",
-		type: "item",
-		item: "botania:spreader 1 1"
 	}]
 }

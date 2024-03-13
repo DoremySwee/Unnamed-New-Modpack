@@ -35,5 +35,12 @@
 		items: [{
 			item: "botania:terraplate"
 		}]
+	},
+	{
+		uid: "0fbe7295",
+		type: "item",
+		items: [{
+			item: "botania:prism"
+		}]
 	}]
 }

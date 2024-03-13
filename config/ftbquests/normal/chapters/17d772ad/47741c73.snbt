@@ -1,18 +1,38 @@
 {
 	x: -10.0d,
 	y: 3.5d,
+	text: [
+		"粘土花不会消耗水"
+	],
 	dependencies: [
 		"5355a236"
 	],
 	tasks: [{
-		uid: "353cb482",
+		uid: "f2a69256",
+		type: "item",
+		items: [{
+			id: "botania:specialflower",
+			tag: {
+				type: "clayconia"
+			}
+		}]
+	},
+	{
+		uid: "c1022b7f",
+		type: "item",
+		items: [{
+			item: "tconstruct:dried_clay"
+		}]
+	},
+	{
+		uid: "68e00fb8",
 		type: "item",
 		items: [{
 			item: "tconstruct:materials 1 2"
 		}]
 	},
 	{
-		uid: "c39e012f",
+		uid: "52f33a67",
 		type: "item",
 		items: [{
 			item: "tconstruct:materials"

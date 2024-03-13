@@ -1,6 +1,6 @@
 {
-	x: -7.0d,
-	y: -3.0d,
+	x: -6.5d,
+	y: -2.0d,
 	text: [
 		"整点雪"
 	],
@@ -13,5 +13,20 @@
 		items: [{
 			item: "botania:altar 1 7"
 		}]
+	},
+	{
+		uid: "c5d6e7b1",
+		type: "item",
+		items: [{
+			id: "botania:waterbowl",
+			tag: {
+				Fluid: {
+					FluidName: "water",
+					Amount: 1000
+				}
+			}
+		}],
+		ignore_damage: true,
+		ignore_nbt: 1b
 	}]
 }

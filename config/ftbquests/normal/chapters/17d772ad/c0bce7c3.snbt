@@ -2,7 +2,7 @@
 	x: -11.0d,
 	y: 5.0d,
 	text: [
-		"还需要一个接水的装置"
+		""
 	],
 	dependencies: [
 		"47741c73"
@@ -20,5 +20,27 @@
 		items: [{
 			item: "tconstruct:faucet"
 		}]
+	},
+	{
+		uid: "9e56d554",
+		type: "item",
+		items: [{
+			item: "tconstruct:seared_tank 1 1"
+		}]
+	},
+	{
+		uid: "075ecd1a",
+		type: "item",
+		items: [{
+			id: "botania:waterbowl",
+			tag: {
+				Fluid: {
+					FluidName: "water",
+					Amount: 1000
+				}
+			}
+		}],
+		ignore_damage: true,
+		ignore_nbt: 1b
 	}]
 }

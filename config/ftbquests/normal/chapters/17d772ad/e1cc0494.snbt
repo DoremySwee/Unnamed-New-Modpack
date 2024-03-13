@@ -1,14 +1,18 @@
 {
 	x: -14.0d,
 	y: -2.0d,
+	text: [
+		"破坏树叶概率获得，使用获得急迫II",
+		"这个整合包转生几次了呢，真奇怪"
+	],
 	dependencies: [
 		"9217672f"
 	],
 	tasks: [{
-		uid: "51b6adaa",
+		uid: "8d379b0e",
 		type: "item",
 		items: [{
-			item: "minecraft:golden_apple"
+			item: "mysticalagriculture:inferium_apple"
 		}]
 	}]
 }
