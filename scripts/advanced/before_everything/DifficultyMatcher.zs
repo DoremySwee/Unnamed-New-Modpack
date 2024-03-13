@@ -75,7 +75,7 @@ events.onPlayerLoggedIn(function(event as crafttweaker.event.PlayerLoggedInEvent
     confirmDifficulty(event.player);
 });
 val setTestWorld as ZenCommand = ZenCommand.create("setTestWorld");
-setTestWorld.tabCompletionGetters = [scripts.libs.advanced.ZenCommand.boolTab];
+setTestWorld.tabCompletionGetters = [IGetTabCompletion.boolean()];
 setTestWorld.execute = function(command, server, sender, args) {
     var w = crafttweaker.world.IWorld.getFromID(0);
     var d = w.getCustomWorldData();
