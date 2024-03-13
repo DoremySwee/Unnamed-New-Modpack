@@ -1,4 +1,5 @@
 #reloadable
+#priority 10000
 import crafttweaker.data.IData;
 import scripts.libs.advanced.Misc as M;
 import scripts.libs.basic.Data as D;
@@ -11,6 +12,12 @@ import crafttweaker.player.IPlayer;
 
 static diffMap as string[]  =["EASY","NORMAL","HARD","LUNATIC","ULTRA"];
 static DIFF as int = scripts.Config.DIFF;
+function isSurvival()as bool{
+    var w = crafttweaker.world.IWorld.getFromID(0);
+    var d = w.getCustomWorldData();
+    var s as int = d.deepGet("modpack.survival").asInt();
+    return s==2;
+}
 events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     var w = crafttweaker.world.IWorld.getFromID(0);
     if(event.world.isRemote())return;

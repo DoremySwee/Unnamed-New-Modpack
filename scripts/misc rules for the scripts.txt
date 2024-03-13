@@ -20,7 +20,7 @@ Naming
     class & imported file:  GoldenApple
     abbr:                   GA
     translationKey:
-        modpack.char.[category].?
+        modpack.chat.[category].?
         modpack.tooltips.?
         modpack.jei.[category+num]
         modpack.quests.[Difficulty+Chapter].[questName].title
