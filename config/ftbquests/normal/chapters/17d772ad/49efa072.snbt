@@ -1,16 +1,13 @@
 {
-	x: -9.5d,
-	y: -5.0d,
-	dependencies: [
-		"fdc9bd01"
-	],
+	x: -1.0d,
+	y: -3.5d,
 	tasks: [{
-		uid: "e79fc2fb",
+		uid: "0156f12b",
 		type: "item",
 		items: [{
 			id: "botania:specialflower",
 			tag: {
-				type: "puredaisy"
+				type: "marimorphosis"
 			}
 		}]
 	}]

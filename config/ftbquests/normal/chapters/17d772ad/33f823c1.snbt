@@ -1,0 +1,32 @@
+{
+	x: 0.0d,
+	y: 1.5d,
+	hide_dependency_lines: true,
+	dependencies: [
+		"d78ab5f9"
+	],
+	tasks: [{
+		uid: "7b437dc2",
+		type: "item",
+		items: [{
+			id: "minecraft:spawn_egg",
+			tag: {
+				EntityTag: {
+					id: "minecraft:creeper"
+				}
+			}
+		}]
+	},
+	{
+		uid: "6482197e",
+		type: "item",
+		items: [{
+			id: "minecraft:spawn_egg",
+			tag: {
+				EntityTag: {
+					id: "minecraft:skeleton"
+				}
+			}
+		}]
+	}]
+}

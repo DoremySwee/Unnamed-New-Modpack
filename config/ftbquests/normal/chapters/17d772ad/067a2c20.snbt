@@ -1,0 +1,11 @@
+{
+	x: 1.0d,
+	y: -1.5d,
+	tasks: [{
+		uid: "e3b95189",
+		type: "item",
+		items: [{
+			item: "minecraft:nether_brick"
+		}]
+	}]
+}

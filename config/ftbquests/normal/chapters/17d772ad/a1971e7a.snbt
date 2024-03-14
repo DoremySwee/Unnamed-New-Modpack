@@ -1,7 +1,7 @@
 {
 	title: "搜刮",
 	icon: "botania:terrasword",
-	x: -16.0d,
+	x: -17.5d,
 	y: -0.5d,
 	text: [
 		"有的物品是可以复制的"

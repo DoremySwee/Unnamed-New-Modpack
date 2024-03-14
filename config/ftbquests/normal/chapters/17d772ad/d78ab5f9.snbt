@@ -1,6 +1,6 @@
 {
-	x: -4.5d,
-	y: 0.0d,
+	x: -6.5d,
+	y: 0.5d,
 	dependencies: [
 		"615dd0fd"
 	],
@@ -12,8 +12,9 @@
 		}]
 	}],
 	rewards: [{
-		uid: "5c03e590",
+		uid: "d21a0127",
 		type: "item",
-		item: "minecraft:feather"
+		item: "minecraft:egg",
+		count: 16
 	}]
 }

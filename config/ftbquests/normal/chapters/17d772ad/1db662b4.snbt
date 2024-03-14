@@ -1,11 +1,11 @@
 {
-	x: -11.5d,
-	y: -5.0d,
+	x: -5.0d,
+	y: -1.5d,
 	text: [
 		"通过爆炸合成【假冒伪劣火符文】"
 	],
 	dependencies: [
-		"83da9cca"
+		"562db7df"
 	],
 	tasks: [{
 		uid: "81ea9c75",

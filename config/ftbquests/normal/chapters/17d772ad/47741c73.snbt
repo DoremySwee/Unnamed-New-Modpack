@@ -1,9 +1,10 @@
 {
-	x: -10.0d,
-	y: 3.5d,
+	x: -8.0d,
+	y: 2.5d,
 	text: [
 		"粘土花不会消耗水"
 	],
+	hide_dependency_lines: true,
 	dependencies: [
 		"5355a236"
 	],

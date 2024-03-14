@@ -1,11 +1,11 @@
 {
-	x: -6.5d,
-	y: -2.0d,
+	x: 1.0d,
+	y: -3.5d,
 	text: [
 		"整点雪"
 	],
 	dependencies: [
-		"aa040523"
+		"49efa072"
 	],
 	tasks: [{
 		uid: "3ea6a800",
