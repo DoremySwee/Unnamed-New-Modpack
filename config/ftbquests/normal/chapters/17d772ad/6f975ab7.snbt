@@ -2,14 +2,16 @@
 	x: -5.5d,
 	y: -0.5d,
 	text: [
-		"树叶上的凝聚板……",
-		"合成的是【假冒伪劣的风符文】"
+		"树叶上的凝聚板……"
 	],
 	dependencies: [
 		"0aa00f4d"
 	],
 	tasks: [{
-		uid: "ac7def9f",
-		type: "checkmark"
+		uid: "09502e9b",
+		type: "item",
+		items: [{
+			item: "contenttweaker:broken_aer_rune"
+		}]
 	}]
 }

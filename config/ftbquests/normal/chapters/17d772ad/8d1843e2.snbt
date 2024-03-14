@@ -2,10 +2,19 @@
 	x: -5.5d,
 	y: -3.5d,
 	text: [
-		"（群友设计的轻语花，用于产魔）",
-		"一朵花可能略显孤单，但是如果有一群花朵在倾听你的诉说，那那些烦恼也有地方去了"
+		"一朵花可能略显孤单，但是如果有一群花朵在倾听你的诉说，那些烦恼也有地方去了……"
 	],
 	dependencies: [
 		"0aa00f4d"
-	]
+	],
+	tasks: [{
+		uid: "59fafaa9",
+		type: "item",
+		items: [{
+			id: "botania:specialflower",
+			tag: {
+				type: "whispee"
+			}
+		}]
+	}]
 }

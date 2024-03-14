@@ -8,7 +8,10 @@
 		"83da9cca"
 	],
 	tasks: [{
-		uid: "9786a0de",
-		type: "checkmark"
+		uid: "81ea9c75",
+		type: "item",
+		items: [{
+			item: "contenttweaker:broken_ignis_rune"
+		}]
 	}]
 }

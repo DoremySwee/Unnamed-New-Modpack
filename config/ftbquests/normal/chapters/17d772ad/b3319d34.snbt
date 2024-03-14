@@ -2,9 +2,16 @@
 	x: -11.0d,
 	y: 7.0d,
 	text: [
-		"应该是【假冒伪劣的水符文】"
+		""
 	],
 	dependencies: [
 		"c0bce7c3"
-	]
+	],
+	tasks: [{
+		uid: "65dec016",
+		type: "item",
+		items: [{
+			item: "contenttweaker:broken_aqua_rune"
+		}]
+	}]
 }

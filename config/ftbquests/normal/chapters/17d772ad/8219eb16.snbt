@@ -2,13 +2,16 @@
 	x: -4.5d,
 	y: -5.0d,
 	text: [
-		"用黑曜石合成【假冒伪劣地符文】"
+		""
 	],
 	dependencies: [
 		"562db7df"
 	],
 	tasks: [{
-		uid: "d2cae09d",
-		type: "checkmark"
+		uid: "74d021cd",
+		type: "item",
+		items: [{
+			item: "contenttweaker:broken_terra_rune"
+		}]
 	}]
 }
