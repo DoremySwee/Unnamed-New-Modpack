@@ -7,3 +7,10 @@ modpack.tooltip.dup0=Can be duplicated through crafting!
 modpack.tooltip.dupMana=Can be duplicated at mana pool!
 modpack.tooltip.dupSpark=Can be duplicated by combining with spark!
 modpack.tooltip.dupInscribe=Can be duplicated at Inscriber (AE2)!
+
+item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
+item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
+item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
+item.contenttweaker.broken_aer_rune.name=Broken Rune of Air
+
+tile.botania:flower.whispee.name=Whispee

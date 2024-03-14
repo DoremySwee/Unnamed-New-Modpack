@@ -183,6 +183,13 @@ function getIntRGB(color as int)as int[]{
     var B = (color%256);
     return [R,G,B]as int[];
 }
+function fromIntRGB(color as int[])as int{
+    return color[0]*65536+color[1]*256+color[2];
+}
+function fromDoubleRGB(color as double[])as int{
+    var T = V.scale(color,255)as int[];
+    return fromIntRGB(T);
+}
 
 static counter as int[] = [0] as int[];
 
@@ -276,4 +283,10 @@ function stringToInt(ins as string, starting as int)as int{
         else return a;
     }
     return a;
+}
+
+function isFlower(block as IBlock, name as string)as bool{
+    //print(block.definition.id);
+    if(block.definition.id!="botania:specialflower")return false;
+    return block.data.subTileName==name;
 }
