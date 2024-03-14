@@ -84,5 +84,3 @@ import mods.zenutils.IByteBuf;
             }
         }
     );
-//4. Mooshroom
-    //TODO
