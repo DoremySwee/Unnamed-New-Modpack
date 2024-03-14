@@ -50,13 +50,13 @@ static manaCoef as double = (3.0+DIFF)/5;
     var centre1 = DIFF<3?quartz:stone1;
     var centre2 = DIFF<3?quartz:sand;
     Agg.addRecipe(deadBush,[sapling],200*manaCoef,0x404000, 0x008000,
-        centre1,bedRock,stone1,null,null,gravel);
+        centre1,bedRock,stone1,centre1,bedRock,gravel);
     Agg.addRecipe(deadBush,[sapling],200*manaCoef,0x404000, 0x008000,
-        quartz,bedRock,gravel,null,null,sand);
+        quartz,bedRock,gravel,quartz,bedRock,sand);
     Agg.addRecipe(<minecraft:stone_pickaxe>,
         [sapling,<minecraft:flint>*3,<minecraft:stick>*2],
         1300*manaCoef,0x404000,0x80D080,
-        centre2,bedRock,stone1,null,null,sand);
+        centre2,bedRock,stone1,centre2,bedRock,sand);
 
 //ManaPool
     var infDust = <enderio:item_material:20>;
@@ -73,7 +73,7 @@ static manaCoef as double = (3.0+DIFF)/5;
     );
     //pool1
     if(DIFF<1) Agg.addRecipe(output1,[infDust],600*manaCoef,0x202020,0xD0D0D0,
-        quartzSlab,stone,quartz,pool1,cobbleStone,null);
+        quartzSlab,stone,quartz,pool1,cobbleStone,quartz);
     else if(DIFF<4) Agg.addRecipe(output1,[infDust],600*manaCoef,0x202020,0xD0D0D0,
         quartzSlab,stone,stone,pool1,cobbleStone,cobbleStone);
     else Agg.addRecipe(output1,[infDust*5],600*manaCoef,0x202020,0xD0D0D0,
@@ -97,19 +97,19 @@ static manaCoef as double = (3.0+DIFF)/5;
 //Tinker
     recipes.addShaped(<tconstruct:tooltables:3>,[[<tconstruct:pattern>],[<tconstruct:tooltables:2>]]);
     recipes.addShapeless(<tconstruct:rack:1>,[M.reuse(<tconstruct:pattern>.withTag({PartType: "tconstruct:tough_tool_rod"})),<minecraft:log>]);
-    T.bot.infusion(<minecraft:hardened_clay>,<tconstruct:dried_clay>,1000)
+    T.bot.infusion(<minecraft:hardened_clay>,<tconstruct:dried_clay>,1000);
     //TODO
 //Crate
-    var centre3 = DIFF<3?:;
     var grass=<minecraft:tallgrass:1>;
+    var water = <liquid:water>;
     Agg.addRecipe(deadBush,[sapling],1000*manaCoef,0x00FF00,0x0000FF,
-        grass,grass,grass,water,null,null
+        grass,grass,grass,water,deadBush,deadBush
     );
     if(DIFF<3) Agg.addRecipe(deadBush,[sapling],2000*manaCoef,0xAAAAAA,0xAAAAFF,
         <minecraft:stained_glass:11>,pool2,<minecraft:stained_hardened_clay:3>,
         <botania:opencrate:1>,pool1,<minecraft:clay>);
-    else Agg.addRecipe(<minecraf:clay>,[<minecraft:stained_hardened_clay:3>],2000*manaCoef,0xAAAAAA,0xAAAAFF,
-        <minecraft:water>,pool2,<minecraft:stained_glass:11>,
+    else Agg.addRecipe(<minecraft:clay>,[<minecraft:stained_hardened_clay:3>],2000*manaCoef,0xAAAAAA,0xAAAAFF,
+        water,pool2,<minecraft:stained_glass:11>,
         <botania:opencrate:1>,pool1,sand);
     
 //Petal
