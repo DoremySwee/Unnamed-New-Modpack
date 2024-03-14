@@ -8,7 +8,7 @@ import crafttweaker.player.IPlayer;
 import mods.zenutils.IByteBuf;
 //Apple
     var apple = <mysticalagriculture:inferium_apple>;
-    apple.displayName="転生林檎";
+    apple.displayName="§q転生林檎§r";
     //Leaf drops
     events.onBlockHarvestDrops(function(event as crafttweaker.event.BlockHarvestDropsEvent){
         if(event.block.definition.id=="minecraft:leaves" && event.block.meta%4==0){
