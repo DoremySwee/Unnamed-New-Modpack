@@ -1,4 +1,4 @@
-#reoloadable
+#reloadable
 <mysticalagriculture:inferium_apple>.displayName="転生林檎";
 //TODOs:
     //1. Inferium_apple HASTE II
