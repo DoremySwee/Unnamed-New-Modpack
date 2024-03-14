@@ -3,15 +3,15 @@ modpack.general.difficulty.confirm1=You are creating a survival world. It's not 
 modpack.general.difficulty.confirm2=] world? If so, type "\syncDifficulty", and start the game.
 modpack.chat.alphaversion=The modpack is alpha version. Issue https://github.com/DoremySwee/Unnamed-New-Modpack if you encounter any problem.
 
-modpack.tooltip.dup0=Can be duplicated through crafting!
-modpack.tooltip.dupMana=Can be duplicated at mana pool!
-modpack.tooltip.dupSpark=Can be duplicated by combining with spark!
-modpack.tooltip.dupInscribe=Can be duplicated at Inscriber (AE2)!
-modpack.tooltip.haste=Eat it for Haste II (1:30)!
+modpack.tooltip.dup0=§eCan be duplicated through crafting!§r
+modpack.tooltip.dupMana=§bCan be duplicated at mana pool!§r
+modpack.tooltip.dupSpark=§fCan be duplicated by combining with spark!§r
+modpack.tooltip.dupInscribe=§fCan be duplicated at Inscriber (AE2)!§r
+modpack.tooltip.haste=§6Eat it for Haste II (1:30)!§r
 
 item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
 item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
 item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
 item.contenttweaker.broken_aer_rune.name=Broken Rune of Air
 
-tile.botania:flower.whispee.name=Whispee
+tile.botania:flower.whispee.name=§dWhispee§r
