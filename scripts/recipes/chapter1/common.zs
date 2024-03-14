@@ -89,16 +89,18 @@ static manaCoef as double = (3.0+DIFF)/5;
     //Usage
     T.bot.infusion(<minecraft:iron_pickaxe>,<minecraft:stone_pickaxe>,700*manaCoef);
     T.bot.infusion(<minecraft:dye:15>,sapling,100*manaCoef);
-        //dup petal
-        for i in 0 to 16{
-            M.dupMana(<botania:petal>.definition.makeStack(i));
-        }
+
+    //dup petal
+    for i in 0 to 16{
+        M.dupMana(<botania:petal>.definition.makeStack(i));
+    }
 
 //Tinker
     recipes.addShaped(<tconstruct:tooltables:3>,[[<tconstruct:pattern>],[<tconstruct:tooltables:2>]]);
     recipes.addShapeless(<tconstruct:rack:1>,[M.reuse(<tconstruct:pattern>.withTag({PartType: "tconstruct:tough_tool_rod"})),<minecraft:log>]);
     T.bot.infusion(<minecraft:hardened_clay>,<tconstruct:dried_clay>,1000);
-    //TODO
+    furnace.remove(<tconstruct:materials>);
+    furnace.addRecipe(<tconstruct:materials>,<tconstruct:materials:2>);
 //Crate
     var grass=<minecraft:tallgrass:1>;
     var water = <liquid:water>;
@@ -112,5 +114,18 @@ static manaCoef as double = (3.0+DIFF)/5;
         water,pool2,<minecraft:stained_glass:11>,
         <botania:opencrate:1>,pool1,sand);
     
-//Petal
+//Pure Daisy
+    var daisy = <botania:specialflower>.withTag({type: "puredaisy"});
+    var petalBlock = <botania:petalblock>;
+    var flower1 =<botania:flower>;
+    var flower2 = <botania:doubleflower1>;
+    var manaGlass = <botania:managlass>;
+    if(DIFF<2) Agg.addRecipe(deadBush,[sapling],1000,0xAAAAFF,0xDDDDFF,
+        water,manaGlass,flower2,
+        daisy,manaGlass,flower1);
+    else Agg.addRecipe(deadBush,[sapling,petalBlock],1500,0xAAAAFF,0xDDDDFF,
+        flower1,water,flower1,
+        daisy,manaGlass,manaGlass);
+
+//
     

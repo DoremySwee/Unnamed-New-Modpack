@@ -23,7 +23,7 @@ import mods.zenutils.IByteBuf;
         }
     });
     apple.addTooltip(game.localize("modpack.tooltip.haste"));
-//3. The flower
+//The flower
     //<cotSubTile:whispee>.onUpdate = function(tile, world, pos) {}
     var radius = 3;
     static posList as double[][] = []as double[][];
