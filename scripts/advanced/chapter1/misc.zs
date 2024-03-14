@@ -22,8 +22,7 @@ import mods.zenutils.IByteBuf;
             event.player.addPotionEffect(<potion:minecraft:haste>.makePotionEffect(1800,2));
         }
     });
-    //TODO: add tooltip
-    apple.addTooltip();
+    apple.addTooltip(game.localize("modpack.tooltip.haste"));
 //3. The flower
     //<cotSubTile:whispee>.onUpdate = function(tile, world, pos) {}
     var radius = 3;

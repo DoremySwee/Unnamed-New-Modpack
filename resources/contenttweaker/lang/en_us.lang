@@ -7,6 +7,7 @@ modpack.tooltip.dup0=Can be duplicated through crafting!
 modpack.tooltip.dupMana=Can be duplicated at mana pool!
 modpack.tooltip.dupSpark=Can be duplicated by combining with spark!
 modpack.tooltip.dupInscribe=Can be duplicated at Inscriber (AE2)!
+modpack.tooltip.haste=Eat it for Haste II (1:30)!
 
 item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
 item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth

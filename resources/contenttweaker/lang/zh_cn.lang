@@ -7,6 +7,7 @@ modpack.tooltip.dup0=可以通过合成复制！
 modpack.tooltip.dupMana=可以在魔力池复制！
 modpack.tooltip.dupSpark=可以与火花结合复制！
 modpack.tooltip.dupInscribe=可以在压印器复制！
+modpack.tooltip.haste=急迫II (90s)
 
 item.contenttweaker.broken_ignis_rune.name=劣质的火符文
 item.contenttweaker.broken_terra_rune.name=劣质的地符文
