@@ -1,5 +1,7 @@
 mods/
 .mixin.out/
+asm/
+asmResult/
 assets/
 astralsorcery/
 crash-reports/
@@ -21,12 +23,17 @@ launcher_profiles.json
 options.txt
 BotaniaVars.dat
 config/AppliedEnergistics2/VersionChecker.cfg
+config/AppliedEnergistics2/CustomRecipes.cfg
+config/AppliedEnergistics2/items.csv
 config/time.history
 config/tconstruct_oredictcache.dat
 config/JustEnoughCalculation
 config/splash.properties
 config/brandon3055/contributors.json
+config/brandon3055/ProjectIntelligence/
 config/worldedit/worldwdit.properties
+config/enderio/recipes/examples/
+config/enderio/recipes/*.pdf
 resources/witchery-1.7.10-0.24.1.jar
 usercache.json
 usernamecache.json
