@@ -52,11 +52,11 @@ import mods.zenutils.IByteBuf;
     events.onClientChat(function(event as mods.eventtweaker.event.ClientChatEvent){
         if(event.getOriginalMessage()[0]=="/")return;
         if(getFlowerPoses(client.player).length<1)return;
-        NetworkHandler.sendToServer("modpack_whispee_listen", function(buffer)as void{});
+        NetworkHandler.sendToServer("modpack_whispee_listen");
         event.cancel();
     });
     NetworkHandler.registerClient2ServerMessage("modpack_whispee_listen",
-        function (server, byteBuf, player) as void{
+        function (server, byteBuf, player){
             var world = player.world;
             var flowerPosList  = getFlowerPoses(player);
             if(flowerPosList.length<1)return;
