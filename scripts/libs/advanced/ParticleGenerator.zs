@@ -188,6 +188,9 @@ zenClass FXGenerator{
         });
         return this;
     }
+    function countObjects(dimension as int)as int{
+        return (newObjects has dimension)?(newObjects[dimension].length):0;
+    }
 }
 
 function attack(player as IPlayer, damage as double){
