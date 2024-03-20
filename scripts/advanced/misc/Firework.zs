@@ -10,7 +10,7 @@ import mods.zenutils.command.ZenCommand;
 import mods.zenutils.command.CommandUtils;
 import mods.zenutils.command.IGetTabCompletion;
 
-//Interpolate [x^0.8]
+//Interpolate [x^0.7]
 static POWTEMPA as double[]=[]as double[];
 for i in 0 to 3000{
     POWTEMPA+=pow(0.001*i,0.7);
@@ -40,7 +40,7 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
         "widthNum":4, "width":5.0,//width
         //Movement. Angle:Degree, Time:GT, 【Velocity:Block/s】
         "maxAngle":30.0,"period":340.0,"velocity":3.0,"defaultMovement":true,
-        "color":0x8888FF,"size":2.0
+        "color":-1 as int,"size":2.0
     }as IData)
     //init
     .addTick(function(world as IWorld, data as IData)as IData{
@@ -62,6 +62,9 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
             var v = V.disc(v1,v2,theta);
             pos = V.add(pos,v);
             data3 = data3 + V.asData(pos,"posRec"~i);
+        }
+        if(data.color.asInt()<0){
+            data2 = data2 + {"color":M.fromDoubleRGB(V.randomUnitVector(world))};
         }
 
         return data+data2+{"posRec":data3,"initialized":true}+V.asData(pos);
@@ -125,6 +128,14 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
                 var p = V.add(p0,V.scale(vy,y));
                 
                 var d2 = data + V.asData(p) + {"r":data.size.asDouble(),"a":data.renderInterval.asInt()*2} as IData;
+                var t3 = 1.0*data.life.asInt() / data.lifeLimit.asInt();
+                if(t3>0.8) t3=1.0-t3;
+                if(t3<0.2){
+                    var ratio = t3*5;
+                    var colorDouble3 = V.scale(M.getDoubleRGB(data.color.asInt()),t3);
+                    var colorInt1 = M.fromDoubleRGB(colorDouble3);
+                    d2 = d2 + {"color":colorInt1};
+                }
                 for j in (0 to data.renderTime.asInt()){
                     M.createFX(d2);
                 }
@@ -132,33 +143,50 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
         }
     })
     .regi();
-
-events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
-    var world = event.world;
-    if(world.remote) return;
-    if(world.dimension!=0) return;
-    if(world.random.nextInt(3000)>0) return;
-    FISH.create(world,{});
-});
+//TODO: more fireworks
 
 static FIREWORKS as FX.FXGenerator[string] = {
     "fish": FISH
 } as FX.FXGenerator[string];
-val spawnFireWork as ZenCommand = ZenCommand.create("spawnFireWork");
-spawnFireWork.requiredPermissionLevel = 0;
-//TODO: GetTab
-spawnFireWork.execute = function(command, server, sender, args) {
-    var player = CommandUtils.getCommandSenderAsPlayer(sender);
-    if(args.length>0){
-        var name = args[0];
-        FIREWORKS[name].create(player.world,{});
-        player.sendChat("Success!");
-    }
-    else{
-        player.sendChat("Missing arguments!");
-    }
-};
+static DL as int = scripts.Config.DECORATION_LEVEL;
+
+val spawnFireWork as ZenCommand = ZenCommand.create("fireWork");
+    spawnFireWork.requiredPermissionLevel = 0;
+    spawnFireWork.tabCompletionGetters = [
+        function(server, sender, pos) {
+            return mods.zenutils.StringList.create(["count","spawn"]);
+        }  as IGetTabCompletion,
+        function(server, sender, pos) {
+            return mods.zenutils.StringList.create(FIREWORKS.keys);
+        }  as IGetTabCompletion];
+
+    spawnFireWork.execute = function(command, server, sender, args) {
+        var player = CommandUtils.getCommandSenderAsPlayer(sender);
+        if(args.length>1){
+            var name = args[1];
+            var fx = FIREWORKS[name];
+            if(args[0]=="spawn"){
+                fx.create(player.world,{});
+                player.sendChat("Success!");
+            }
+            else if (args[1]=="count"){
+                player.sendChat("There are "~fx.countObjects(player.world.dimension)~" "~name~" in this world, currently");
+            }
+        }
+        else{
+            player.sendChat("Missing arguments!");
+        }
+    };
 spawnFireWork.register();
-//TODO: a method of FXGenerator, telling how many objects are there in this dimension
-//TODO: random color
-//TODO: more fireworks
+
+events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
+    var world = event.world;
+    if(DL<1)return;
+    if(world.remote) return;
+    if(world.dimension!=0) return;
+    //fish
+    if(world.random.nextInt(3000)<1){
+        if(FISH.countObjects(world.dimension)<DL)FISH.create(world,{});
+    }
+    
+});
