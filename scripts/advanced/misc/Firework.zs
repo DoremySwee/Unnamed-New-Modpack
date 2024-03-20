@@ -64,7 +64,7 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
             data3 = data3 + V.asData(pos,"posRec"~i);
         }
         if(data.color.asInt()<0){
-            data2 = data2 + {"color":M.fromDoubleRGB(V.randomUnitVector(world))};
+            data2 = data2 + {"color":M.fromDoubleRGB(V.randomUnitPositiveVector(world))};
         }
 
         return data+data2+{"posRec":data3,"initialized":true}+V.asData(pos);
@@ -131,8 +131,7 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
                 var t3 = 1.0*data.life.asInt() / data.lifeLimit.asInt();
                 if(t3>0.8) t3=1.0-t3;
                 if(t3<0.2){
-                    var ratio = t3*5;
-                    var colorDouble3 = V.scale(M.getDoubleRGB(data.color.asInt()),t3);
+                    var colorDouble3 = V.scale(M.getDoubleRGB(data.color.asInt()),t3*5);
                     var colorInt1 = M.fromDoubleRGB(colorDouble3);
                     d2 = d2 + {"color":colorInt1};
                 }
@@ -143,10 +142,63 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
         }
     })
     .regi();
+
+static COMMET as FX.FXGenerator=FX.LinearOrb.copy("firework_comet")
+    .updateDefaultData({"lifeLimit":400,"renderTime":5,"renderInterval":1,"effectiveRadius":440,"color":0xFFFFFF,"colli":false,"omega":3.77,"branch":3,"color2":0x77CCFF})
+    .addTick(function(world as IWorld,data as IData)as IData{
+        var pos = V.readFromData(data);
+        var newDat as IData = IData.createEmptyMutableDataMap();
+        var life as int = data.life.asInt();
+        var v = V.unify(V.readFromData(data,"v"));
+        if(life%20==0){
+            var x = V.rot(v,V.randomUnitVector(world),V.randDouble(75.0,105.0,world));
+            var pl = world.getClosestPlayer(pos[0],pos[1],pos[2],200,false);
+            if(!isNull(pl) && V.randDouble(0,1,world)<0.3){
+                x=V.unify(V.subtract(V.getPos(pl),pos));
+                if(V.randDouble(0,1,world)<0.9)x=V.rot(x,V.randomUnitVector(world),V.randDouble(-15,15,world)+V.randDouble(-15,15,world));
+            }
+            var y = V.rot(v,V.randomUnitVector(world),V.randDouble(75.0,105.0,world));
+            var dt = V.randDouble(60,300,world);
+            var colors as int[]= [0x0000FF,0xAAAAFF,0xFF77FF,0xFF00FF];
+            var color as int= colors[world.random.nextInt(4)];
+            for i in 0 to 70{
+                var t = 360.0/70*i;
+                var v0 = V.disc(x,y,t);
+                var a = V.scale(V.disc(x,y,t),0.05);
+                var size = V.randDouble(1.5,3.0,world);
+                FX.AcclOrb.create(world,V.asData(pos)+V.asData(v0,"v")+V.asData(a,"a")+{
+                    "lifeLimit":120,"renderSize":size,"size":size*1.2,"color":color,"renderTime":1,"renderInterval":5,"effectiveRadius":400,"colli":false
+                });
+            }
+        }
+        var coV = V.unify([v[1],-v[0],v[2]]);
+        var coV2 = V.unify(V.cross(v,coV));
+        var t0 = data.omega.asDouble()*data.life.asInt();
+        for i in 0 to (data.branch.asInt()){
+            //M.shout("AAAAAAA");
+            t0 = t0 + 360.0/(data.branch.asInt());
+            var v2 = V.scale(V.disc(coV,coV2,t0),0.08);
+            var size = V.randDouble(1.5,3.0,world);
+            FX.LinearOrb.create(world,V.asData(pos)+V.asData(v2,"v")+{
+                "lifeLimit":120,"renderSize":size,"size":size*1.2,"color":data.color2,"renderTime":1,"renderInterval":5,"effectiveRadius":400,"colli":false
+            });
+        }
+        return data;
+    })
+    .setRender(function(player as IPlayer, data as IData)as void{
+        var world as IWorld=player.world;
+        for i in 0 to 7{
+            M.createFX(
+                data+{"r":data.size,"a":40}+V.asData(V.scale(V.randomUnitVector(world),0.07),"v")+
+                V.asData(V.add(V.scale(V.randomUnitVector(world),0.5),V.readFromData(data)))
+            );
+        }
+    }).regi();
 //TODO: more fireworks
 
 static FIREWORKS as FX.FXGenerator[string] = {
-    "fish": FISH
+    "fish": FISH,
+    "commet": COMMET
 } as FX.FXGenerator[string];
 static DL as int = scripts.Config.DECORATION_LEVEL;
 
@@ -185,8 +237,14 @@ events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     if(world.remote) return;
     if(world.dimension!=0) return;
     //fish
-    if(world.random.nextInt(3000)<1){
-        if(FISH.countObjects(world.dimension)<DL)FISH.create(world,{});
+    if(world.random.nextInt(3000)<DL){
+        if(FISH.countObjects(world.dimension)<DL*2)FISH.create(world,{});
     }
-    
+    //commet
+    if(world.random.nextInt(9000)<DL){
+        var pos = V.add([0.0,260.0,0],V.stretch(V.randomUnitVector(world),[200.0,10.0,200.0]));
+        var v = V.add([0.0,-2.0,0],V.stretch(V.randomUnitVector(world),[1.6,0.3,1.6]));
+        if(COMMET.countObjects(world.dimension)<DL*2)COMMET.create(world,V.asData(pos)+V.asData(v,"v")+{"lifeLimit":400});
+    }
 });
+//TODO: command to clean up the firework
