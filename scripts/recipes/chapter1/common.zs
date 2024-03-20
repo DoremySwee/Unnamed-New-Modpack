@@ -61,7 +61,7 @@ static manaCoef as double = (3.0+DIFF)/5;
 //ManaPool
     var infDust = <enderio:item_material:20>;
     var powder = <minecraft:gunpowder>;
-    var output1 = powder;//TODO: Check if there is better output
+    var output1 = <botania:manaresource:23>; //powder;// Check if there is better output
     var pool1 = <botania:pool:2>;
     var pool2 = <botania:pool>;
     var quartzSlab = <appliedenergistics2:quartz_slab>;
@@ -70,6 +70,11 @@ static manaCoef as double = (3.0+DIFF)/5;
         deadBush,[sapling],1500*manaCoef,0x202020,0x808080,
         sand,cobbleStone,cobbleStone,
         <minecraft:furnace>,<minecraft:glass>,<minecraft:glass>
+    );
+    else Agg.addRecipe(
+        deadBush,[sapling],1500*manaCoef,0x202020,0x808080,
+        sand,cobbleStone,cobbleStone,
+        <minecraft:glass>,<minecraft:glass>,<minecraft:glass>
     );
     //pool1
     if(DIFF<1) Agg.addRecipe(output1,[infDust],600*manaCoef,0x202020,0xD0D0D0,
@@ -120,12 +125,25 @@ static manaCoef as double = (3.0+DIFF)/5;
     var flower1 =<botania:flower>;
     var flower2 = <botania:doubleflower1>;
     var manaGlass = <botania:managlass>;
-    if(DIFF<2) Agg.addRecipe(deadBush,[sapling],1000,0xAAAAFF,0xDDDDFF,
+    if(DIFF<2) Agg.addRecipe(daisy,[flower1],1000,0xAAAAFF,0xDDDDFF,
         water,manaGlass,flower2,
-        daisy,manaGlass,flower1);
-    else Agg.addRecipe(deadBush,[sapling,petalBlock],1500,0xAAAAFF,0xDDDDFF,
-        flower1,water,flower1,
-        daisy,manaGlass,manaGlass);
+        manaGlass,<minecraft:glass>,flower1);
+    else Agg.addRecipe(daisy,[sapling,flower1],1500,0xAAAAFF,0xDDDDFF,
+        petalBlock,water,flower1,
+        manaGlass,manaGlass,manaGlass);
 
-//
+//Coal, Redstone, Netherrock, Lava
+    var charcoal = <minecraft:coal:1>;
+    var coal = <minecraft:coal>;
+    var coalOre = <minecraft:coal_ore>;
+    var coalBlock = <minecraft:coal_block>;
+    var ccB = <chisel:block_charcoal>;
+    var edge1 = DIFF<3?<minecraft:log>:ccB;
+    Agg.addRecipe(coal,[charcoal],700*manaCoef,0xAA9999,0xFFAAAA,
+        stone,edge1,stone,coalOre,edge1,cobbleStone);
+    var flower3 = DIFF<2?<botania:doubleflower2:6>:<botania:flower:14>;
+    var redstoneOre = <minecraft:redstone_ore>;
+    var redstone = <minecraft:redstone>;
+    Agg.addRecipe(<botania:dye:15>,[<botania:dye:14>],1500*manaCoef,0x777777,0xFF8888,
+        gravel,coalOre,flower3,sand,redstoneOre,flower1); //ToBalance: flower1 -> flower3
     
