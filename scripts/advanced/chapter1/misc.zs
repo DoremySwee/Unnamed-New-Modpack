@@ -68,7 +68,7 @@ import mods.zenutils.IByteBuf;
                 var pp = V.add(V.add(V.getPos(player),[0,1.5,0]),V.scale(V.randomUnitVector(world),0.3));
                 var fp = V.add(V.fromBlockPos(flowerPos),V.scale(V.randomUnitVector(world),0.3));
                 var vpf = V.subtract(fp,pp);
-                var color = M.fromDoubleRGB(V.randomUnitVector(world));
+                var color = M.fromDoubleRGB(V.randomUnitPositiveVector(world));
                 var rdCoef = (3.0+world.random.nextDouble())/3.5;
                 for i in 15 to 30{
                     var v = V.rot(V.scale(vpf,0.0005*i),V.randomUnitVector(world),3.0);

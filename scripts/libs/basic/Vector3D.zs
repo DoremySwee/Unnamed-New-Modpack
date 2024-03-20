@@ -322,6 +322,14 @@ function randomUnitVector(world as IWorld)as double[]{
     if(isZero(p))return randomUnitVector(world);
     else return unify(p);
 }
+function randomUnitPositiveVector(world as IWorld)as double[]{
+    var p as double[]= [
+        randDouble(0.001,1.0,world),
+        randDouble(0.001,1.0,world),
+        randDouble(0.001,1.0,world)
+    ];
+    return unify(p);
+}
 
 //Line Related Calculations         //Lines should be represented by giving two points, since all other contents in this file are point based.
 function getFootPoint(point as double[], linePointA as double[], linePointB as double[])as double[]{
