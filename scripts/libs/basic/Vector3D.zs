@@ -9,6 +9,9 @@ import crafttweaker.world.IVector3d;
 import crafttweaker.entity.IEntity;
 import crafttweaker.world.IWorld;
 
+function abs(x as double)as double{
+    return x<0?-x:x;
+}
 
 // Vectors are represented by double[] with length 3
 // All trigonometric functions use degree
@@ -139,6 +142,9 @@ function readFromData(data as IData, keyPrefix as string="", cap as bool=false, 
         }
     }
     return t;
+}
+function fromData(data as IData, keyPrefix as string="", cap as bool=false, suffix as string="")as double[]{
+    return readFromData(data, keyPrefix, cap, suffix);
 }
 function asData(pos as double[], keyPrefix as string="", cap as bool=false, suffix as string="")as IData{
     if(!isVector3D(pos))return {};
