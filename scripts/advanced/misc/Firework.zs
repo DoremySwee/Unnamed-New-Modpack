@@ -12,6 +12,8 @@ import mods.zenutils.command.IGetTabCompletion;
 
 //Interpolate [x^0.7]
 static POWTEMPA as double[]=[]as double[];
+static DL as int = scripts.Config.DECORATION_LEVEL;
+static DCOEF as int = ([0,1,3,10,30]as int[])[DL] as int;
 for i in 0 to 3000{
     POWTEMPA+=pow(0.001*i,0.7);
 }
@@ -34,19 +36,19 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
     .updateDefaultData({
         "x":0.0,  "y":0.0,  "z":0.0,
         "initialized":false, "effectiveRadius":300.0,
-        "renderInterval":2,"renderTime":1,
+        "renderInterval":5,"renderTime":1,
         //Its size
-        "parts":20,"partInterval":5,//length
-        "widthNum":4, "width":5.0,//width
+        "parts":16,"partInterval":7,//length
+        "widthNum":4, "width":8.0,//width
         //Movement. Angle:Degree, Time:GT, 【Velocity:Block/s】
-        "maxAngle":30.0,"period":340.0,"velocity":3.0,"defaultMovement":true,
-        "color":-1 as int,"size":2.0
+        "maxAngle":30.0,"period":340.0,"velocity":5.0,"defaultMovement":true,
+        "color":-1 as int,"size":2.8
     }as IData)
     //init
     .addTick(function(world as IWorld, data as IData)as IData{
         if(data.initialized.asBool())return data;
         var data2 as IData = IData.createEmptyMutableDataMap();
-        var pos = V.scale(V.randomUnitVector(world),70+world.random.nextInt(30)+world.random.nextInt(70));
+        var pos = V.scale(V.randomUnitVector(world),60+world.random.nextInt(30)+world.random.nextInt(40));
         var vs = data.velocity.asDouble()/20; //Block/gt
         var v1 = V.rot(V.scale(V.unify([pos[1],-pos[0],pos[2]]),vs),pos,world.random.nextInt(360));
         var v2 = V.scale(V.unify(V.cross(pos,v1)),vs);
@@ -127,7 +129,7 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
                 //TODO: the fish should appear and disappear smoothly, by changing the color
                 var p = V.add(p0,V.scale(vy,y));
                 
-                var d2 = data + V.asData(p) + {"r":data.size.asDouble(),"a":data.renderInterval.asInt()*2} as IData;
+                var d2 = data + V.asData(p) + {"r":data.size.asDouble(),"a":data.renderInterval.asInt()*1.2} as IData;
                 var t3 = 1.0*data.life.asInt() / data.lifeLimit.asInt();
                 if(t3>0.8) t3=1.0-t3;
                 if(t3<0.2){
@@ -144,7 +146,14 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
     .regi();
 
 static COMMET as FX.FXGenerator=FX.LinearOrb.copy("firework_comet")
-    .updateDefaultData({"lifeLimit":400,"renderTime":5,"renderInterval":1,"effectiveRadius":440,"color":0xFFFFFF,"colli":false,"omega":3.77,"branch":3,"color2":0x77CCFF})
+    .updateDefaultData({"lifeLimit":400,"renderTime":5,"renderInterval":1,"effectiveRadius":440,"color":0xFFFFFF,"colli":false,"omega":3.77,"branch":3,"color2":0x77CCFF,"initialized":false})
+    //init
+    .addTick(function(world as IWorld,data as IData)as IData{
+        if(data.initialized.asBool())return data;
+        var pos = V.add([0.0,260.0,0],V.stretch(V.randomUnitVector(world),[200.0,10.0,200.0]));
+        var v = V.add([0.0,-2.0,0],V.stretch(V.randomUnitVector(world),[1.6,0.3,1.6]));
+        return data+V.asData(pos)+V.asData(v,"v")+{"lifeLimit":400,"initialized":true};
+    })
     .addTick(function(world as IWorld,data as IData)as IData{
         var pos = V.readFromData(data);
         var newDat as IData = IData.createEmptyMutableDataMap();
@@ -200,19 +209,18 @@ static FIREWORKS as FX.FXGenerator[string] = {
     "fish": FISH,
     "commet": COMMET
 } as FX.FXGenerator[string];
-static DL as int = scripts.Config.DECORATION_LEVEL;
 
-val spawnFireWork as ZenCommand = ZenCommand.create("fireWork");
-    spawnFireWork.requiredPermissionLevel = 0;
-    spawnFireWork.tabCompletionGetters = [
+val spawnFirework as ZenCommand = ZenCommand.create("firework");
+    spawnFirework.requiredPermissionLevel = 0;
+    spawnFirework.tabCompletionGetters = [
         function(server, sender, pos) {
-            return mods.zenutils.StringList.create(["count","spawn"]);
+            return mods.zenutils.StringList.create(["spawn","count","disable","enable","clear"]);
         }  as IGetTabCompletion,
         function(server, sender, pos) {
             return mods.zenutils.StringList.create(FIREWORKS.keys);
         }  as IGetTabCompletion];
 
-    spawnFireWork.execute = function(command, server, sender, args) {
+    spawnFirework.execute = function(command, server, sender, args) {
         var player = CommandUtils.getCommandSenderAsPlayer(sender);
         if(args.length>1){
             var name = args[1];
@@ -226,10 +234,25 @@ val spawnFireWork as ZenCommand = ZenCommand.create("fireWork");
             }
         }
         else{
+            //TODO
+            if(args.length>0){
+                if(args[0]=="disable"){
+                    //TODO: Save Data System
+                    //The system for the entire save file.
+                    //We should also merge the difficulty system into this system
+                    //The realization is simply customWorldData in the dim=0 world
+                }
+                if(args[0]=="enable"){
+
+                }
+                if(args[0]=="clear"){
+                    //TODO: FXGenerator.clear(world/null)
+                }
+            }
             player.sendChat("Missing arguments!");
         }
     };
-spawnFireWork.register();
+spawnFirework.register();
 
 events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     var world = event.world;
@@ -237,14 +260,13 @@ events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     if(world.remote) return;
     if(world.dimension!=0) return;
     //fish
-    if(world.random.nextInt(3000)<DL){
-        if(FISH.countObjects(world.dimension)<DL*2)FISH.create(world,{});
+    if(world.random.nextInt(30000)<DCOEF){
+        if(FISH.countObjects(world.dimension)<DCOEF)FISH.create(world,{});
     }
     //commet
-    if(world.random.nextInt(9000)<DL){
-        var pos = V.add([0.0,260.0,0],V.stretch(V.randomUnitVector(world),[200.0,10.0,200.0]));
-        var v = V.add([0.0,-2.0,0],V.stretch(V.randomUnitVector(world),[1.6,0.3,1.6]));
-        if(COMMET.countObjects(world.dimension)<DL*2)COMMET.create(world,V.asData(pos)+V.asData(v,"v")+{"lifeLimit":400});
+    if(world.random.nextInt(90000)<DCOEF){
+        if(COMMET.countObjects(world.dimension)<DCOEF)COMMET.create(world,{});
     }
 });
-//TODO: command to clean up the firework
+
+//TODO: If we've got an "achievenemt system", we can have [manually spawn 300 firework through command] as an achievement.
