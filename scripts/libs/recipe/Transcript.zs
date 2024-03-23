@@ -107,6 +107,9 @@ zenClass TiC{
     function alloy(output as IL, inputs as IL[]){
         mods.tconstruct.Alloy.addRecipe(output, inputs);
     }
+    function drying(output as It, input as In, time as int = 6000){
+        mods.tconstruct.Drying.addRecipe(output,input,time);
+    }
 }
 static tic as TiC = TiC();
 zenClass TE{

@@ -130,9 +130,10 @@ static manaCoef as double = (3.0+DIFF)/5;
         manaGlass,<minecraft:glass>,flower1);
     else Agg.addRecipe(daisy,[sapling,flower1],1500,0xAAAAFF,0xDDDDFF,
         petalBlock,water,flower1,
-        manaGlass,manaGlass,manaGlass);
+        manaGlass,manaGlass,deadBush);
 
-//Coal, Redstone, Netherrock, Lava
+
+//Coal, Redstone
     var charcoal = <minecraft:coal:1>;
     var coal = <minecraft:coal>;
     var coalOre = <minecraft:coal_ore>;
@@ -140,10 +141,59 @@ static manaCoef as double = (3.0+DIFF)/5;
     var ccB = <chisel:block_charcoal>;
     var edge1 = DIFF<3?<minecraft:log>:ccB;
     Agg.addRecipe(coal,[charcoal],700*manaCoef,0xAA9999,0xFFAAAA,
-        stone,edge1,stone,coalOre,edge1,cobbleStone);
+        stone,edge1,stone,coalOre,edge1,cobbleStone);/*
     var flower3 = DIFF<2?<botania:doubleflower2:6>:<botania:flower:14>;
     var redstoneOre = <minecraft:redstone_ore>;
     var redstone = <minecraft:redstone>;
     Agg.addRecipe(<botania:dye:15>,[<botania:dye:14>],1500*manaCoef,0x777777,0xFF8888,
         gravel,coalOre,flower3,sand,redstoneOre,flower1); //ToBalance: flower1 -> flower3
+*/
+
+//Mana spreader
+    recipes.addShaped(<botania:spreader>,Mp.read("AAA;BC_;AAA;",{
+        "A":<botania:livingwood>,"B":<minecraft:stained_glass:4>,"C":<botania:petal:*>
+    }));
+
+//Nether
+    var netherrack = <minecraft:netherrack>;
+    var magma = <minecraft:magma>;
+    var netherBrick = <minecraft:netherbrick>;
+    var netherBrickBlock = <minecraft:nether_brick>;
+    T.tic.casting(netherrack,cobbleStone,<liquid:blood>*40,600,true,true);
+    furnace.remove(netherBrick);
+    for i in 0 to 10{
+        var input = (i<1)?netherrack:M.shimmer(netherrack).withTag({"heatingProgress":i});
+        var output = (i>8)?M.shimmer(netherrack).withTag({"heatingProgress":i}):magma;
+        if(i>0)input.addTooltip(game.localize("modpack.tooltip.netherrackHeating",""~i));
+        furnace.addRecipe(output,input);
+    }
+    T.tic.drying(netherBrickBlock,magma);
+    //TODO: recaf Botania, for blazer summation
+
+//Cocoon
+    for meat in [<minecraft:fish>,<minecraft:fish:1>,<minecraft:beef>,<minecraft:mutton>,<minecraft:porkchop>,<minecraft:chicken>]as IItemStack[]{
+        Agg.addRecipe(<minecraft:rotten_flesh>,[meat],100,0xFF0000,0xAA3333,netherrack,netherrack,netherrack);
+    }
+    for num,item in {4:null,10:<minecraft:iron_ingot>,25:<ore:ingotElectrum>}as IIngredient[int]{
+        recipes.addShaped(<botania:cocoon>*num,Mp.read("AAA;BCB;ADA;",{
+            "A":<minecraft:string>, "B":<botania:manaresource:22>, "C":<botania:felpumpkin>, "D":item
+        }));
+    }
+
+//Runes
+    var runeBase = <botania:livingrock1slab>;
+    T.tic.casting(<contenttweaker:broken_aqua_rune>,runeBase,water*1000*DIFF*DIFF,200*DIFF*DIFF);
+
+    var leaves = <minecraft:leaves>;
+    var centre3 = DIFF<2?leaves:(DIFF<3?sapling:grass);
+    var edge3 = DIFF<4?<minecraft:leaves>:water;
+    Agg.addRecipe(<contenttweaker:broken_aer_rune>,[runeBase,<minecraft:feather>,<minecraft:string>,<minecraft:carpet:4>],
+        3000*manaCoef,0xFFFF00,0x9999FF,centre3,leaves,edge3
+    );
     
+    var centre4 = DIFF<3?
+    var corner4 = DIFF<3?sapling:(DIFF<4?grass:water);
+    Agg.addRecipe(<contenttweaker:broken_terra_rune>,[runeBase,<minecraft:coal_block>,<extrautils2:compressedgravel>,<minecraft:yellow_flower>,<mysticalagriculture:inferium_apple>],
+        3000*manaCoef,0xAA9933,0x55FF55,centre4,bedRock,corner4
+    );
+

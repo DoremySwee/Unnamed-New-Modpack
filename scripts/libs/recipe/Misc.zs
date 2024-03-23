@@ -103,3 +103,6 @@ function clearNBT(item as IItemStack){
     recipes.addShapeless(item,[item]);
     item.addTooltip(format.aqua(format.italic(game.localize("description.crt.tooltip.clearnbt"))));
 }
+function shimmer(item as IItemStack)as IItemStack{
+    return item.withTag({ench: [{lvl: 1 as short, id: 28 as short}]});
+}
