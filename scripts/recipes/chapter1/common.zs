@@ -186,13 +186,13 @@ static manaCoef as double = (3.0+DIFF)/5;
 
     var leaves = <minecraft:leaves>;
     var centre3 = DIFF<2?leaves:(DIFF<3?sapling:grass);
-    var edge3 = DIFF<4?<minecraft:leaves>:water;
+    var edge3 = DIFF<4? <minecraft:leaves>as IIngredient:water;
     Agg.addRecipe(<contenttweaker:broken_aer_rune>,[runeBase,<minecraft:feather>,<minecraft:string>,<minecraft:carpet:4>],
         3000*manaCoef,0xFFFF00,0x9999FF,centre3,leaves,edge3
     );
     
-    var centre4 = DIFF<3?
-    var corner4 = DIFF<3?sapling:(DIFF<4?grass:water);
+    var centre4 = DIFF<3?sapling:grass;
+    var corner4 = DIFF<3?sapling as IIngredient:(DIFF<4?grass as IIngredient:water);
     Agg.addRecipe(<contenttweaker:broken_terra_rune>,[runeBase,<minecraft:coal_block>,<extrautils2:compressedgravel>,<minecraft:yellow_flower>,<mysticalagriculture:inferium_apple>],
         3000*manaCoef,0xAA9933,0x55FF55,centre4,bedRock,corner4
     );
