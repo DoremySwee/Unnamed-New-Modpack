@@ -1,6 +1,5 @@
 modpack.general.difficulty.world_error=这个世界和游戏运行的难度不符！请查看scripts问价夹下的“难度.txt”以正常游戏！
-modpack.general.difficulty.confirm1=你正在创建一个生存世界。生存世界的游戏难度一经设定不建议再修改。你确定要将难度设置为【
-modpack.general.difficulty.confirm2=】吗？如果确定了，就请输入“\syncDifficulty”，开始你的旅程吧！
+modpack.general.difficulty.confirm=你正在创建一个生存世界。生存世界的游戏难度一经设定不建议再修改。你确定要将难度设置为【%s】吗？如果确定了，就请输入“\syncDifficulty”，开始你的旅程吧！
 modpack.chat.alphaversion=您下载的整合包是alpha版，即测试版。如果遇到任何问题请加群881296266
 
 modpack.tooltip.dup0=§e可以通过合成复制！§r
@@ -8,6 +7,7 @@ modpack.tooltip.dupMana=§b可以在魔力池复制！§r
 modpack.tooltip.dupSpark=§f可以与火花结合复制！§r
 modpack.tooltip.dupInscribe=§f可以在压印器复制！§r
 modpack.tooltip.haste=§6急迫II (90s)§r
+modpack.tooltip.netherrackHeating=§c已加热%s次§r
 
 item.contenttweaker.broken_ignis_rune.name=劣质的火符文
 item.contenttweaker.broken_terra_rune.name=劣质的地符文

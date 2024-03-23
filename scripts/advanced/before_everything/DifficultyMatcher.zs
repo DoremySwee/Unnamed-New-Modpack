@@ -68,7 +68,8 @@ function confirmDifficulty(p as IPlayer)as void{
     var d = w.getCustomWorldData();
     var s as int = d.deepGet("modpack.survival").asInt();
     if(s!=1)return;
-    var message = M.localize("modpack.general.difficulty.confirm1")~ITextComponent.fromString(diffMap[DIFF])~M.localize("modpack.general.difficulty.confirm2");
+    //var message = M.localize("modpack.general.difficulty.confirm1")~ITextComponent.fromString(diffMap[DIFF])~M.localize("modpack.general.difficulty.confirm2");
+    var message = ITextComponent.fromTranslation("modpack.general.difficulty.confirm",diffMap[DIFF]);
     p.sendRichTextStatusMessage(message, false);
 }
 events.onPlayerLoggedIn(function(event as crafttweaker.event.PlayerLoggedInEvent){
