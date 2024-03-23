@@ -1,0 +1,12 @@
+{
+	x: -1.0d,
+	y: -6.5d,
+	shape: "square",
+	text: [
+		"液态石头、黑曜石……"
+	],
+	tasks: [{
+		uid: "a95a6bd0",
+		type: "checkmark"
+	}]
+}

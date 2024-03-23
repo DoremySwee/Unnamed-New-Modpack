@@ -1,0 +1,17 @@
+{
+	x: -1.0d,
+	y: 3.5d,
+	text: [
+		"不急着做，但是你会需要它的"
+	],
+	dependencies: [
+		"6b1ed082"
+	],
+	tasks: [{
+		uid: "f5f26810",
+		type: "item",
+		items: [{
+			item: "mysticalagriculture:crafting 1 48"
+		}]
+	}]
+}

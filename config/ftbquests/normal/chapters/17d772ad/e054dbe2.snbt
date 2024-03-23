@@ -2,6 +2,9 @@
 	x: -3.0d,
 	y: -0.5d,
 	shape: "hexagon",
+	text: [
+		"需要研究台"
+	],
 	hide_dependency_lines: true,
 	dependencies: [
 		"6f975ab7",

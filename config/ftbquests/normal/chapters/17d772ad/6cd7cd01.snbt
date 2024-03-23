@@ -1,0 +1,22 @@
+{
+	x: -1.0d,
+	y: -5.0d,
+	shape: "pentagon",
+	text: [
+		"典"
+	],
+	dependencies: [
+		"09b987c9"
+	],
+	tasks: [{
+		uid: "bb4b8ac8",
+		type: "checkmark",
+		icon: {
+			id: "forge:bucketfilled",
+			tag: {
+				FluidName: "pyrotheum",
+				Amount: 1000
+			}
+		}
+	}]
+}

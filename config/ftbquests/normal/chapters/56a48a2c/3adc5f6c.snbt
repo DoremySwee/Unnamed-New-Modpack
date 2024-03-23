@@ -1,0 +1,12 @@
+{
+	x: -1.0d,
+	y: -1.5d,
+	shape: "square",
+	text: [
+		"完全没设计好的任务，只是记录一下可以干嘛"
+	],
+	tasks: [{
+		uid: "8bcbfb3b",
+		type: "checkmark"
+	}]
+}

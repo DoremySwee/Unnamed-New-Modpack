@@ -1,0 +1,14 @@
+{
+	x: 0.5d,
+	y: 2.5d,
+	text: [
+		"可以进行岩浆参与的流体合成了"
+	],
+	dependencies: [
+		"6b1ed082"
+	],
+	tasks: [{
+		uid: "8eb80cbe",
+		type: "checkmark"
+	}]
+}

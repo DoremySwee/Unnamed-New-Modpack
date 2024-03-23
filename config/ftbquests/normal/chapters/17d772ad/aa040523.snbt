@@ -1,6 +1,9 @@
 {
 	x: -9.5d,
 	y: -5.0d,
+	text: [
+		"我的建议是，多做点"
+	],
 	dependencies: [
 		"fdc9bd01"
 	],

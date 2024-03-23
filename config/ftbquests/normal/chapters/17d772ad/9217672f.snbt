@@ -1,4 +1,5 @@
 {
+	icon: "minecraft:stone_pickaxe",
 	x: -14.5d,
 	y: -0.5d,
 	shape: "hexagon",

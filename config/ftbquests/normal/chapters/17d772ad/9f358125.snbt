@@ -1,0 +1,15 @@
+{
+	x: -9.5d,
+	y: -6.5d,
+	shape: "circle",
+	dependencies: [
+		"aa040523"
+	],
+	tasks: [{
+		uid: "05ca27a7",
+		type: "item",
+		items: [{
+			item: "botania:spreader"
+		}]
+	}]
+}

@@ -1,11 +1,14 @@
 {
 	x: -6.5d,
 	y: -3.5d,
+	text: [
+		"圆石+血=地狱岩"
+	],
 	dependencies: [
-		"43e13d3d"
+		"4ac4180f"
 	],
 	tasks: [{
-		uid: "c96c7521",
+		uid: "99c08bf2",
 		type: "item",
 		items: [{
 			item: "minecraft:netherrack"

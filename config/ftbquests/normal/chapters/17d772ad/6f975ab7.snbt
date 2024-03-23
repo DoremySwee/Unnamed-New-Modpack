@@ -1,8 +1,9 @@
 {
 	x: -5.0d,
 	y: 0.5d,
+	shape: "circle",
 	text: [
-		"树叶上的凝聚板……"
+		"树叶上的凝聚板……需要羽毛"
 	],
 	dependencies: [
 		"d78ab5f9"

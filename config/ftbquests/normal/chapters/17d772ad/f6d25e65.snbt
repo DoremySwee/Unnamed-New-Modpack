@@ -1,0 +1,17 @@
+{
+	x: -6.5d,
+	y: -5.0d,
+	text: [
+		"地狱岩反复烧制10次变为岩浆块"
+	],
+	dependencies: [
+		"71ff43a5"
+	],
+	tasks: [{
+		uid: "878c023c",
+		type: "item",
+		items: [{
+			item: "minecraft:magma"
+		}]
+	}]
+}

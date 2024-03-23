@@ -1,0 +1,12 @@
+{
+	x: 2.0d,
+	y: -1.5d,
+	shape: "rsquare",
+	text: [
+		"觉得合成表不是很好"
+	],
+	tasks: [{
+		uid: "90e59d32",
+		type: "checkmark"
+	}]
+}

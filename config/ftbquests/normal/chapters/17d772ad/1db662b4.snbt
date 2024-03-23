@@ -1,11 +1,12 @@
 {
 	x: -5.0d,
-	y: -1.5d,
+	y: -3.5d,
+	shape: "pentagon",
 	text: [
-		"通过爆炸合成【假冒伪劣火符文】"
+		"在岩浆之中挖取?方块，多合1，得到火符文"
 	],
 	dependencies: [
-		"562db7df"
+		"f6d25e65"
 	],
 	tasks: [{
 		uid: "81ea9c75",

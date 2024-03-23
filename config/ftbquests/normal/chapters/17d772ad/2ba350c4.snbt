@@ -1,16 +1,16 @@
 {
-	x: -3.0d,
+	x: -1.0d,
 	y: -3.5d,
 	shape: "pentagon",
 	hide_dependency_lines: true,
 	dependencies: [
-		"e054dbe2"
+		"1db662b4"
 	],
 	tasks: [{
-		uid: "7db1646c",
+		uid: "56d4ceb8",
 		type: "item",
 		items: [{
-			item: "appliedenergistics2:part 1 380"
+			item: "botania:spark"
 		}]
 	}]
 }

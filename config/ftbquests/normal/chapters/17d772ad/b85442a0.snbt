@@ -4,10 +4,10 @@
 	shape: "hexagon",
 	size: 2.0d,
 	tasks: [{
-		uid: "fe2bef2b",
+		uid: "434d3aec",
 		type: "item",
 		items: [{
-			item: "minecraft:iron_ingot"
+			item: "avaritia:singularity"
 		}]
 	}]
 }

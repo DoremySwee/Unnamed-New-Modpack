@@ -1,0 +1,17 @@
+{
+	x: -8.0d,
+	y: -3.5d,
+	text: [
+		"事实证明，即使冶炼炉没有燃料，里面只要有液体，即使是水，也可以烫死生物得到血液"
+	],
+	dependencies: [
+		"b760470f"
+	],
+	tasks: [{
+		uid: "5ab2c193",
+		type: "item",
+		items: [{
+			item: "tconstruct:edible 1 3"
+		}]
+	}]
+}

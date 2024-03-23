@@ -1,0 +1,23 @@
+{
+	x: 3.5d,
+	y: -3.5d,
+	text: [
+		"注意，这玩意还倒不出来，除非我们有桶或者流体接口"
+	],
+	dependencies: [
+		"49e47292"
+	],
+	tasks: [{
+		uid: "93446770",
+		type: "item",
+		items: [{
+			id: "forge:bucketfilled",
+			tag: {
+				FluidName: "cryotheum",
+				Amount: 1000
+			}
+		}],
+		ignore_damage: true,
+		ignore_nbt: 1b
+	}]
+}

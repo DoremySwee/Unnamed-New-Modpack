@@ -1,0 +1,13 @@
+{
+	x: 0.5d,
+	y: -1.5d,
+	shape: "pentagon",
+	text: [
+		"已经确认，等待魔改的任务",
+		"一般来说它的后续任务也是在等待魔改"
+	],
+	tasks: [{
+		uid: "653a2a45",
+		type: "checkmark"
+	}]
+}

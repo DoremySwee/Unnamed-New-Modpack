@@ -1,0 +1,28 @@
+{
+	x: -3.0d,
+	y: 3.5d,
+	shape: "square",
+	dependencies: [
+		"33f823c1"
+	],
+	tasks: [{
+		uid: "2bce0aff",
+		type: "item",
+		items: [{
+			id: "itemfilters:filter",
+			tag: {
+				display: {
+					Name: "Any record"
+				}
+			},
+			ForgeCaps: {
+				Parent: {
+					id: "ore",
+					data: "record"
+				}
+			}
+		}],
+		ignore_damage: true,
+		ignore_nbt: 1b
+	}]
+}

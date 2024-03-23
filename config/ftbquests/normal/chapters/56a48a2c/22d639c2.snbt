@@ -1,0 +1,12 @@
+{
+	x: -1.0d,
+	y: -3.0d,
+	shape: "diamond",
+	text: [
+		"QoL"
+	],
+	tasks: [{
+		uid: "723920e8",
+		type: "checkmark"
+	}]
+}

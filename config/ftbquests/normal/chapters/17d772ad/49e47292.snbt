@@ -1,0 +1,17 @@
+{
+	x: 2.0d,
+	y: -3.5d,
+	text: [
+		"改用匠魂浇筑"
+	],
+	dependencies: [
+		"db5baf01"
+	],
+	tasks: [{
+		uid: "f5d8ad2a",
+		type: "item",
+		items: [{
+			item: "thermalfoundation:material 1 2049"
+		}]
+	}]
+}

@@ -1,0 +1,21 @@
+{
+	x: 3.5d,
+	y: -5.0d,
+	dependencies: [
+		"43e13d3d"
+	],
+	tasks: [{
+		uid: "e0c6b866",
+		type: "item",
+		items: [{
+			id: "tconstruct:toolforge",
+			tag: {
+				textureBlock: {
+					id: "minecraft:redstone_block",
+					Count: 1b,
+					Damage: 0s
+				}
+			}
+		}]
+	}]
+}

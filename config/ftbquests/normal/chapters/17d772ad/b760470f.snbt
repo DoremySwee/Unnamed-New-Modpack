@@ -1,0 +1,22 @@
+{
+	x: -9.5d,
+	y: -3.5d,
+	shape: "circle",
+	hide_dependency_lines: true,
+	dependencies: [
+		"47741c73"
+	],
+	tasks: [{
+		uid: "32202b91",
+		type: "item",
+		items: [{
+			item: "tconstruct:smeltery_controller"
+		}]
+	}],
+	rewards: [{
+		uid: "7477d27c",
+		type: "item",
+		item: "tconstruct:seared_tank 1 1",
+		count: 16
+	}]
+}

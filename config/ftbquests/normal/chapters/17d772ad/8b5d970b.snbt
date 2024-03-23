@@ -1,0 +1,15 @@
+{
+	x: 0.5d,
+	y: -6.5d,
+	shape: "gear",
+	text: [
+		"这玩意还解不了，因为没有模具"
+	],
+	tasks: [{
+		uid: "9db32154",
+		type: "item",
+		items: [{
+			item: "embers:crystal_ember"
+		}]
+	}]
+}

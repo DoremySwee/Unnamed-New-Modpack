@@ -1,6 +1,7 @@
 {
 	x: -5.0d,
 	y: 2.5d,
+	shape: "circle",
 	text: [
 		""
 	],

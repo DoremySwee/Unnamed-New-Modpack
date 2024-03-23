@@ -1,11 +1,14 @@
 {
 	x: -5.0d,
-	y: -3.5d,
+	y: -1.5d,
+	shape: "circle",
 	text: [
-		""
+		"Corner：树苗/草/水源",
+		"Edge：基岩"
 	],
+	hide_dependency_lines: true,
 	dependencies: [
-		"562db7df"
+		"a4cba7ea"
 	],
 	tasks: [{
 		uid: "74d021cd",

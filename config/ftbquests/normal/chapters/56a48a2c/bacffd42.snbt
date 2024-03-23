@@ -1,0 +1,12 @@
+{
+	x: 2.0d,
+	y: -3.0d,
+	shape: "hexagon",
+	text: [
+		"核心任务"
+	],
+	tasks: [{
+		uid: "903d5aaa",
+		type: "checkmark"
+	}]
+}
