@@ -1,7 +1,6 @@
 {
-	x: 0.5d,
-	y: -5.0d,
-	shape: "square",
+	x: -4.0d,
+	y: -4.0d,
 	text: [
 		"典"
 	],
@@ -9,16 +8,17 @@
 		"6cd7cd01"
 	],
 	tasks: [{
-		uid: "a58450ed",
+		uid: "cd826ba0",
 		type: "item",
 		items: [{
-			id: "forge:bucketfilled",
-			tag: {
-				FluidName: "glowstone",
-				Amount: 1000
-			}
-		}],
-		ignore_damage: true,
-		ignore_nbt: 1b
+			item: "minecraft:glowstone"
+		}]
+	},
+	{
+		uid: "6c022531",
+		type: "item",
+		items: [{
+			item: "minecraft:glowstone_dust"
+		}]
 	}]
 }

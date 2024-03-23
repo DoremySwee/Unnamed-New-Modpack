@@ -152,7 +152,7 @@ static COMMET as FX.FXGenerator=FX.LinearOrb.copy("firework_comet")
         if(data.initialized.asBool())return data;
         var pos = V.add([0.0,260.0,0],V.stretch(V.randomUnitVector(world),[200.0,10.0,200.0]));
         var v = V.add([0.0,-2.0,0],V.stretch(V.randomUnitVector(world),[1.6,0.3,1.6]));
-        return data+V.asData(pos)+V.asData(v,"v")+{"lifeLimit":400,"initialized":true};
+        return data+V.asData(pos)+V.asData(v,"v")+{"initialized":true};
     })
     .addTick(function(world as IWorld,data as IData)as IData{
         var pos = V.readFromData(data);
@@ -203,11 +203,57 @@ static COMMET as FX.FXGenerator=FX.LinearOrb.copy("firework_comet")
             );
         }
     }).regi();
+static ROLL1 as FX.FXGenerator = FX.FXGenerator("firework_roll1")
+    .updateDefaultData({
+        "renderTime":5,"renderInterval":11-DL*2,"effectiveRadius":440,"color":0x8833FF,"colli":false,
+        "x":0,"y":0,"z":0,"initialized":false
+    })
+    .addAging(800)
+    //init
+    .addTick(function(world as IWorld,data as IData)as IData{
+        if(data.initialized.asBool())return data;
+        //w: omega; t:theta
+        var w1 = V.scale(V.randomUnitVector(world),0.02*(10+world.random.nextInt(10)));
+        var w2 = V.scale(V.randomUnitVector(world),0.02*(10+world.random.nextInt(10)));
+        var t1 = V.scale(V.randomUnitVector(world),100000);
+        var t2 = V.scale(V.randomUnitVector(world),100000);
+        //M.shout(V.asString(t1));
+        return data+{"initialized":true}+V.asData(w1,"w1")+V.asData(w2,"w2")+V.asData(t1,"t1")+V.asData(t2,"t2");
+            //+{"v1":world.random.nextDouble(2,4.1),"v2":world.random.nextDouble(2,4.1),"vChangePeriod":3*world.random.nextInt(50,110)};
+    })
+    .addTick(function(world as IWorld,data as IData)as IData{
+        var w1 = V.readFromData(data,"w1");
+        var w2 = V.readFromData(data,"w2");
+        var t1 = V.readFromData(data,"t1");
+        var t2 = V.readFromData(data,"t2");
+        if(data.life.asInt()%data.renderInterval.asInt()==0){
+            var i = 0;
+            for node in V.getPolyhedron(20).vertexes{
+                i+=1;
+                var colors = [0x0000FF,0x55AAFF,0xFFAAFF,0xFF00FF,0xFFFFFF]as int[];
+                var color = colors[i%colors.length];
+                var pos = V.scale(V.eulaAng(V.unify(node),t1),200);
+                for direction in V.getPolyhedron(8).vertexes{
+                    //var phase = 360.0 * data.life.asInt() / data.vChangePeriod.asInt();
+                    var vs = 3;//data.v1.asDouble() * V.sinf(phase)*V.sinf(phase) + data.v2.asDouble()*V.cosf(phase)*V.cosf(phase);
+                    var v = V.scale(V.eulaAng(V.unify(direction),t2),vs);
+                    var p = V.add(pos,V.scale(v,-7.0));
+                    FX.LinearOrb.create(world,{
+                        "color":color,"colli":false,"lifeLimit":120,"renderSize":6,"size":6,"renderTime":1,"renderInterval":5,"effectiveRadius":300
+                    }+V.asData(v,"v")+V.asData(p));
+                }
+            }
+        }
+        //M.shout(V.asString(t1));
+        return data+V.asData(V.add(w1,t1),"t1")+V.asData(V.add(w2,t2),"t2");
+    })
+    .regi();
 //TODO: more fireworks
 
 static FIREWORKS as FX.FXGenerator[string] = {
     "fish": FISH,
-    "commet": COMMET
+    "commet": COMMET,
+    "roll1": ROLL1
 } as FX.FXGenerator[string];
 
 val spawnFirework as ZenCommand = ZenCommand.create("firework");
@@ -266,6 +312,10 @@ events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     //commet
     if(world.random.nextInt(90000)<DCOEF){
         if(COMMET.countObjects(world.dimension)<DCOEF)COMMET.create(world,{});
+    }
+    //roll1
+    if(world.random.nextInt(270000)<DCOEF){
+        if(ROLL1.countObjects(world.dimension)<1)ROLL1.create(world,{});
     }
 });
 

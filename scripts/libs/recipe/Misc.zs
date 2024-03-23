@@ -60,10 +60,10 @@ function temporaryLore(ins as IIngredient, lore as string)as IIngredient{
     return result;
 }
 function reuse(ins as IIngredient)as IIngredient{
-    return temporaryLore(ins,"§a§o"~game.localize("description.crt.reuse")~"§r").reuse();
+    return temporaryLore(ins,"§a§o"~game.localize("modpack.tooltip.reuse")~"§r").reuse();
 }
 function consume(ins as IIngredient)as IIngredient{
-    return temporaryLore(ins,"§a§o"~game.localize("description.crt.consume")~"§r").noReturn();
+    return temporaryLore(ins,"§a§o"~game.localize("modpack.tooltip.consume")~"§r").noReturn();
 }
 function orb(level as int)as IIngredient{
     var orbs as IIngredient[]=[
@@ -101,7 +101,7 @@ function removeGrind(dust as IItemStack, ingot as IItemStack, ore as IItemStack)
 }
 function clearNBT(item as IItemStack){
     recipes.addShapeless(item,[item]);
-    item.addTooltip(format.aqua(format.italic(game.localize("description.crt.tooltip.clearnbt"))));
+    item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.clearnbt"))));
 }
 function shimmer(item as IItemStack)as IItemStack{
     return item.withTag({ench: [{lvl: 1 as short, id: 28 as short}]});

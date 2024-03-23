@@ -92,7 +92,7 @@ static manaCoef as double = (3.0+DIFF)/5;
         pool1,pool1,pool1,pool2,quartzSlab,pool1);
 
     //Usage
-    T.bot.infusion(<minecraft:iron_pickaxe>,<minecraft:stone_pickaxe>,700*manaCoef);
+    T.bot.infusion(<appliedenergistics2:certus_quartz_pickaxe>,<minecraft:stone_pickaxe>,700*manaCoef);
     T.bot.infusion(<minecraft:dye:15>,sapling,100*manaCoef);
 
     //dup petal
@@ -102,7 +102,7 @@ static manaCoef as double = (3.0+DIFF)/5;
 
 //Tinker
     recipes.addShaped(<tconstruct:tooltables:3>,[[<tconstruct:pattern>],[<tconstruct:tooltables:2>]]);
-    recipes.addShapeless(<tconstruct:rack:1>,[M.reuse(<tconstruct:pattern>.withTag({PartType: "tconstruct:tough_tool_rod"})),<minecraft:log>]);
+    recipes.addShaped(<tconstruct:rack:1>,Mp.read("AB;BA;",{"A":<tconstruct:tough_tool_rod>.withTag({Material: "wood"}),"B":<tconstruct:large_plate>.withTag({Material: "wood"})}));
     T.bot.infusion(<minecraft:hardened_clay>,<tconstruct:dried_clay>,1000);
     furnace.remove(<tconstruct:materials>);
     furnace.addRecipe(<tconstruct:materials>,<tconstruct:materials:2>);
@@ -133,7 +133,7 @@ static manaCoef as double = (3.0+DIFF)/5;
         manaGlass,manaGlass,deadBush);
 
 
-//Coal, Redstone
+//Coal, Powder
     var charcoal = <minecraft:coal:1>;
     var coal = <minecraft:coal>;
     var coalOre = <minecraft:coal_ore>;
@@ -141,7 +141,11 @@ static manaCoef as double = (3.0+DIFF)/5;
     var ccB = <chisel:block_charcoal>;
     var edge1 = DIFF<3?<minecraft:log>:ccB;
     Agg.addRecipe(coal,[charcoal],700*manaCoef,0xAA9999,0xFFAAAA,
-        stone,edge1,stone,coalOre,edge1,cobbleStone);/*
+        stone,edge1,stone,coalOre,edge1,cobbleStone);
+    Agg.addRecipe(powder*5,[charcoal],700*manaCoef,0xAA9999,0xFFAAAA,
+        ccB,stone,coalBlock,coalBlock,cobbleStone,coalBlock);
+//Redstone
+/*
     var flower3 = DIFF<2?<botania:doubleflower2:6>:<botania:flower:14>;
     var redstoneOre = <minecraft:redstone_ore>;
     var redstone = <minecraft:redstone>;
@@ -155,10 +159,16 @@ static manaCoef as double = (3.0+DIFF)/5;
     }));
 
 //Nether
+    //Blood and Bone
+    mods.tconstruct.Casting.removeTableRecipe(<tconstruct:edible:3>);
+    T.ae.inscribe(<minecraft:bone>,[<minecraft:dye:15>,<minecraft:dye:15>,<minecraft:dye:15>]);
+
+    T.tic.casting(<tconstruct:edible:3>,null,<liquid:blood>*40,80);
     var netherrack = <minecraft:netherrack>;
     var magma = <minecraft:magma>;
     var netherBrick = <minecraft:netherbrick>;
     var netherBrickBlock = <minecraft:nether_brick>;
+    var lava = <liquid:lava>;
     T.tic.casting(netherrack,cobbleStone,<liquid:blood>*40,600,true,true);
     furnace.remove(netherBrick);
     var netherrackHeatingList = [netherrack,<contenttweaker:heated_netherrack_1>,<contenttweaker:heated_netherrack_2>,<contenttweaker:heated_netherrack_3>,<contenttweaker:heated_netherrack_4>,magma] as IItemStack[];
@@ -166,6 +176,13 @@ static manaCoef as double = (3.0+DIFF)/5;
         furnace.addRecipe(netherrackHeatingList[i+1],netherrackHeatingList[i]);
     }
     T.tic.drying(netherBrickBlock,magma);
+    var redstoneBlock = <minecraft:redstone_block>;
+    Agg.addRecipe(<botania:dye:14>,[<minecraft:blaze_powder>],2000*manaCoef,0x880000,0xFF8888,
+        <tconstruct:slime:3>, magma, coalBlock,
+        lava, netherrack, ccB
+    );
+    
+    
 
 //Cocoon
     for meat in [<minecraft:fish>,<minecraft:fish:1>,<minecraft:beef>,<minecraft:mutton>,<minecraft:porkchop>,<minecraft:chicken>]as IItemStack[]{
@@ -179,7 +196,7 @@ static manaCoef as double = (3.0+DIFF)/5;
 
 //Runes
     var runeBase = <botania:livingrock1slab>;
-    T.tic.casting(<contenttweaker:broken_aqua_rune>,runeBase,water*1000*DIFF*DIFF,200*DIFF*DIFF);
+    T.tic.casting(<contenttweaker:broken_aqua_rune>,runeBase,water*(1000*DIFF*DIFF),200*DIFF*DIFF);
 
     var leaves = <minecraft:leaves>;
     var centre3 = DIFF<2?leaves:(DIFF<3?sapling:grass);
@@ -194,3 +211,25 @@ static manaCoef as double = (3.0+DIFF)/5;
         3000*manaCoef,0xAA9933,0x55FF55,centre4,bedRock,corner4
     );
 
+    Agg.addRecipe(<botania:dye:14>,[<minecraft:blaze_powder>],2000*manaCoef,0x880000,0xFF8888,
+        <botania:livingrock:3>, magma, lava,
+        <contenttweaker:ignis_living_rock>, lava, netherrack
+    );
+    furnace.addRecipe(<contenttweaker:broken_ignis_rune>*2,<contenttweaker:ignis_living_rock>);
+
+//Pyrotheum, Glowstone & Rune Altar
+    mods.tconstruct.Melting.addEntityMelting(<entity:minecraft:blaze>,<liquid:pyrotheum>*4);
+    var torch = <minecraft:torch>;
+    var coef1 = DIFF>3 ? 32 : 16;
+    var corner5 = DIFF>3 ? <botania:shinyflower:3> : <botania:flower:3>;
+    recipes.remove(torch);
+    recipes.addShaped(torch*coef1,[[<ore:coal>],[<minecraft:stick>]]);
+    T.tic.melting(<liquid:glowstone>,torch);
+    
+    var c1 = 1+DIFF/3;
+    var inputs1 = [<oldresearch:research_table_old>, <botania:manaresource:23>*4, <contenttweaker:broken_aer_rune>*c1,<contenttweaker:broken_aqua_rune>*c1,<contenttweaker:broken_ignis_rune>*c1,<contenttweaker:broken_terra_rune>*c1] as IItemStack[];
+    if(DIFF>2) inputs1+=<botania:specialflower>.withTag({type: "puredaisy"});
+    Agg.addRecipe(<botania:managlasspane>, inputs1, 4000*manaCoef, 0x6666CC, 0x99AAFF,
+        <botania:opencrate:1>, <botania:livingrock:4>, corner5,
+        <botania:runealtar>, <botania:livingrock:3>, <botania:flower:3>
+    );

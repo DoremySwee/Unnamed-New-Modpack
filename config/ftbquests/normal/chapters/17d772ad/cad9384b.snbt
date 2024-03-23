@@ -1,15 +1,14 @@
 {
-	x: -1.0d,
-	y: 0.5d,
+	x: -2.0d,
+	y: 1.5d,
 	shape: "pentagon",
 	text: [
 		"开放了流体成型",
 		"但是AE2的流体输入设备除了破坏面板暂时只有流体输入总线，做不到1B/次，无法激活成型面板",
 		"你可以让破坏直连成型当桶用"
 	],
-	hide_dependency_lines: true,
 	dependencies: [
-		"6f975ab7"
+		"6b1ed082"
 	],
 	tasks: [{
 		uid: "2bbe3b5a",

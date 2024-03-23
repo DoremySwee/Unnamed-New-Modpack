@@ -1,0 +1,16 @@
+{
+	x: -4.0d,
+	y: -2.5d,
+	shape: "pentagon",
+	hide_dependency_lines: true,
+	dependencies: [
+		"e054dbe2"
+	],
+	tasks: [{
+		uid: "31a0173a",
+		type: "item",
+		items: [{
+			item: "botania:manaresource 1 11"
+		}]
+	}]
+}

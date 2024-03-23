@@ -7,3 +7,5 @@ val flower as ISubTileEntityGenerating = VanillaFactory.createSubTileGenerating(
     flower.range = 5;
     flower.maxMana = 1000;
     flower.register();
+//ColorEngine
+//val colorExtractor as 

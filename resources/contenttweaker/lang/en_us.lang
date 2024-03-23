@@ -9,6 +9,10 @@ modpack.tooltip.dupInscribe=§fCan be duplicated at Inscriber (AE2)!§r
 modpack.tooltip.haste=§6Eat it for Haste II (1:30)!§r
 modpack.tooltip.netherrackHeating=§cHeated for %s times!§r
 
+modpack.tooltip.reuse=This item will §aNOT§r be consumed 
+modpack.tooltip.consume=This item §cWILL§r be consumed
+modpack.tooltip.clearnbt=Do a 1->1 Craft to clean up the nbt, for other crafting usages.
+
 item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
 item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
 item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
@@ -18,5 +22,7 @@ tile.contenttweaker.heated_netherrack_1.name=§cWarm Netherrack§r
 tile.contenttweaker.heated_netherrack_2.name=§cHot Netherrack§r
 tile.contenttweaker.heated_netherrack_3.name=§cScalding Netherrack§r
 tile.contenttweaker.heated_netherrack_4.name=§cBlazing Netherrack§r
+
+tile.contenttweaker.ignis_living_rock.name=§cRock of Ignis§r
 
 tile.botania:flower.whispee.name=§dWhispee§r

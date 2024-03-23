@@ -253,15 +253,24 @@ static LinearOrb as FXGenerator = SingleOrb.copy("linearOrb")
         "vx":0.0,"vy":0.0,"vz":0.0,
     })
     .regi();
+static FLAG as int[] = [1] as int[];
 static AcclOrb as FXGenerator = LinearOrb.copy("linearOrb")
     .addTick(function(world as IWorld, data as IData)as IData{
+        var tick = data.acclTicker.asInt();
+        if(data.acclStartTime.asInt() > tick) return data + {"acclTicker":tick+1};
+        var endTime = data.acclEndTime.asInt();
+        if(endTime > -1 && endTime < tick){
+            return data;
+        }
+
         var a = V.readFromData(data,"a");
         var v = V.readFromData(data,"v");
         var p1 = V.add(v,a);
-        return data + V.asData(p1,"v");
+        return data + V.asData(p1,"v") + {"acclTicker":tick+1};
     })
     .updateDefaultData({
-        "ax":0.0,"ay":0.0,"az":0.0
+        "ax":0.0,"ay":0.0,"az":0.0,
+        "acclStartTime":-1,"acclEndTime":-1,"acclTicker":0
     })
     .regi();
 

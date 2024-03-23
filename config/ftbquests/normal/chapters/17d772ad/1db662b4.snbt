@@ -1,12 +1,11 @@
 {
 	x: -5.0d,
 	y: -3.5d,
-	shape: "pentagon",
 	text: [
-		"在岩浆之中挖取?方块，多合1，得到火符文"
+		"挖掘蕴火活石掉落"
 	],
 	dependencies: [
-		"f6d25e65"
+		"09b987c9"
 	],
 	tasks: [{
 		uid: "81ea9c75",

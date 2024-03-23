@@ -1,7 +1,6 @@
 {
 	x: -9.5d,
 	y: 2.5d,
-	shape: "rsquare",
 	text: [
 		"最好把铁镐换成别的……"
 	],
@@ -16,10 +15,10 @@
 		}]
 	},
 	{
-		uid: "349a4529",
+		uid: "95199530",
 		type: "item",
 		items: [{
-			item: "minecraft:iron_pickaxe"
+			item: "appliedenergistics2:certus_quartz_pickaxe"
 		}],
 		ignore_damage: true,
 		ignore_nbt: 1b

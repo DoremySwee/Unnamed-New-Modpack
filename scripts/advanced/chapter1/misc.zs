@@ -23,6 +23,16 @@ import mods.zenutils.IByteBuf;
         }
     });
     apple.addTooltip(game.localize("modpack.tooltip.haste"));
+//Ignis Block
+    events.onBlockHarvestDrops(function(event as crafttweaker.event.BlockHarvestDropsEvent){
+        if(event.block.definition.id=="contenttweaker:ignis_living_rock"){
+            event.drops = [];
+            for i in 1 to 6{
+                var t = 0.2*i;
+                event.drops += <contenttweaker:broken_ignis_rune>.weight(t*t);
+            }
+        }
+    });
 //The flower
     //<cotSubTile:whispee>.onUpdate = function(tile, world, pos) {}
     var radius = 3;
