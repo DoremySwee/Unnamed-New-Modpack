@@ -161,14 +161,11 @@ static manaCoef as double = (3.0+DIFF)/5;
     var netherBrickBlock = <minecraft:nether_brick>;
     T.tic.casting(netherrack,cobbleStone,<liquid:blood>*40,600,true,true);
     furnace.remove(netherBrick);
-    for i in 0 to 10{
-        var input = (i<1)?netherrack:M.shimmer(netherrack).withTag({"heatingProgress":i});
-        var output = (i>8)?M.shimmer(netherrack).withTag({"heatingProgress":i}):magma;
-        if(i>0)input.addTooltip(game.localize("modpack.tooltip.netherrackHeating",""~i));
-        furnace.addRecipe(output,input);
+    var netherrackHeatingList = [netherrack,<contenttweaker:heated_netherrack_1>,<contenttweaker:heated_netherrack_2>,<contenttweaker:heated_netherrack_3>,<contenttweaker:heated_netherrack_4>,magma] as IItemStack[];
+    for i in 0 to 5{
+        furnace.addRecipe(netherrackHeatingList[i+1],netherrackHeatingList[i]);
     }
     T.tic.drying(netherBrickBlock,magma);
-    //TODO: recaf Botania, for blazer summation
 
 //Cocoon
     for meat in [<minecraft:fish>,<minecraft:fish:1>,<minecraft:beef>,<minecraft:mutton>,<minecraft:porkchop>,<minecraft:chicken>]as IItemStack[]{

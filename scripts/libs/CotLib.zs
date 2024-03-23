@@ -14,6 +14,8 @@ static moltFlow as string="base:fluids/molten_flowing";
 static potionStill as string="contenttweaker:fluids/create_potion_still";
 static potionFlow as string="contenttweaker:fluids/create_potion_flow";
 static exu2Molt as string="extrautils2:molten_fluid_base";
+
+static MISCTAB as CreativeTab=<creativetab:misc>;
 function createFluid(id as string, color as string, attributes as IData={}){
     var fluid=VanillaFactory.createFluid(id,Color.fromHex(color));
     if(attributes has "density")fluid.density=attributes.density as int;

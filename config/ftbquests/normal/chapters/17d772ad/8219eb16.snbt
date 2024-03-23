@@ -3,8 +3,7 @@
 	y: -1.5d,
 	shape: "circle",
 	text: [
-		"Corner：树苗/草/水源",
-		"Edge：基岩"
+		""
 	],
 	hide_dependency_lines: true,
 	dependencies: [

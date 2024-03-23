@@ -14,4 +14,9 @@ item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
 item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
 item.contenttweaker.broken_aer_rune.name=Broken Rune of Air
 
+tile.contenttweaker.heated_netherrack_1.name=§cWarm Netherrack§r
+tile.contenttweaker.heated_netherrack_2.name=§cHot Netherrack§r
+tile.contenttweaker.heated_netherrack_3.name=§cScalding Netherrack§r
+tile.contenttweaker.heated_netherrack_4.name=§cBlazing Netherrack§r
+
 tile.botania:flower.whispee.name=§dWhispee§r
