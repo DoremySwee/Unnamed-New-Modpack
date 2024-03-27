@@ -87,7 +87,7 @@ if(scripts.Config.DEV){
                     var pattern = Mp.getPattern(inputs,map);
                     print("Mp.read(\"\n    "~pattern~"\","~Mp.displayMap(map)~")");
                 }
-                M.tellAuto(event.player,"Recipe has been outputed to crafttweaker.log!");
+                M.tellAuto(event.player,"Recipe has been outputted to crafttweaker.log!");
                 event.cancel();
             }
         }

@@ -145,7 +145,7 @@ static FISH as FX.FXGenerator = FX.FXGenerator("firework_fish")
     })
     .regi();
 
-static COMMET as FX.FXGenerator=FX.LinearOrb.copy("firework_comet")
+static COMET as FX.FXGenerator=FX.LinearOrb.copy("firework_comet")
     .updateDefaultData({"lifeLimit":400,"renderTime":5,"renderInterval":1,"effectiveRadius":440,"color":0xFFFFFF,"colli":false,"omega":3.77,"branch":3,"color2":0x77CCFF,"initialized":false})
     //init
     .addTick(function(world as IWorld,data as IData)as IData{
@@ -252,7 +252,7 @@ static ROLL1 as FX.FXGenerator = FX.FXGenerator("firework_roll1")
 
 static FIREWORKS as FX.FXGenerator[string] = {
     "fish": FISH,
-    "commet": COMMET,
+    "comet": COMET,
     "roll1": ROLL1
 } as FX.FXGenerator[string];
 
@@ -311,7 +311,7 @@ events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     }
     //commet
     if(world.random.nextInt(90000)<DCOEF){
-        if(COMMET.countObjects(world.dimension)<DCOEF)COMMET.create(world,{});
+        if(COMET.countObjects(world.dimension)<DCOEF)COMET.create(world,{});
     }
     //roll1
     if(world.random.nextInt(270000)<DCOEF){
@@ -319,4 +319,4 @@ events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     }
 });
 
-//TODO: If we've got an "achievenemt system", we can have [manually spawn 300 firework through command] as an achievement.
+//TODO: If we've got an "achievement system", we can have [manually spawn 300 firework through command] as an achievement.
