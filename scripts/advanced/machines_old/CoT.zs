@@ -1,4 +1,5 @@
 #loader contenttweaker
+#norun
 import crafttweaker.data.IData;
 import scripts.advanced.machines.Register;
 import mods.contenttweaker.VanillaFactory;
