@@ -156,6 +156,9 @@ function asData(pos as double[], keyPrefix as string="", cap as bool=false, suff
     //print(d);
     return d;
 }
+function asDataList(v as double[])as IData{
+    return [v[0]as IData, v[1]as IData, v[2]as IData] as IData;
+}
 function getPos(entity as IEntity)as double[]{
     if(isNull(entity))return copy(V000);
     return [entity.x, entity.y, entity.z]as double[];

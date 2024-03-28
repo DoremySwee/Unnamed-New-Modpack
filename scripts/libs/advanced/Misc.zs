@@ -46,6 +46,10 @@ IBotaniaFXHelper.setSparkleFXNoClip(true);
 
 function executeCommand(s as string){
     server.commandManager.executeCommandSilent(server,s);
+    //print(s);
+}
+function playSound(s as string, pos as IBlockPos, volume as double=1.0){
+    executeCommand("playsound "~s~" block @p "~pos.x~" "~pos.y~" "~pos.z~" "~volume);
 }
 function isNumber(s as string)as bool{
     return ["0","1","2","3","4","5","6","7","8","9"] as string[] has s;
@@ -290,3 +294,11 @@ function isFlower(block as IBlock, name as string)as bool{
     if(block.definition.id!="botania:specialflower")return false;
     return block.data.subTileName==name;
 }
+
+//data source: https://minecraft.fandom.com/wiki/Wool/DV#cite_note-1
+static COLOR_RGB as int[] = [
+    0xE9ECEC, 0xF07613, 0xBD44B3, 0x3AAFD9,
+    0xF8C627, 0x70B919, 0xED8DAC, 0x3E4447,
+    0x8E8E86, 0x158991, 0x792AAC, 0x35399D,
+    0xF24728, 0x546D1B, 0xA12722, 0x141519
+];
