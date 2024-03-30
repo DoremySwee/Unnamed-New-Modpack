@@ -9,6 +9,9 @@ modpack.tooltip.dupInscribe=§f可以在压印器复制！§r
 modpack.tooltip.haste=§6急迫II (90s)§r
 modpack.tooltip.netherrackHeating=§c已加热%s次§r
 
+modpack.tooltip.color_engine_b_real=需要被16种不同的荧光花围绕
+modpack.tooltip.fake_machine=不存在的物品，仅用于显示结构
+
 modpack.tooltip.reuse=该物品§a不会消耗§r
 modpack.tooltip.consume=该物品§c会被消耗§r
 modpack.tooltip.clearnbt=放入合成栏以简化nbt，再用于后续合成
@@ -22,7 +25,6 @@ tile.contenttweaker.heated_netherrack_1.name=§c暖的地狱岩§r
 tile.contenttweaker.heated_netherrack_2.name=§c热的地狱岩§r
 tile.contenttweaker.heated_netherrack_3.name=§c滚烫的地狱岩§r
 tile.contenttweaker.heated_netherrack_4.name=§c炽热的地狱岩§r
-
 tile.contenttweaker.ignis_living_rock.name=§c蕴火活石§r
-
 tile.botania:flower.whispee.name=§d梦呓§r
+tile.contenttweaker.color_engine_b_real=Color Engine (Type B) 等待翻译

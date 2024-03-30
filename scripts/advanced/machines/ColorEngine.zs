@@ -6,6 +6,7 @@ import crafttweaker.block.IBlock;
 import crafttweaker.world.IBlockPos;
 import mods.modularmachinery.MMEvents;
 import mods.modularmachinery.MachineTickEvent;
+import mods.modularmachinery.MachineStructureFormedEvent;
 
 import scripts.libs.basic.Vector3D as V;
 import scripts.libs.advanced.Misc as M;
@@ -109,3 +110,20 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
     val temp2 = temp1.definition.defaultState;
     world.setBlockState(temp2,pos2);
 });
+
+MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureFormedEvent) {
+    var controller = event.controller;
+    var world = controller.world;
+    var pos = controller.pos;
+    val temp1 as IBlock = <contenttweaker:color_engine_b_real>as IBlock;
+    val temp2 = temp1.definition.defaultState;
+    world.setBlockState(temp2,pos);
+    event.canceled=true;
+});
+
+var realB = <contenttweaker:color_engine_b_real>;
+var fakeB = <modularmachinery:color_engine_b_controller>;
+recipes.addShapeless(realB, [fakeB]);
+realB.addTooltip(game.localize("modpack.tooltip.color_engine_b_real"));
+fakeB.addTooltip(game.localize("modpack.tooltip.fake_machine"));
+
