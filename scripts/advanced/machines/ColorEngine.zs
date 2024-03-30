@@ -12,6 +12,10 @@ import scripts.libs.basic.Vector3D as V;
 import scripts.libs.advanced.Misc as M;
 import scripts.libs.advanced.ParticleGenerator as FX;
 
+import mods.modularmachinery.RecipePrimer;
+import mods.modularmachinery.RecipeBuilder;
+import mods.modularmachinery.IngredientArrayBuilder;
+
 static soundA0 as string = "botania:divinationrod";
 static soundA1 as string = "botania:manapoolcraft";//"botania:ding";
 static soundA16 as string = "botania:terrasteelcraft";//"astralsorcery:attunement";
@@ -142,3 +146,4 @@ MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureF
     event.canceled = (counter==65535);
 });
 
+//function addRecipe()

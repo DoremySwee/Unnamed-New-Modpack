@@ -1,37 +1,37 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "contenttweaker:color_engine_b_real"
+    "model": "contenttweaker:color_engine_b_formed"
   },
   "variants": {
     "facing=north,formed=false": {
-      "model": "contenttweaker:color_engine_b_real"
+      "model": "contenttweaker:color_engine_b_not_formed"
     },
     "facing=south,formed=false": {
-      "model": "contenttweaker:color_engine_b_real",
+      "model": "contenttweaker:color_engine_b_not_formed",
       "y": 180
     },
     "facing=west,formed=false": {
-      "model": "contenttweaker:color_engine_b_real",
+      "model": "contenttweaker:color_engine_b_not_formed",
       "y": 270
     },
     "facing=east,formed=false": {
-      "model": "contenttweaker:color_engine_b_real",
+      "model": "contenttweaker:color_engine_b_not_formed",
       "y": 90
     },
     "facing=north,formed=true": {
-      "model": "contenttweaker:color_engine_b_real"
+      "model": "contenttweaker:color_engine_b_formed"
     },
     "facing=south,formed=true": {
-      "model": "contenttweaker:color_engine_b_real",
+      "model": "contenttweaker:color_engine_b_formed",
       "y": 180
     },
     "facing=west,formed=true": {
-      "model": "contenttweaker:color_engine_b_real",
+      "model": "contenttweaker:color_engine_b_formed",
       "y": 270
     },
     "facing=east,formed=true": {
-      "model": "contenttweaker:color_engine_b_real",
+      "model": "contenttweaker:color_engine_b_formed",
       "y": 90
     },
     "inventory": [

@@ -1,0 +1,8 @@
+{
+	"parent": "botania:block/shapes/three_high_bottom_top",
+	"textures": {
+		"bottom": "contenttweaker:blocks/color_engine_b_bottom",
+		"up": "contenttweaker:blocks/color_engine_b_top_not_formed",
+		"side": "contenttweaker:blocks/color_engine_b_side"
+	}
+}
