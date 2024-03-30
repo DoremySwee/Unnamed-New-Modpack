@@ -119,7 +119,6 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
 var controllerB = <modularmachinery:color_engine_b_controller>;
 controllerB.addTooltip(game.localize("modpack.tooltip.color_engine_b_real"));
 //TODO: Add JEI descriptions to two controllers
-//TODO: Add translations to two controllers. Key: modularmachinery.machine_name
 
 MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureFormedEvent) {
     var controller = event.controller;
