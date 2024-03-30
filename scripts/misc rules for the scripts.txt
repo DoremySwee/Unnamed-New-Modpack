@@ -26,3 +26,8 @@ Naming
         modpack.quests.[Difficulty+Chapter].[questName].title
         modpack.quests.[Difficulty+Chapter].[questName].des1
         modpack.general.[category].?
+
+Units
+    Distance: Block
+    Time: Game Tick //Note for M.createFX: The coefficient is 4 times larger than desired, to cancel out the effect that botFX shrink their size as time go by and makes things look better
+    Speed: 【Block/Second】

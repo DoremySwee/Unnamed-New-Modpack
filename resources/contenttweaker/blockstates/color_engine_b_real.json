@@ -1,0 +1,9 @@
+{
+  "defaults": {
+    "model": "contenttweaker:color_engine_b_real"
+  },
+  "variants": {
+    "normal": { "model": "contenttweaker:color_engine_b_real" },
+    "inventory": { "model": "contenttweaker:color_engine_b_real" }
+  }
+}

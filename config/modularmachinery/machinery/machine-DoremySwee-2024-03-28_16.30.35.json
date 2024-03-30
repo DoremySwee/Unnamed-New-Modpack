@@ -1,0 +1,133 @@
+{
+    "registryname":"color_engine_b",
+    "localizedname":"color_engine_b",
+    "parts": [
+        {
+            "x": -1,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": -2,
+            "y": 0,
+            "z": 1,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": -2,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": -2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": -2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": -2,
+            "y": 0,
+            "z": -1,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": -2,
+            "y": 0,
+            "z": 0,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": -2,
+            "y": 0,
+            "z": -2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": -2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 0,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": -1,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 1,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        },
+        {
+            "x": -1,
+            "y": 0,
+            "z": -2,
+            "elements": [
+                "botania:shinyflower"
+            ]
+        }
+    ]}

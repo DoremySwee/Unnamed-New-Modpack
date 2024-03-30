@@ -88,7 +88,7 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
                     var v1 = V.scale(V.disc(V.VX,V.VZ,theta),1.4);
                     var v2 = V.scale(V.disc(V.VX,V.VZ,theta+100),0.06);
                     var p = V.add(V.fromIBlockPos(pos),V.rot(v1,rotAxis,10));
-                    var v = V.rot(v2,rotAxis,15);
+                    var v = V.rot(v2,rotAxis,10);
                     FX.LinearOrb.create(world,V.asData(p)+V.asData(v,"v")+{
                         "color":M.COLOR_RGB[color],
                         "size":0.15,

@@ -91,3 +91,15 @@ function createBlock(id as string, attributes as IData={}, creativeTab as Creati
         b.register();
     return b;
 }
+
+static ZU_TILE_ENTITIES as string[] = [] as string[];
+function getNewTileEntityID(name as string = "unnamed")as int{
+    ZU_TILE_ENTITIES=ZU_TILE_ENTITIES+name;
+    return 123+ZU_TILE_ENTITIES.length;
+}
+
+function createTileEntity(name as string = "unnamed") as mods.zenutils.cotx.TileEntity{
+    val te = VanillaFactory.createActualTileEntity(getNewTileEntityID(name));
+    te.register();
+    return te;
+}
