@@ -23,12 +23,12 @@ static EXAMPLE_MANABURST_DATA as IData =
     //shake: 0 as byte, PortalCooldown: 0, FallDistance: 0.0 as float, inGround: 0 as byte, UpdateBlocked: 0 as byte, //ticksExisted: 550, UUIDMost: 5120235492213279619 as long, UUIDLeast: -8210393045666413237 as long, 
     ownerName: "", zTile: -1, yTile: -1, spreaderZ: 0, spreaderY: -1, spreaderX: 0, hasShooter: 0 as byte, xTile: -1, //Invulnerable: 0 as byte, Air: 300 as short, OnGround: 0 as byte, Dimension: 0, //inTile: "minecraft:air", 
     startingMana: 100, color: 16777215, manaLossTick: 4.0 as float, mana: 100, minManaLoss: 2147483647, 
-        //Motion: [-0.005287180306594671, 1.3841746483211827E-4, -2.4838395178704506E-5], 
-        //Rotation: [-90.26912 as float, 1.4997045 as float], 
-        //Pos: [-84.48982191986408, 74.0224058956854, 59.294428189767224],
         gravity: 0.0 as float, Fire: -1 as short
         //lastMotionZ: -2.4838395178704506E-5, lastMotionY: 1.3841746483211827E-4, lastMotionX: -0.005287180306594671, 
         //AABB: [-84.48982191986408, 74.0224058956854, 59.294428189767224, -84.48982191986408, 74.0224058956854, 59.294428189767224]
+        //Motion: [-0.005287180306594671, 1.3841746483211827E-4, -2.4838395178704506E-5], 
+        //Rotation: [-90.26912 as float, 1.4997045 as float], 
+        //Pos: [-84.48982191986408, 74.0224058956854, 59.294428189767224],
 } as IData;
 
 MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) {
@@ -111,19 +111,34 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
     world.setBlockState(temp2,pos2);
 });
 
+
+var controllerB = <modularmachinery:color_engine_b_controller>;
+controllerB.addTooltip(game.localize("modpack.tooltip.color_engine_b_real"));
+//TODO: Add JEI descriptions to two controllers
+//TODO: Add translations to two controllers. Key: modularmachinery.machine_name
+
 MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureFormedEvent) {
     var controller = event.controller;
     var world = controller.world;
     var pos = controller.pos;
-    val temp1 as IBlock = <contenttweaker:color_engine_b_real>as IBlock;
-    val temp2 = temp1.definition.defaultState;
-    world.setBlockState(temp2,pos);
-    event.canceled=true;
+    val xs as int[]= [2,2,2,2,2,-2,-2,-2,-2,-2,1,0,-1,1,0,-1] as int[];
+    val zs as int[]= [2,1,0,-1,-2,2,1,0,-1,-2,2,2,2,-2,-2,-2] as int[];
+    var t = 1;
+    var counter = 0;
+    for i in 0 to 16{
+        var pos2 = IBlockPos.create(pos.x+xs[i], pos.y, pos.z+zs[i]);
+        var flower = world.getBlock(pos2);
+        if(isNull(flower.definition)){
+            event.canceled=true;
+            return;
+        }
+        if(flower.definition.id!=<botania:shinyflower>.definition.id){
+            event.canceled=true;
+            return;
+        }
+        counter = counter | t;
+        t*=2;
+    }
+    event.canceled = (counter==65535);
 });
-
-var realB = <contenttweaker:color_engine_b_real>;
-var fakeB = <modularmachinery:color_engine_b_controller>;
-recipes.addShapeless(realB, [fakeB]);
-realB.addTooltip(game.localize("modpack.tooltip.color_engine_b_real"));
-fakeB.addTooltip(game.localize("modpack.tooltip.fake_machine"));
 
