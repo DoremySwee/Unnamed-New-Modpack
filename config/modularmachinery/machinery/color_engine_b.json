@@ -1,6 +1,7 @@
 {
     "registryname":"color_engine_b",
     "localizedname":"color_engine_b",
+    "controller-bounding-box": [0.0, 0.0, 0.0, 1.0, 0.125, 1.0],
     "parts": [
         {
             "x": -1,
