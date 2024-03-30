@@ -27,4 +27,6 @@ tile.contenttweaker.heated_netherrack_3.name=§cScalding Netherrack§r
 tile.contenttweaker.heated_netherrack_4.name=§cBlazing Netherrack§r
 tile.contenttweaker.ignis_living_rock.name=§cRock of Ignis§r
 tile.botania:flower.whispee.name=§dWhispee§r
-tile.contenttweaker.color_engine_b_real=Color Engine (Type B)
+
+modularmachinery.color_engine_a=Color Engine (Type A)
+modularmachinery.color_engine_b=Color Engine (Type B)

@@ -27,4 +27,6 @@ tile.contenttweaker.heated_netherrack_3.name=§c滚烫的地狱岩§r
 tile.contenttweaker.heated_netherrack_4.name=§c炽热的地狱岩§r
 tile.contenttweaker.ignis_living_rock.name=§c蕴火活石§r
 tile.botania:flower.whispee.name=§d梦呓§r
-tile.contenttweaker.color_engine_b_real=Color Engine (Type B) 等待翻译
+
+modularmachinery.color_engine_a=Color Engine (Type A) 中文未命名
+modularmachinery.color_engine_b=Color Engine (Type B) 中文未命名
