@@ -16,6 +16,9 @@ import mods.modularmachinery.RecipePrimer;
 import mods.modularmachinery.RecipeBuilder;
 import mods.modularmachinery.IngredientArrayBuilder;
 
+import crafttweaker.item.IIngredient;
+import crafttweaker.item.IItemStack;
+
 static soundA0 as string = "botania:divinationrod";
 static soundA1 as string = "botania:manapoolcraft";//"botania:ding";
 static soundA16 as string = "botania:terrasteelcraft";//"astralsorcery:attunement";
@@ -145,4 +148,41 @@ MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureF
     event.canceled = (counter==65535);
 });
 
-//function addRecipe()
+static commandBlock as IItemStack = <minecraft:command_block>;
+// In JEI Recipe, items before the command block are actual ingredients that need to be put onto the plate
+// Wools after the command block represents required color rays.
+static COLOR_ENGINE_RECIPE_COUNTER as int[] = [11] as int[];
+static COLOR_ENGINE_RECIPES_INPUTS as IIngredient[][string] = {} as IIngredient[string];
+static COLOR_ENGINE_RECIPES_COLORS as IItemStack[][string] = {} as IItemStack[string];
+function addRecipe(output as IItemStack, inputs as IIngredient[], colors as IItemStack[])as void{
+    //Use wools to represent color rays
+    for wool in colors {
+        if(!<minecraft:wool:*>.matches(wool)){
+            print("[ERROR]: Color Engine (Type B), addRecipe found wrong arguments. The recipe is not added to the game.");
+            print("[ERROR]: The second argument should be a set of wools, representing the color ray required.");
+            return;
+        }
+    }
+    var id = "color_engine_b_recipe_nid_" ~ COLOR_ENGINE_RECIPE_COUNTER[0];
+    COLOR_ENGINE_RECIPE_COUNTER[0] = COLOR_ENGINE_RECIPE_COUNTER[0] + 1;
+
+    var jeiInputs = [] as IIngredient[];
+    for i in inputs {
+        jeiInputs = jeiInputs + i;
+    }
+    jeiInputs = jeiInputs + (commandBlock as IIngredient);
+    for i in colors {
+        jeiInputs = jeiInputs + (i as IIngredient);
+    }
+
+    RecipeBuilder.newBuilder(id, "color_engine_b", 1)
+        .addItemInputs(jeiInputs)
+        .addItemOutput(output)
+        .build();
+    COLOR_ENGINE_RECIPES_INPUTS[id]=inputs;
+    COLOR_ENGINE_RECIPES_COLORS[id]=colors;
+}
+
+MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent) {
+    //TODO
+});
