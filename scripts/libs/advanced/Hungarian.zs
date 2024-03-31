@@ -76,7 +76,7 @@ function hung(graph as bool[][])as int[]{
     return matching;
 }
 function hungEdge(m as int, n as int, edges as int[][], startFromOne as bool = false)as int[]{
-    var graph as bool[][] = [] as bool[][];
+    var graph as bool[][] = [] as bool[][]; //TODO: [LIST-ARRAY] [20240331]
     for i in 0 to m{
         var t as bool[] = [] as bool[];
         for j in 0 to n{
@@ -115,7 +115,7 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         return testShapeless(requirements,inputs,true,false);
     }
     if(mergeItems){
-        var inputs2 = [] as IItemStack[];
+        var inputs2 = [] as IItemStack[]; //TODO: [LIST-ARRAY] [20240331]
         for i in inputs{
             if(inputs2.length==0) inputs2+=i;
             else {
@@ -135,8 +135,8 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         return testShapeless(requirements,inputs2,false,false);
     }
     if(splitItems){
-        var req = [] as IIngredient[];
-        var inp = [] as IItemStack[];
+        var req = [] as IIngredient[]; //TODO: [LIST-ARRAY] [20240331]
+        var inp = [] as IItemStack[]; //TODO: [LIST-ARRAY] [20240331]
         for r in requirements{
             for i in 0 to r.amount{
                 req = req + r*1;
@@ -153,7 +153,7 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
     var m = requirements.length;
     if(m!=inputs.length)return false;
 
-    var graph as bool[][] = [] as bool[][];
+    var graph as bool[][] = [] as bool[][]; //TODO: [LIST-ARRAY] [20240331]
     for i in 0 to m{
         var t as bool[] = [] as bool[];
         for j in 0 to m{
