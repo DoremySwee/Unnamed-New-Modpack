@@ -4,25 +4,21 @@ import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemStack;
 
 static TEST as bool = false;
-static TEST2 as bool = false;
+static TEST2 as bool = true;
 function hung(graph as bool[][])as int[]{
     //graph [i][j] == Whether LEFT[i] and RIGHT[j] has a edge connecting them
-    var matching as int[] = [] as int[];
-    var mInverse as int[] = [] as int[];
-    var LR as int[][] = [] as int[][];
     var m = graph.length;
     var n = graph[0].length;
+    var matching as int[] = intArrayOf(m, -1 as int);
+    var mInverse as int[] = intArrayOf(n, -1 as int);
+    var LR as int[][] = [] as int[][];  //TODO: [LIST-ARRAY] [20240331]
     //init
-    for i in 0 to n{
-        mInverse = mInverse + (-1 as int);
-    }
     for i in 0 to m{
         var t as int[] = [] as int[];
         for j in 0 to n{
             if(graph[i][j]) t = t + j;
         }
         LR = LR + t;
-        matching = matching + (-1 as int);
     }
 
     //alg
@@ -35,12 +31,9 @@ function hung(graph as bool[][])as int[]{
         //If a related node is occupied, the occupier's related nodes are also related - a shift can be formed on the path
         //The path is wanted, to form the shift
 
-        var pathRecorder = [] as int[]; //It records which LHS node evoke the RHS nodes, to avoid repeated search and record the path.
-        var queue as int[] = [] as int[];
+        var pathRecorder = intArrayOf(m, -1 as int); //It records which LHS node evoke the RHS nodes, to avoid repeated search and record the path.
+        var queue as int[] = [] as int[]; //TODO: [LIST-ARRAY] [20240331]
         
-        for j in 0 to m{
-            pathRecorder+=(-1 as int);
-        }
         for j in LR[i]{
             queue += j;
             pathRecorder[j] = i;
