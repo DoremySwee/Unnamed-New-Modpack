@@ -11,14 +11,21 @@ function hung(graph as bool[][])as int[]{
     var n = graph[0].length;
     var matching as int[] = intArrayOf(m, -1 as int);
     var mInverse as int[] = intArrayOf(n, -1 as int);
-    var LR as int[][] = [] as int[][];  //TODO: [LIST-ARRAY] [20240331]
+    var LR as int[][] = arrayOf(m,intArrayOf(0)) as int[][];
     //init
     for i in 0 to m{
-        var t as int[] = [] as int[];
+        var c = 0;
         for j in 0 to n{
-            if(graph[i][j]) t = t + j;
+            if(graph[i][j]) c+=1;
         }
-        LR = LR + t;
+        LR[i] = intArrayOf(c) as int[];
+        c = 0;
+        for j in 0 to n{
+            if(graph[i][j]){
+                LR[i][c] = j;
+                c+=1;
+            }
+        }
     }
 
     //alg
@@ -32,20 +39,22 @@ function hung(graph as bool[][])as int[]{
         //The path is wanted, to form the shift
 
         var pathRecorder = intArrayOf(m, -1 as int); //It records which LHS node evoke the RHS nodes, to avoid repeated search and record the path.
-        var queue as int[] = [] as int[]; //TODO: [LIST-ARRAY] [20240331]
+        var queue as int[] = intArrayOf(m+3);
+        var last = 0;
         
         for j in LR[i]{
-            queue += j;
+            queue[last] = j;
+            last+=1;
             pathRecorder[j] = i;
         }
         if(TEST){
             print("New I = "~i);
             print("Printing current matching");
             for j in matching{print(j);}
-            print("queue.length = "~queue.length);
+            print("queue.length = "~last);
         }
         var k = 0;
-        while (k<queue.length){
+        while (k<last){
             var j = queue[k];
             if(TEST){
                 print("   New j = "~j);
@@ -54,7 +63,8 @@ function hung(graph as bool[][])as int[]{
             if(mInverse[j]>=0){
                 for t in LR[mInverse[j]]{
                     if(pathRecorder[t]<0){
-                        queue += t;
+                        queue[last] = t;
+                        last += 1;
                         pathRecorder[t] = mInverse[j];
                     }
                 }
