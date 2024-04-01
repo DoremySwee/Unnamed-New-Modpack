@@ -1,5 +1,6 @@
 #reloadable
 #priority 1000000030
+#debug
 import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemStack;
 
@@ -118,43 +119,19 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         return testShapeless(requirements,inputs,true,false);
     }
     if(mergeItems){
-        var c = 0;
-        var a = intArrayOf(inputs.length,0);
-        for i in 0 to inputs.length{
-            var f = true;
-            if(i>0)for j in 0 to i{
-                if((inputs[i]*1).commandString==(inputs[j]*1).commandString){
-                    f = false;
-                    a[j] = a[j] + inputs[i].amount;
-                    break;
-                }
-            }
-            if(f){
-                c+=1;
-                a[i] = inputs[i].amount;
-            }
-        }
-        var merged = arrayOf(c, <minecraft:apple>) as IItemStack[];
-        var j = 0;
-        for i in 0 to inputs.length{
-            if(a[i]>0){
-                merged[j] = inputs[i] * a[i];
-                j+=1;
-            }
-        }
-        return testShapeless(requirements,merged,false,false);
+        return testShapeless(requirements,mergeItemStacks(inputs),false,false);
     }
     if(splitItems){
         var req = [] as [IIngredient];
         var inp = [] as [IItemStack];
         for r in requirements{
             for i in 0 to r.amount{
-                req = req + r*1;
+                req += r*1;
             }
         }
         for i in inputs{
             for j in 0 to i.amount{
-                inp = inp + i*1;
+                inp += i*1;
             }
         }
         return testShapeless(req,inp,false,false);
@@ -175,6 +152,24 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
     }
     return true;
 }
+
+function mergeItemStacks(a as IItemStack[]) as [IItemStack] {
+    val tempMap as int[IItemStack] = {};
+    for item in a {
+        val itemWithoutAmount = item * 1;
+        if (tempMap has itemWithoutAmount) {
+            tempMap[itemWithoutAmount] = tempMap[itemWithoutAmount] + item.amount;
+        } else {
+            tempMap[itemWithoutAmount] = item.amount;
+        }
+    }
+    var result = [] as [IItemStack];
+    for item, amount in tempMap {
+        result += (item * amount);
+    }
+    return result;
+}
+
 if(TEST2){
     print("Test2 Hungarian Algorithm!");
     print(testShapeless([<appliedenergistics2:io_port>],[<appliedenergistics2:chest>]));
@@ -186,4 +181,5 @@ if(TEST2){
     print(testShapeless([<ore:dye>*3,<ore:dyeRed>,<ore:gemLapis>],[<minecraft:dye:9>,<minecraft:dye:4>*3,<minecraft:dye:1>]));
     print(testShapeless([<ore:dye>*30,<ore:dyeRed>,<ore:gemLapis>],[<minecraft:dye:9>,<minecraft:dye:4>*30,<minecraft:dye:1>]));    //False, since did not use split items
     print(testShapeless([<ore:dye>,<ore:dyeRed>,<ore:gemLapis>*128],[<minecraft:dye:9>,<minecraft:dye:4>*64,<minecraft:dye:4>*64,<minecraft:dye:1>]));
+    print(testShapeless([<ore:dye>,<ore:dyeRed>,<ore:gemLapis>*160],[<minecraft:dye:9>,<minecraft:dye:4>*64,<minecraft:dye:4>*64,<minecraft:dye:1>, <minecraft:dye:4> * 32]));
 }
