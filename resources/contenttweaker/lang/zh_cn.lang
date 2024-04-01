@@ -16,6 +16,8 @@ modpack.tooltip.reuse=该物品§a不会消耗§r
 modpack.tooltip.consume=该物品§c会被消耗§r
 modpack.tooltip.clearnbt=放入合成栏以简化nbt，再用于后续合成
 
+modpack.jei.mmce.color_engine_b.tolerance=如果你加入了%s的任何一种颜色，会发生§c爆炸§r！
+
 item.contenttweaker.broken_ignis_rune.name=劣质的火符文
 item.contenttweaker.broken_terra_rune.name=劣质的地符文
 item.contenttweaker.broken_aqua_rune.name=劣质的水符文

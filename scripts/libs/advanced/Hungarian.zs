@@ -103,7 +103,7 @@ if(TEST){
     }
 }
 
-function testShapeless(requirements as IIngredient[], inputs as IItemStack[], mergeItems as bool = true, splitItems as bool = true)as bool{
+function matchShapeless(requirements as IIngredient[], inputs as IItemStack[], mergeItems as bool = true, splitItems as bool = true)as int[]{
     //Split Item & Merge Item cannot coexists. It turns into smart mode if they are both true.
     //Merge Item : Merge all same inputs into one huge stack.
     //Split Item : Split all items and requirements into single items, so that the test is always accurate, no matter how weird the requirement is. But it may take long time if there are many items.
@@ -113,9 +113,9 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
             count += i.amount;
         }
         if(count<30){
-            return testShapeless(requirements,inputs,false,true);
+            return matchShapeless(requirements,inputs,false,true);
         }
-        return testShapeless(requirements,inputs,true,false);
+        return matchShapeless(requirements,inputs,true,false);
     }
     if(mergeItems){
         var c = 0;
@@ -142,7 +142,7 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
                 j+=1;
             }
         }
-        return testShapeless(requirements,merged,false,false);
+        return matchShapeless(requirements,merged,false,false);
     }
     if(splitItems){
         var req = [] as [IIngredient];
@@ -157,10 +157,10 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
                 inp = inp + i*1;
             }
         }
-        return testShapeless(req,inp,false,false);
+        return matchShapeless(req,inp,false,false);
     }
     var m = requirements.length;
-    if(m!=inputs.length)return false;
+    if(m!=inputs.length)return ([-1] as int[]);
 
     var graph = arrayOf(m,boolArrayOf(m,false)) as bool[][];
     for i in 0 to m{
@@ -169,11 +169,17 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         }
     }
     
-    var output = hung(graph);
+    return hung(graph);
+}
+function testMatching(output as int[]) as bool {
     for i in output {
         if(i<0) return false;
     }
     return true;
+}
+function testShapeless(requirements as IIngredient[], inputs as IItemStack[], mergeItems as bool = true, splitItems as bool = true) as bool {
+    var output = matchShapeless(requirements,inputs,mergeItems,splitItems);
+    return testMatching(output);
 }
 if(TEST2){
     print("Test2 Hungarian Algorithm!");

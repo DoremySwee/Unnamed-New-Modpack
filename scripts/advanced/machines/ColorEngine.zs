@@ -4,12 +4,17 @@
 import crafttweaker.data.IData;
 import crafttweaker.block.IBlock;
 import crafttweaker.world.IBlockPos;
+import crafttweaker.entity.IEntity;
+import crafttweaker.entity.IEntityItem;
+import crafttweaker.util.IAxisAlignedBB;
+
 import mods.modularmachinery.MMEvents;
 import mods.modularmachinery.MachineTickEvent;
 import mods.modularmachinery.MachineStructureFormedEvent;
 
 import scripts.libs.basic.Vector3D as V;
 import scripts.libs.advanced.Misc as M;
+import scripts.libs.advanced.Hungarian;
 import scripts.libs.advanced.ParticleGenerator as FX;
 
 import mods.modularmachinery.RecipePrimer;
@@ -121,6 +126,7 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
 
 var controllerB = <modularmachinery:color_engine_b_controller>;
 controllerB.addTooltip(game.localize("modpack.tooltip.color_engine_b_real"));
+(controllerB as IBlock).definition.resistance = 13.0;
 //TODO: Add JEI descriptions to two controllers
 
 MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureFormedEvent) {
@@ -152,9 +158,11 @@ static commandBlock as IItemStack = <minecraft:command_block>;
 // In JEI Recipe, items before the command block are actual ingredients that need to be put onto the plate
 // Wools after the command block represents required color rays.
 static COLOR_ENGINE_RECIPE_COUNTER as int[] = [11] as int[];
+static COLOR_ENGINE_RECIPES_OUTPUTS as IItemStack[][string] = {} as IItemStack[string];
 static COLOR_ENGINE_RECIPES_INPUTS as IIngredient[][string] = {} as IIngredient[string];
 static COLOR_ENGINE_RECIPES_COLORS as IItemStack[][string] = {} as IItemStack[string];
-function addRecipe(output as IItemStack, inputs as IIngredient[], colors as IItemStack[])as void{
+static COLOR_ENGINE_RECIPES_TOLERANCE as double[string] = {} as double[string];
+function addRecipe(outputs as IItemStack[], inputs as IIngredient[], colors as IItemStack[], tolerance as double = 0.3)as void{
     //Use wools to represent color rays
     for wool in colors {
         if(!<minecraft:wool:*>.matches(wool)){
@@ -169,20 +177,132 @@ function addRecipe(output as IItemStack, inputs as IIngredient[], colors as IIte
     var jeiInputs = [] as IIngredient[];
     for i in inputs {
         jeiInputs = jeiInputs + i;
+        if(i.hasTransformations) print("[WARNING]: Color Engine Does not support OLD itemTransformers, which require a player parameter.");
     }
     jeiInputs = jeiInputs + (commandBlock as IIngredient);
     for i in colors {
         jeiInputs = jeiInputs + (i as IIngredient);
     }
 
-    RecipeBuilder.newBuilder(id, "color_engine_b", 1)
+    RecipeBuilder.newBuilder(id, "color_engine_b", 114)
         .addItemInputs(jeiInputs)
-        .addItemOutput(output)
+        .addItemOutputs(outputs)
+        .addRecipeTooltip(game.localize("modpack.jei.mmce.color_engine_b.tolerance",""~((1.0+tolerance)*100)~"%"))
         .build();
     COLOR_ENGINE_RECIPES_INPUTS[id]=inputs;
+    COLOR_ENGINE_RECIPES_OUTPUTS[id]=outputs;
     COLOR_ENGINE_RECIPES_COLORS[id]=colors;
+    COLOR_ENGINE_RECIPES_TOLERANCE[id]=tolerance;
 }
 
-MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent) {
-    //TODO
+addRecipe([<minecraft:redstone>],[<botania:manaresource:23>],[<minecraft:wool:14>]);
+
+static getWrongResult as function(int)IItemStack = function (color as int)as IItemStack{
+    return <minecraft:dye>.definition.makeStack(color*10);
+};
+
+MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)as void{
+    var controller = event.controller;
+    var world = controller.world;
+    var pos = controller.pos;
+    var data = controller.customData;
+    if(!(data has "recipe")){
+        data = {
+            "recipe":""
+        } as IData;
+    }
+
+    var aabb = IAxisAlignedBB.create(
+        0.0+pos.x, 0.125+pos.y, 0.0+pos.z,
+        1.0+pos.x, 0.128+pos.y, 1.0+pos.z
+    );
+    var entities = world.getEntitiesWithinAABB(aabb) as IEntity[];
+
+    var items = [] as [IItemStack];
+    for e in entities{
+        if(e instanceof IEntityItem){
+            var i as IEntityItem = e;
+            items += i.item;
+        }
+    }
+    var recipeId = data.recipe.asString();
+    if(COLOR_ENGINE_RECIPES_INPUTS has recipeId){
+        var requirements = COLOR_ENGINE_RECIPES_INPUTS[recipeId];
+        if(Hungarian.testShapeless(requirements,items)){
+            var t as IData = data.progress;
+            var progress = t.asIntArray();
+            var requirementsW = COLOR_ENGINE_RECIPES_COLORS[recipeId];
+            var colors = intArrayOf(16,0);
+            var tolerance = 1.0 + COLOR_ENGINE_RECIPES_TOLERANCE[recipeId];
+            var charge = 0;
+            for w in requirementsW{
+                colors[w.metadata] = w.amount;
+            }
+            for i in 0 to 16{
+                charge += progress[i];
+            }
+            //1. Check if any of the color is over charged
+            //2. Check if the recipe is completed
+            var completed = true;
+            for i in 0 to 16{
+                if(progress[i]>tolerance*colors[i]){
+                    var size0 = V.sqrt(1.3*charge);
+                    var coef = 17.0;
+                    var size1 = size0/coef;
+                    var size2 = coef*(pow(2.71,size1)-pow(2.71,-size1))/(pow(2.71,size1)+pow(2.71,-size1));
+                    controller.customData = {
+                        "recipe":"",
+                        "progress":intArrayOf(16,0) as IData
+                    };
+                    world.performExplosion(null, 0.5+pos.x, 0.3+pos.y, 0.5+pos.z, size2, true, true);
+                    //TODO: explode with colored manabursts
+                    return;
+                }
+                if(progress[i]<colors[i])completed=false;
+            }
+            if(completed){
+                for e in entities{
+                    if(e instanceof IEntityItem){
+                        e.removeFromWorld();
+                    }
+                }
+                var outputs = COLOR_ENGINE_RECIPES_OUTPUTS[recipeId] as IItemStack[];
+                for o in outputs{
+                    M.shout(o.commandString);
+                    world.spawnEntity(o.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
+                }
+                var matching = Hungarian.matchShapeless(requirements,items);
+                for i in 0 to requirements.length{
+                    var ing as IIngredient= requirements[i];
+                    if(!ing.hasNewTransformers)continue;
+                    var it as IItemStack= items[matching[i]];
+                    var result = ing.applyNewTransform(it);
+                    if(isNull(result))continue;
+                    M.shout(result.commandString);
+                    world.spawnEntity(result.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
+                }
+                controller.customData = {
+                    "recipe":"",
+                    "progress":intArrayOf(16,0) as IData
+                };
+                //TODO: animation
+                return;
+            }
+            //3. Absorb Mana Burst nearby
+
+            //4. Animation
+            return;
+        }
+    }
+    for k,v in COLOR_ENGINE_RECIPES_INPUTS{
+        if(Hungarian.testShapeless(v,items)){
+            controller.customData = {
+                "recipe":k,
+                "progress":intArrayOf(16,0) as IData
+            };
+        }
+    }
 });
+
+//M.shout(<botania:manaresource:23>.transformReplace(<minecraft:potato>).hasNewTransformers);
+//M.shout(<botania:manaresource:23>.transformReplace(<minecraft:potato>).applyNewTransform(<botania:manaresource:23>).commandString);
