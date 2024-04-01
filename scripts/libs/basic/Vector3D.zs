@@ -313,6 +313,10 @@ function disc(x as double[],y as double[],theta as double)as double[]{
 function discR(x as double[],y as double[],theta as double)as double[]{
     return add(scale(x,cosR(theta)),scale(y,sinR(theta)));
 }
+function getOrtho(v as double[])as double[]{
+    if(v[1]==0 && v[2]==0) return [1,0,0] as double[];
+    return unify([0.0,v[2],-v[1]]);
+}
 //print(para([PIE,PIE,PIE],[1.14,1.14,1.14]));
 
 //Random

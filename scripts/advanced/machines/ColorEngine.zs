@@ -12,6 +12,7 @@ import mods.modularmachinery.MMEvents;
 import mods.modularmachinery.MachineTickEvent;
 import mods.modularmachinery.MachineStructureFormedEvent;
 
+import scripts.libs.basic.Data as D;
 import scripts.libs.basic.Vector3D as V;
 import scripts.libs.advanced.Misc as M;
 import scripts.libs.advanced.Hungarian;
@@ -28,6 +29,7 @@ static soundA0 as string = "botania:divinationrod";
 static soundA1 as string = "botania:manapoolcraft";//"botania:ding";
 static soundA16 as string = "botania:terrasteelcraft";//"astralsorcery:attunement";
 static DL as int = scripts.Config.DECORATION_LEVEL;
+static absorptionRadius as double = 3.5;
 
 static EXAMPLE_MANABURST_DATA as IData = 
 {
@@ -76,14 +78,13 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
                 "manaLossTick":0.01 as float, "minManaLoss":300,
                 "Pos":V.asDataList(V.add(V.fromIBlockPos(pos2),[0.0,1.51,0.0])), 
                 "Motion":V.asDataList(v),
-                "colorEngineData":color
+                "ForgeData": {"colorEngineData":color}
             }as IData)+V.asData(v,"lastMotion",true);
             var entity = <entity:botania:mana_burst>.createEntity(world);
             entity.updateNBT(data);
             world.spawnEntity(entity);
             //Particles
             M.playSound(soundA16,pos,0.3);
-            M.shout("Progress"~progress);
             for i in 0 to (20*DL){
                 var p0 = V.add(V.fromIBlockPos(pos),V.scale(V.randomUnitVector(world),0.3));
                 var v0 = [world.random.nextDouble(-0.015,0.015),world.random.nextDouble(0.12,0.17),world.random.nextDouble(-0.015,0.015)] as double[];
@@ -94,8 +95,8 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
                 });
             }
             var n = 30*DL;
-            var rotAxis = V.randomUnitVector(world);
-            for j in 0 to (2+DL){
+            //for j in 0 to (2+DL){
+                var rotAxis = V.randomUnitVector(world);
                 for i in 0 to n{
                     var theta = 360.0/n*i;
                     var v1 = V.scale(V.disc(V.VX,V.VZ,theta),1.4);
@@ -108,7 +109,7 @@ MMEvents.onMachinePreTick("color_engine_a", function(event as MachineTickEvent) 
                         "lifeLimit":50
                     });
                 }
-                }
+            //}
         }
         data = data + {"progress":progress%16};
     }
@@ -195,15 +196,12 @@ function addRecipe(outputs as IItemStack[], inputs as IIngredient[], colors as I
     COLOR_ENGINE_RECIPES_TOLERANCE[id]=tolerance;
 }
 
-addRecipe([<minecraft:redstone>],[<botania:manaresource:23>],[<minecraft:wool:14>]);
-
-static getWrongResult as function(int)IItemStack = function (color as int)as IItemStack{
-    return <minecraft:dye>.definition.makeStack(color*10);
-};
 
 MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)as void{
+
     var controller = event.controller;
     var world = controller.world;
+    if(world.remote)return;
     var pos = controller.pos;
     var data = controller.customData;
     if(!(data has "recipe")){
@@ -211,13 +209,11 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
             "recipe":""
         } as IData;
     }
-
     var aabb = IAxisAlignedBB.create(
         0.0+pos.x, 0.125+pos.y, 0.0+pos.z,
         1.0+pos.x, 0.128+pos.y, 1.0+pos.z
     );
     var entities = world.getEntitiesWithinAABB(aabb) as IEntity[];
-
     var items = [] as [IItemStack];
     for e in entities{
         if(e instanceof IEntityItem){
@@ -226,74 +222,181 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
         }
     }
     var recipeId = data.recipe.asString();
+
+
     if(COLOR_ENGINE_RECIPES_INPUTS has recipeId){
+        //init
         var requirements = COLOR_ENGINE_RECIPES_INPUTS[recipeId];
-        if(Hungarian.testShapeless(requirements,items)){
-            var t as IData = data.progress;
-            var progress = t.asIntArray();
-            var requirementsW = COLOR_ENGINE_RECIPES_COLORS[recipeId];
-            var colors = intArrayOf(16,0);
-            var tolerance = 1.0 + COLOR_ENGINE_RECIPES_TOLERANCE[recipeId];
-            var charge = 0;
-            for w in requirementsW{
-                colors[w.metadata] = w.amount;
+        var requirementsW = COLOR_ENGINE_RECIPES_COLORS[recipeId];
+        var tolerance = 1.0 + COLOR_ENGINE_RECIPES_TOLERANCE[recipeId];
+        var t as IData = data.progress;
+        var progress = t.asIntArray();
+        var colors = intArrayOf(16,0);
+        var charge = 0;
+        for w in requirementsW{
+            colors[w.metadata] = w.amount;
+        }
+        for i in 0 to 16{
+            charge += progress[i];
+        }
+
+        //1. Check if any of the color is over charged, or if items are removed during the process. If so, then do boom
+        //2. Check if the recipe is completed
+        var boom = !Hungarian.testShapeless(requirements,items);
+        var completed = true;
+        for i in 0 to 16{
+            if(progress[i]>tolerance*colors[i]){
+                boom = true;
             }
-            for i in 0 to 16{
-                charge += progress[i];
-            }
-            //1. Check if any of the color is over charged
-            //2. Check if the recipe is completed
-            var completed = true;
-            for i in 0 to 16{
-                if(progress[i]>tolerance*colors[i]){
-                    var size0 = V.sqrt(1.3*charge);
-                    var coef = 17.0;
-                    var size1 = size0/coef;
-                    var size2 = coef*(pow(2.71,size1)-pow(2.71,-size1))/(pow(2.71,size1)+pow(2.71,-size1));
-                    controller.customData = {
-                        "recipe":"",
-                        "progress":intArrayOf(16,0) as IData
-                    };
-                    world.performExplosion(null, 0.5+pos.x, 0.3+pos.y, 0.5+pos.z, size2, true, true);
-                    //TODO: explode with colored manabursts
-                    return;
-                }
-                if(progress[i]<colors[i])completed=false;
-            }
-            if(completed){
-                for e in entities{
-                    if(e instanceof IEntityItem){
-                        e.removeFromWorld();
+            if(progress[i]<colors[i])completed=false;
+        }
+
+        //Boom!
+        if(boom){
+            var size0 = V.sqrt(1.3*charge);
+            var coef = 17.0;
+            var size1 = size0/coef;
+            var size2 = coef*(pow(2.71,size1)-pow(2.71,-size1))/(pow(2.71,size1)+pow(2.71,-size1));
+            controller.customData = {
+                "recipe":"",
+                "progress":intArrayOf(16,0) as IData
+            };
+            if(charge>0){
+                for color in 0 to 16{
+                    if(progress[color]>0)for k in 0 to progress[color]{
+                        var v = V.scale(V.randomUnitVector(world),0.0001);
+                        var data = EXAMPLE_MANABURST_DATA + ({
+                            "startingMana":5, "mana":17, "color":M.COLOR_RGB[color],
+                            "manaLossTick":0.1 as float, "minManaLoss":3,
+                            "Pos":V.asDataList(V.add(V.fromIBlockPos(pos),V.scale(V.randomUnitVector(world),0.3))), 
+                            "Motion":V.asDataList(v)
+                        }as IData)+V.asData(v,"lastMotion",true);
+                        var entity = <entity:botania:mana_burst>.createEntity(world);
+                        entity.updateNBT(data);
+                        world.spawnEntity(entity);
                     }
                 }
-                var outputs = COLOR_ENGINE_RECIPES_OUTPUTS[recipeId] as IItemStack[];
-                for o in outputs{
-                    M.shout(o.commandString);
-                    world.spawnEntity(o.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
-                }
-                var matching = Hungarian.matchShapeless(requirements,items);
-                for i in 0 to requirements.length{
-                    var ing as IIngredient= requirements[i];
-                    if(!ing.hasNewTransformers)continue;
-                    var it as IItemStack= items[matching[i]];
-                    var result = ing.applyNewTransform(it);
-                    if(isNull(result))continue;
-                    M.shout(result.commandString);
-                    world.spawnEntity(result.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
-                }
-                controller.customData = {
-                    "recipe":"",
-                    "progress":intArrayOf(16,0) as IData
-                };
-                //TODO: animation
-                return;
+                world.performExplosion(null, 0.5+pos.x, 0.3+pos.y, 0.5+pos.z, size2, true, true);
             }
-            //3. Absorb Mana Burst nearby
-
-            //4. Animation
             return;
         }
+
+        //Craft Completed!
+        if(completed){
+            for e in entities{
+                if(e instanceof IEntityItem){
+                    e.removeFromWorld();
+                }
+            }
+            var outputs = COLOR_ENGINE_RECIPES_OUTPUTS[recipeId] as IItemStack[];
+            for o in outputs{
+                world.spawnEntity(o.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
+            }
+            var matching = Hungarian.matchShapeless(requirements,items);
+            for i in 0 to requirements.length{
+                var ing as IIngredient= requirements[i];
+                if(!ing.hasNewTransformers)continue;
+                var it as IItemStack= items[matching[i]];
+                var result = ing.applyNewTransform(it);
+                if(isNull(result))continue;
+                world.spawnEntity(result.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
+            }
+            controller.customData = {
+                "recipe":"",
+                "progress":intArrayOf(16,0) as IData
+            };
+            //Animation
+            if(DL>0){
+                var n = 30*DL;
+                for j in 0 to (1+DL){
+                    var rotAxis = V.randomUnitVector(world);
+                    var wool = requirementsW[world.random.nextInt(requirementsW.length)];
+                    var color = wool.metadata;
+                    for i in 0 to n{
+                        var theta = 360.0/n*i;
+                        var v1 = V.scale(V.disc(V.VX,V.VZ,theta),0.4+0.2*j);
+                        var v2 = V.scale(V.disc(V.VX,V.VZ,theta+100),0.06+j*0.03);
+                        var p = V.add(V.fromIBlockPos(pos),V.rot(v1,rotAxis,30));
+                        var v = V.rot(v2,rotAxis,30);
+                        FX.LinearOrb.create(world,V.asData(p)+V.asData(v,"v")+{
+                            "color":M.COLOR_RGB[color],
+                            "size":0.15,
+                            "lifeLimit":50
+                        });
+                    }
+                }
+            }
+            return;
+        }
+
+        //The machine is working in progress
+        //Absorb Mana Burst nearby
+        var r = absorptionRadius;
+        var aabb2 = IAxisAlignedBB.create(
+            -r+pos.x, -r+pos.y, -r+pos.z,
+            r+pos.x, r+pos.y, r+pos.z
+        );
+        var entities2 = world.getEntitiesWithinAABB(aabb2) as IEntity[];
+        for e in entities2{
+            if(!isNull(e.definition)){
+                if(e.definition.id == "botania:mana_burst"){
+                    var t = e.nbt.deepGet("ForgeData.colorEngineData");
+                    if(!isNull(t)){
+                        var color = e.nbt.ForgeData.colorEngineData.asInt();
+                        //Animation
+                        if(DL>0){
+                            var p = V.getPos(e);
+                            var v = V.unify([e.motionX,e.motionY,e.motionZ] as double[]);
+                            var r1 = V.getOrtho(v);
+                            var r2 = V.cross(v,r1);
+                            var n = 10+10*DL;
+                            var m = DL;
+                            var dv = 0.013;
+                            var v0 = 0.03 - dv/m/2;
+                            for j in 0 to m{
+                                var vt = v0 + dv * j;
+                                for i in 0 to n{
+                                    var theta = 360.0/n*i;
+                                    var v1 = V.scale(V.disc(r1,r2,theta),vt);
+                                    var p1 = V.add(p,V.scale(V.disc(r1,r2,theta+150),0.15));
+                                    M.createFX(V.asData(p1)+V.asData(v1,"v")+{"r":0.1,"a":10,"color":M.COLOR_RGB[color]});
+                                }
+                            }
+                        }
+                        e.removeFromWorld();
+                        progress[color] = progress[color] + 1;
+                    }
+                }
+            }
+        }
+        controller.customData = {
+            "recipe":recipeId,
+            "progress":progress as IData
+        };
+        //Animation while working
+        if(DL>0){
+            var t = controller.ticksExisted;
+            var eulaAng = V.scale([0.114,0.514,0.810] as double[], t);
+            var i = 0;
+            var c = 0;
+            var a1 = V.eulaAng(V.VX,eulaAng);
+            var a2 = V.eulaAng(V.VZ,eulaAng);
+            for color in 0 to 16{
+                c+=progress[color];
+            }
+            for color in 0 to 16{
+                if(progress[color]>0)for j in 0 to progress[color]{
+                    i+=1;
+                    var theta = 1.3*t + 360.0/c*i;
+                    var dp = V.disc(a1,a2,theta);
+                    var p1 = V.add(V.fromBlockPos(pos),dp);
+                    M.createFX(V.asData(p1)+{"color":M.COLOR_RGB[color],"r":0.13,"a":2});
+                }
+            }
+        }
+        return;
     }
+    //If there is no current recipe, Check if there should be one.
     for k,v in COLOR_ENGINE_RECIPES_INPUTS{
         if(Hungarian.testShapeless(v,items)){
             controller.customData = {
@@ -304,5 +407,4 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
     }
 });
 
-//M.shout(<botania:manaresource:23>.transformReplace(<minecraft:potato>).hasNewTransformers);
-//M.shout(<botania:manaresource:23>.transformReplace(<minecraft:potato>).applyNewTransform(<botania:manaresource:23>).commandString);
+addRecipe([<minecraft:redstone>],[<botania:manaresource:23>],[<minecraft:wool:14>*20]);
