@@ -108,28 +108,35 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         return testShapeless(requirements,inputs,true,false);
     }
     if(mergeItems){
-        var inputs2 = [] as IItemStack[]; //TODO: [LIST-ARRAY] [20240331]
-        for i in inputs{
-            if(inputs2.length==0) inputs2+=i;
-            else {
-                var flag = true;
-                for t in 0 to inputs2.length{
-                    var j = inputs2[t];
-                    if((i*1).commandString == (j*1).commandString){
-                        inputs2[t] = i * (i.amount + j.amount);
-                        flag=false;
-                    }
-                }
-                if(flag){
-                    inputs2 = inputs2 + i;
+        var c = 0;
+        var a = intArrayOf(inputs.length,0);
+        for i in 0 to inputs.length{
+            var f = true;
+            if(i>0)for j in 0 to i{
+                if((inputs[i]*1).commandString==(inputs[j]*1).commandString){
+                    f = false;
+                    a[j] = a[j] + inputs[i].amount;
+                    break;
                 }
             }
+            if(f){
+                c+=1;
+                a[i] = inputs[i].amount;
+            }
         }
-        return testShapeless(requirements,inputs2,false,false);
+        var merged = arrayOf(c, <minecraft:apple>) as IItemStack[];
+        var j = 0;
+        for i in 0 to inputs.length{
+            if(a[i]>0){
+                merged[j] = inputs[i] * a[i];
+                j+=1;
+            }
+        }
+        return testShapeless(requirements,merged,false,false);
     }
     if(splitItems){
-        var req = [] as IIngredient[]; //TODO: [LIST-ARRAY] [20240331]
-        var inp = [] as IItemStack[]; //TODO: [LIST-ARRAY] [20240331]
+        var req = [] as [IIngredient]; //TODO: [LIST-ARRAY] [20240331]
+        var inp = [] as [IItemStack]; //TODO: [LIST-ARRAY] [20240331]
         for r in requirements{
             for i in 0 to r.amount{
                 req = req + r*1;
