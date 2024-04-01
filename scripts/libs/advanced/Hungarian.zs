@@ -135,8 +135,8 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         return testShapeless(requirements,merged,false,false);
     }
     if(splitItems){
-        var req = [] as [IIngredient]; //TODO: [LIST-ARRAY] [20240331]
-        var inp = [] as [IItemStack]; //TODO: [LIST-ARRAY] [20240331]
+        var req = [] as [IIngredient];
+        var inp = [] as [IItemStack];
         for r in requirements{
             for i in 0 to r.amount{
                 req = req + r*1;
@@ -149,7 +149,6 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
         }
         return testShapeless(req,inp,false,false);
     }
-    //if(TEST2)for i in inputs{print(i.commandString);}
     var m = requirements.length;
     if(m!=inputs.length)return false;
 
