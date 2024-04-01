@@ -76,14 +76,7 @@ function hung(graph as bool[][])as int[]{
     return matching;
 }
 function hungEdge(m as int, n as int, edges as int[][], startFromOne as bool = false)as int[]{
-    var graph as bool[][] = [] as bool[][]; //TODO: [LIST-ARRAY] [20240331]
-    for i in 0 to m{
-        var t as bool[] = [] as bool[];
-        for j in 0 to n{
-            t += false;
-        }
-        graph += t;
-    }
+    var graph as bool[][] = arrayOf(m,boolArrayOf(n,false)) as bool[][];
     var t = startFromOne? 1: 0;
     for e in edges{
         graph[e[0]-t][e[1]-t]=true;
@@ -153,13 +146,11 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
     var m = requirements.length;
     if(m!=inputs.length)return false;
 
-    var graph as bool[][] = [] as bool[][]; //TODO: [LIST-ARRAY] [20240331]
+    var graph = arrayOf(m,boolArrayOf(m,false)) as bool[][];
     for i in 0 to m{
-        var t as bool[] = [] as bool[];
         for j in 0 to m{
-            t += (requirements[i].amount==inputs[j].amount) && (requirements[i].matches(inputs[j]));
+            graph[i][j] = (requirements[i].amount==inputs[j].amount) && (requirements[i].matches(inputs[j]));
         }
-        graph += t;
     }
     
     var output = hung(graph);
