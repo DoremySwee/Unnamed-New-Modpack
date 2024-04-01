@@ -1,5 +1,6 @@
 #reloadable
 #priority 1000000030
+#debug
 import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemStack;
 
@@ -149,12 +150,12 @@ function matchShapeless(requirements as IIngredient[], inputs as IItemStack[], m
         var inp = [] as [IItemStack];
         for r in requirements{
             for i in 0 to r.amount{
-                req = req + r*1;
+                req += r*1;
             }
         }
         for i in inputs{
             for j in 0 to i.amount{
-                inp = inp + i*1;
+                inp += i*1;
             }
         }
         return matchShapeless(req,inp,false,false);
@@ -181,6 +182,7 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
     var output = matchShapeless(requirements,inputs,mergeItems,splitItems);
     return testMatching(output);
 }
+
 if(TEST2){
     print("Test2 Hungarian Algorithm!");
     print(testShapeless([<appliedenergistics2:io_port>],[<appliedenergistics2:chest>]));
@@ -192,4 +194,5 @@ if(TEST2){
     print(testShapeless([<ore:dye>*3,<ore:dyeRed>,<ore:gemLapis>],[<minecraft:dye:9>,<minecraft:dye:4>*3,<minecraft:dye:1>]));
     print(testShapeless([<ore:dye>*30,<ore:dyeRed>,<ore:gemLapis>],[<minecraft:dye:9>,<minecraft:dye:4>*30,<minecraft:dye:1>]));    //False, since did not use split items
     print(testShapeless([<ore:dye>,<ore:dyeRed>,<ore:gemLapis>*128],[<minecraft:dye:9>,<minecraft:dye:4>*64,<minecraft:dye:4>*64,<minecraft:dye:1>]));
+    print(testShapeless([<ore:dye>,<ore:dyeRed>,<ore:gemLapis>*160],[<minecraft:dye:9>,<minecraft:dye:4>*64,<minecraft:dye:4>*64,<minecraft:dye:1>, <minecraft:dye:4> * 32]));
 }
