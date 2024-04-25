@@ -265,10 +265,8 @@ static manaCoef as double = (3.0+DIFF)/5;
     recipes.addShapeless("afflatus_of_crafting_process", aff*7, [aff,aff,aff,aff,aff,aff,aff],
         function(out, ins, cinfo){
             var nullsT = [] as int[];
-            M2.shout("14532");
             if(cinfo.inventory.width!=3) return null;
             if(cinfo.inventory.height!=3) return null;
-            M2.shout("1452");
             var f = false;
             var lastNBT as IData = null;
             for i in 0 to 9{
@@ -284,25 +282,20 @@ static manaCoef as double = (3.0+DIFF)/5;
                     }
                 }
             }
-            M2.shout("145");
             if(nullsT.length!=2) return null;
-            M2.shout("1145");
             var i = nullsT[0];
             var j = nullsT[1];
-            M2.shout("11456");
             var index as int = i*(17-i)/2 + j - i - 1; //The index for current recipe
-            M2.shout("11456");
             if(isNull(lastNBT)) lastNBT = IData.createEmptyMutableDataMap(); 
-            M2.shout("11456");
-            var a = (lastNBT has "affCrating0") ? lastNBT.affCrafting0.asInt() : 0;
-            var b = (lastNBT has "affCrating1") ? lastNBT.affCrafting1.asInt() : 0;
-            M2.shout("11457");
+            print(isNull(lastNBT));
+            //print(lastNBT has "affCounting0");
+            //print(lastNBT.affCrafting0.asInt());
+            var a = (lastNBT has "affCounting0") ? lastNBT.affCounting0.asInt() : 0;
+            var b = (lastNBT has "affCounting1") ? lastNBT.affCounting1.asInt() : 0;
             if(index<24) a=a|V.pow2(index);
             else b=b|V.pow2(index - 24);
             var out2 = aff.withTag(lastNBT + {"affCounting0":a, "affCounting1":b} as IData);
-            M2.shout("11456");
             var affInfo = craftingAfflatusInfo(out2);
-            M2.shout("11456");
             if(affInfo[0]>=requiredNum) return M.shimmer(aff).withTag({"completed":true})*7;
             return out2*7;
         }, null
@@ -318,10 +311,13 @@ static manaCoef as double = (3.0+DIFF)/5;
         7
     ] as int[];
     aff.addShiftTooltip(function(item){
+        if(item.tag.deepGetBool("completed")){
+            return game.localize("modpack.tooltip.afflatus_of_crafting.completed");
+        }
         var lastNBT as IData = isNull(item.tag)?IData.createEmptyMutableDataMap():item.tag;
         var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shifted");
-        var a = (lastNBT has "affCrating0") ? lastNBT.affCrafting0.asInt() : 0;
-        var b = (lastNBT has "affCrating1") ? lastNBT.affCrafting1.asInt() : 0;
+        var a = (lastNBT has "affCounting0") ? lastNBT.affCounting0.asInt() : 0;
+        var b = (lastNBT has "affCounting1") ? lastNBT.affCounting1.asInt() : 0;
         var ans = "";
         var t = 1;
         for i in 0 to 24{
@@ -335,6 +331,9 @@ static manaCoef as double = (3.0+DIFF)/5;
         }
         return strShift~NEWLINE~ans;
     },function(item){
+        if(item.tag.deepGetBool("completed")){
+            return game.localize("modpack.tooltip.afflatus_of_crafting.completed");
+        }
         var info = craftingAfflatusInfo(item);
         var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shift");
         //var str1 = game.localize("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
