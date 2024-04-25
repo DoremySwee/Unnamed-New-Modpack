@@ -3,9 +3,12 @@ import mods.botaniatweaks.Agglomeration as Agg;
 import scripts.libs.recipe.Transcript as T;
 import scripts.libs.recipe.Mapping as Mp;
 import scripts.libs.recipe.Misc as M;
+import scripts.libs.basic.Vector3D as V;
+import scripts.libs.advanced.Misc as M2;
 import crafttweaker.item.IItemStack;
 import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemDefinition;
+import crafttweaker.data.IData;
 
 static DIFF as int = scripts.Config.DIFF;
 static manaCoef as double = (3.0+DIFF)/5;
@@ -233,3 +236,117 @@ static manaCoef as double = (3.0+DIFF)/5;
         <botania:opencrate:1>, <botania:livingrock:4>, corner5,
         <botania:runealtar>, <botania:livingrock:3>, <botania:flower:3>
     );
+
+//Afflatus of Crafting
+    static aff as IItemStack = <contenttweaker:afflatus_of_crafting>;
+    static requiredNum as int = ([3,9,18,27,36] as int[]) [DIFF];
+    static craftingAfflatusInfo as function(IItemStack)int[] = function(item as IItemStack)as int[]{
+        //return [numberOfCompletedCrafts, leastUncompletedCrafts]
+        var T as int[] = [0,0] as int[];
+        if(!aff.matches(item)) return T;
+        var data = item.tag;
+        if(isNull(data)) return T;
+        if(data.deepGetBool("completed")) return [36,-1 as int] as int[];
+        if(!(data has "affCounting0")) return T;
+        var count = 0;
+        var a = data.deepGetInt("affCounting0");//.asInt();
+        var b = data.deepGetInt("affCounting1");//data.affCounting1.asInt();
+        var t = 1;
+        var minMissing = 114;
+        for i in 0 to 24 {
+            if((a&t)>0) count+=1;
+            else if(minMissing>i) minMissing = i;
+            if((b&t)>0) count+=1;
+            else if(minMissing>i+24) minMissing = i+24;
+            t*=2;
+        }
+        return [count,minMissing] as int[];
+    };
+    recipes.addShapeless("afflatus_of_crafting_process", aff*7, [aff,aff,aff,aff,aff,aff,aff],
+        function(out, ins, cinfo){
+            var nullsT = [] as int[];
+            M2.shout("14532");
+            if(cinfo.inventory.width!=3) return null;
+            if(cinfo.inventory.height!=3) return null;
+            M2.shout("1452");
+            var f = false;
+            var lastNBT as IData = null;
+            for i in 0 to 9{
+                var t = cinfo.inventory.items[i/3][i%3];
+                if(isNull(t))nullsT+=i;
+                else{
+                    if(f){
+                        if(lastNBT!=t.tag) return null;
+                    }
+                    else{
+                        lastNBT = t.tag;
+                        f = true;
+                    }
+                }
+            }
+            M2.shout("145");
+            if(nullsT.length!=2) return null;
+            M2.shout("1145");
+            var i = nullsT[0];
+            var j = nullsT[1];
+            M2.shout("11456");
+            var index as int = i*(17-i)/2 + j - i - 1; //The index for current recipe
+            M2.shout("11456");
+            if(isNull(lastNBT)) lastNBT = IData.createEmptyMutableDataMap(); 
+            M2.shout("11456");
+            var a = (lastNBT has "affCrating0") ? lastNBT.affCrafting0.asInt() : 0;
+            var b = (lastNBT has "affCrating1") ? lastNBT.affCrafting1.asInt() : 0;
+            M2.shout("11457");
+            if(index<24) a=a|V.pow2(index);
+            else b=b|V.pow2(index - 24);
+            var out2 = aff.withTag(lastNBT + {"affCounting0":a, "affCounting1":b} as IData);
+            M2.shout("11456");
+            var affInfo = craftingAfflatusInfo(out2);
+            M2.shout("11456");
+            if(affInfo[0]>=requiredNum) return M.shimmer(aff).withTag({"completed":true})*7;
+            return out2*7;
+        }, null
+    );
+    static affFindI as int[] = [
+        0,0,0,0,0,0,0,0,
+        1,1,1,1,1,1,1,
+        2,2,2,2,2,2,
+        3,3,3,3,3,
+        4,4,4,4,
+        5,5,5,
+        6,6,
+        7
+    ] as int[];
+    aff.addShiftTooltip(function(item){
+        var lastNBT as IData = isNull(item.tag)?IData.createEmptyMutableDataMap():item.tag;
+        var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shifted");
+        var a = (lastNBT has "affCrating0") ? lastNBT.affCrafting0.asInt() : 0;
+        var b = (lastNBT has "affCrating1") ? lastNBT.affCrafting1.asInt() : 0;
+        var ans = "";
+        var t = 1;
+        for i in 0 to 24{
+            if((a&t)==0) ans = ans~i~" ";
+            t = t*2;
+        }
+        t = 1;
+        for i in 0 to 12{
+            if((b&t)==0) ans = ans~(i+24)~" ";
+            t = t*2;
+        }
+        return strShift~NEWLINE~ans;
+    },function(item){
+        var info = craftingAfflatusInfo(item);
+        var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shift");
+        //var str1 = game.localize("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
+        //var str1 = crafttweaker.text.ITextComponent.fromTranslation("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]) as string;
+        var str1 = mods.zenutils.I18n.format("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
+        var str2 = game.localize("modpack.tooltip.afflatus_of_crafting.next");
+        var t = info[1];
+        var i = affFindI[t];
+        var j = t+i+1 - i*(17-i)/2;
+        var str3 = "";
+        for k in 0 to 9{
+            str3 = str3 ~ ((k==i || k==j) ? "O" : "X") ~ ((k%3==2) ? ";"~NEWLINE : "");
+        }
+        return strShift~NEWLINE~str1~NEWLINE~str2~NEWLINE~str3;
+    });

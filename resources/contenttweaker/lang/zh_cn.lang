@@ -9,6 +9,11 @@ modpack.tooltip.dupInscribe=§f可以在压印器复制！§r
 modpack.tooltip.haste=§6急迫II (90s)§r
 modpack.tooltip.netherrackHeating=§c已加热%s次§r
 
+modpack.tooltip.afflatus_of_crafting.requirement=需要进行%s/%s次不同的合成
+modpack.tooltip.afflatus_of_crafting.next=未进行的合成样例：
+modpack.tooltip.afflatus_of_crafting.shift=按下shift查看未完成的合成编号
+modpack.tooltip.afflatus_of_crafting.shifted=未完成的合成编号列表:
+
 modpack.tooltip.color_engine_b_real=需要被16种不同的荧光花围绕
 modpack.tooltip.fake_machine=不存在的物品，仅用于显示结构
 
@@ -22,6 +27,7 @@ item.contenttweaker.broken_ignis_rune.name=劣质的火符文
 item.contenttweaker.broken_terra_rune.name=劣质的地符文
 item.contenttweaker.broken_aqua_rune.name=劣质的水符文
 item.contenttweaker.broken_aer_rune.name=劣质的风符文
+item.contenttweaker.afflatus_of_crafting.name=合成之脑
 
 tile.contenttweaker.heated_netherrack_1.name=§c暖的地狱岩§r
 tile.contenttweaker.heated_netherrack_2.name=§c热的地狱岩§r

@@ -9,3 +9,5 @@ import scripts.libs.CotLib as CL;
         var id = "heated_netherrack_"~i;
         CL.createBlock(id,{"lightValue":i/2},CL.MISCTAB,<blockmaterial:rock>);
     }
+//Misc
+    CL.createItem("afflatus_of_crafting");

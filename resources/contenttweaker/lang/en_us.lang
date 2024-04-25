@@ -9,6 +9,11 @@ modpack.tooltip.dupInscribe=§fCan be duplicated at Inscriber (AE2)!§r
 modpack.tooltip.haste=§6Eat it for Haste II (1:30)!§r
 modpack.tooltip.netherrackHeating=§cHeated for %s times!§r
 
+modpack.tooltip.afflatus_of_crafting.requirement=Require [%s/%s] Different Crafts.
+modpack.tooltip.afflatus_of_crafting.next=An example of uncompleted craft:
+modpack.tooltip.afflatus_of_crafting.shift=Press shift to see which crafts haven't been done. 
+modpack.tooltip.afflatus_of_crafting.shifted=The indexes for uncompleted crafts:
+
 modpack.tooltip.color_engine_b_real=Needs to be surrounded by 16 different shiny flowers.
 modpack.tooltip.fake_machine=This item is only used to show the multi-block structure.
 
@@ -22,6 +27,7 @@ item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
 item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
 item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
 item.contenttweaker.broken_aer_rune.name=Broken Rune of Air
+item.contenttweaker.afflatus_of_crafting.name=Afflatus of Crafting
 
 tile.contenttweaker.heated_netherrack_1.name=§cWarm Netherrack§r
 tile.contenttweaker.heated_netherrack_2.name=§cHot Netherrack§r
