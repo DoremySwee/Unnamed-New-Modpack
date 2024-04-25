@@ -13,6 +13,7 @@ modpack.tooltip.afflatus_of_crafting.requirement=需要进行%s/%s次不同的�
 modpack.tooltip.afflatus_of_crafting.next=未进行的合成样例：
 modpack.tooltip.afflatus_of_crafting.shift=按下shift查看未完成的合成编号
 modpack.tooltip.afflatus_of_crafting.shifted=未完成的合成编号列表:
+modpack.tooltip.afflatus_of_crafting.completed=该物品已完成制作，可以进行参与其它物品的合成了。
 
 modpack.tooltip.color_engine_b_real=需要被16种不同的荧光花围绕
 modpack.tooltip.fake_machine=不存在的物品，仅用于显示结构
