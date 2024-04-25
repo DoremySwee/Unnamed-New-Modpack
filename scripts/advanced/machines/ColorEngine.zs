@@ -223,7 +223,11 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
     }
     var recipeId = data.recipe.asString();
 
-
+    //TODO1: Record [LastTickItems], and boom iff [Item Changed] and [Has RecipeId]. Additionally, only check recipe if [Item Changed]
+    //TODO2: Sort the recipes in [Total Item Counts], to avoid complete go through-s when looking for items. 
+    //Or is it necessary? We can turn down the recipe immediately after we find the total item count wrong. It's O(n), while n<10000.
+        // Seems this does not appear in Hungarian.zs, we need to write it down.
+    //But it seems that TiC2 casting system should be even simpler than this, but it took very long time.
     if(COLOR_ENGINE_RECIPES_INPUTS has recipeId){
         //init
         var requirements = COLOR_ENGINE_RECIPES_INPUTS[recipeId];
