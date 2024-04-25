@@ -116,7 +116,7 @@ events.onCommand(function(event as CommandEvent){
         val player as IPlayer=event.commandSender;
         var message as string=messages[player.world.random.nextInt(messages.length)];
         var sound as string=sounds[player.world.random.nextInt(sounds.length)];
-        if(scripts.Config.ALPHA)M.tellAuto(player,"You used command:"~event.command.name~"\nIf you want it to be added to the whiteList, inform the author.");
+        if(scripts.Config.ALPHA)M.tellAuto(player,"You used command:"~event.command.name~NEWLINE~"If you want it to be added to the whiteList, inform the author.");
         pipiFX(player);
         M.executeCommand("playsound "~sound~" neutral " ~ player.name ~ " " ~ player.x ~ " " ~ player.y ~ " " ~ player.z);
         val text = ITextComponent.fromString(message);

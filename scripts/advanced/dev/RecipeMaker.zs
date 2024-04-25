@@ -27,7 +27,7 @@ if(scripts.Config.DEV){
             print("Items in chest:");
             print("as list:");
             for i in list{
-                logstring=logstring~i.commandString~",\n";
+                logstring=logstring~i.commandString~","~NEWLINE;
             }
             print(logstring);
             print("as map:");
@@ -69,9 +69,9 @@ if(scripts.Config.DEV){
                 var map = Mp.getMap(list);
                 //if(1.0 * (map.keys.length+0.7) / (list.length+1) > 0.8){
                 if(map.keys.length>65){
-                    var logstring = "[\n";
+                    var logstring = "["~NEWLINE;
                     for i in inputs{
-                        if(logstring!="[\n")logstring+=",\n";
+                        if(logstring!="["~NEWLINE)logstring+=","~NEWLINE;
                         var t = "[";
                         for j in i{
                             if(t!="[")t+=", ";
@@ -80,12 +80,12 @@ if(scripts.Config.DEV){
                         }
                         logstring+=t~"]";
                     }
-                    logstring+="\n]";
+                    logstring+=(NEWLINE~"]");
                     print(logstring);
                 }
                 else{
                     var pattern = Mp.getPattern(inputs,map);
-                    print("Mp.read(\"\n    "~pattern~"\","~Mp.displayMap(map)~")");
+                    print("Mp.read(\""~NEWLINE~"    "~pattern~"\","~Mp.displayMap(map)~")");
                 }
                 M.tellAuto(event.player,"Recipe has been outputted to crafttweaker.log!");
                 event.cancel();

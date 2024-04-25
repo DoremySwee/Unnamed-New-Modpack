@@ -2,7 +2,7 @@
 #priority 100000000
 import crafttweaker.item.IIngredient as I;
 static dev as bool= scripts.Config.DEV;
-static whiteSpaces as string[]=["\n","\r"," ","\t"];
+static whiteSpaces as string[]=["\n","\r"," ","\t",NEWLINE];
 function read1d(pattern as string, map as I[string])as I[]{
     var result as I[] = [] as I[];
     for index in 0 to pattern.length{
@@ -86,7 +86,7 @@ function getPattern(inputs as I[][], map as I[string])as string{
     var result = "";
     for i in inputs{
         result+=getPattern1d(i,map);
-        result+=";\n    ";
+        result+=";"~NEWLINE~"    ";
     }
     return result;
 }
@@ -94,7 +94,7 @@ function getPattern3d(inputs as I[][][], map as I[string])as string{
     var result = "";
     for i in inputs{
         result+=getPattern(i,map);
-        result+=".\n\n    ";
+        result+="."~NEWLINE~NEWLINE~"    ";
     }
     return result;
 }
@@ -102,8 +102,8 @@ function displayMap(map as I[string])as string{
     var result="{";
     for k,v in map{
         if(result!="{")result+=",";
-        result+="\n    \""~k~"\":"~v.commandString;
+        result+=NEWLINE~"    \""~k~"\":"~v.commandString;
     }
-    result+="\n}";
+    result+=NEWLINE~"}";
     return result;
 }
