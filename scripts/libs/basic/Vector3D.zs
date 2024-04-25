@@ -12,7 +12,21 @@ import crafttweaker.world.IWorld;
 function abs(x as double)as double{
     return x<0?-x:x;
 }
-
+static pow2Results as int[] = [1] as int[];
+for i in 1 to 31{
+    pow2Results +=  pow2Results [pow2Results.length - 1] * 2;
+}
+function pow2(n as int)as int{
+    if(n>30){
+        print("[ERROR]: Int Overflow! Location: libs/basic/Vector3D/pow2");
+        return 0;
+    }
+    if(n<0){
+        print("[ERROR]: pow2 does not support negative exponent! Location: libs/basic/Vector3D/pow2");
+        return 0;
+    }
+    return pow2Results[n];
+}
 // Vectors are represented by double[] with length 3
 // All trigonometric functions use degree
 static PIE as double = 3.1415927;

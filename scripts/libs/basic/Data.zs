@@ -186,3 +186,33 @@ function asFluid(data as IData)as ILiquidStack{
     }
     return null;
 }*/
+
+
+function getBool(data as IData, path as string, default as bool = false)as bool{
+    var t = get(data,path);
+    return isNull(t)?default:t.asBool();
+}
+function getInt(data as IData, path as string, default as int = 0)as int{
+    var t = get(data,path);
+    return isNull(t)?default:t.asInt();
+}
+function getDouble(data as IData, path as string, default as double = 0.0)as double{
+    var t = get(data,path);
+    return isNull(t)?default:t.asDouble();
+}
+function getString(data as IData, path as string, default as string = "")as string{
+    var t = get(data,path);
+    return isNull(t)?default:t.asString();
+}
+$expand IData$deepGetBool(path as string, default as bool = false)as bool{
+    return getBool(this,path,default);
+}
+$expand IData$deepGetInt(path as string, default as int = 0)as int{
+    return getInt(this,path,default);
+}
+$expand IData$deepGetDouble(path as string, default as double = 0.0)as double{
+    return getDouble(this,path,default);
+}
+$expand IData$deepGetString(path as string, default as string = "")as string{
+    return getString(this,path,default);
+}

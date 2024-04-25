@@ -104,5 +104,5 @@ function clearNBT(item as IItemStack){
     item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.clearnbt"))));
 }
 function shimmer(item as IItemStack)as IItemStack{
-    return item.withTag({ench: [{lvl: 1 as short, id: 28 as short}]});
+    return item.updateTag({ench: [{lvl: 1 as short, id: 28 as short}]});
 }
