@@ -344,9 +344,9 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
         for e in entities2{
             if(!isNull(e.definition)){
                 if(e.definition.id == "botania:mana_burst"){
-                    var t = e.nbt.deepGet("ForgeData.colorEngineData");
+                    var t = e.forgeData.colorEngineData;
                     if(!isNull(t)){
-                        var color = e.nbt.ForgeData.colorEngineData.asInt();
+                        var color = e.forgeData.colorEngineData.asInt();
                         //Animation
                         if(DL>0){
                             var p = V.getPos(e);
