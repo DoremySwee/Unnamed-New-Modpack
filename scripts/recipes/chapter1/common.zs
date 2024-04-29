@@ -314,44 +314,49 @@ static manaCoef as double = (3.0+DIFF)/5;
         6,6,
         7
     ] as int[];
-    aff.addShiftTooltip(function(item){
-        if(item.tag.deepGetBool("completed")){
-            return game.localize("modpack.tooltip.afflatus_of_crafting.completed");
+    aff.modifyTooltip(function(item, tooltip, shiftPressed, advanced) {
+        if (item.tag.deepGetBool("completed")){
+            tooltip.add(game.localize("modpack.tooltip.afflatus_of_crafting.completed"));
+        } else if (shiftPressed) {
+            var lastNBT as IData = isNull(item.tag)?IData.createEmptyMutableDataMap():item.tag;
+            var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shifted");
+            var a = (lastNBT has "affCounting0") ? lastNBT.affCounting0.asInt() : 0;
+            var b = (lastNBT has "affCounting1") ? lastNBT.affCounting1.asInt() : 0;
+            var ans = "";
+            var t = 1;
+            for i in 0 to 24{
+                if((a&t)==0) ans = ans~i~" ";
+                t = t*2;
+            }
+            t = 1;
+            for i in 0 to 12{
+                if((b&t)==0) ans = ans~(i+24)~" ";
+                t = t*2;
+            }
+            tooltip.add(strShift);
+            tooltip.add(ans);
+        } else {
+            var info = craftingAfflatusInfo(item);
+            var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shift");
+            //var str1 = game.localize("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
+            //var str1 = crafttweaker.text.ITextComponent.fromTranslation("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]) as string;
+            var str1 = mods.zenutils.I18n.format("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
+            var str2 = game.localize("modpack.tooltip.afflatus_of_crafting.next");
+            var t = info[1];
+            var i = affFindI[t];
+            var j = t+i+1 - i*(17-i)/2;
+            tooltip.add(strShift);
+            tooltip.add(str1);
+            tooltip.add(str2);
+            var matrixRow = "";
+            for k in 0 to 9{
+                matrixRow ~= ((k==i || k==j) ? "O" : "X");
+                if (k % 3 == 2) {
+                    tooltip.add(matrixRow ~ ";");
+                    matrixRow = "";
+                }
+            }
         }
-        var lastNBT as IData = isNull(item.tag)?IData.createEmptyMutableDataMap():item.tag;
-        var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shifted");
-        var a = (lastNBT has "affCounting0") ? lastNBT.affCounting0.asInt() : 0;
-        var b = (lastNBT has "affCounting1") ? lastNBT.affCounting1.asInt() : 0;
-        var ans = "";
-        var t = 1;
-        for i in 0 to 24{
-            if((a&t)==0) ans = ans~i~" ";
-            t = t*2;
-        }
-        t = 1;
-        for i in 0 to 12{
-            if((b&t)==0) ans = ans~(i+24)~" ";
-            t = t*2;
-        }
-        return strShift~NEWLINE~ans;
-    },function(item){
-        if(item.tag.deepGetBool("completed")){
-            return game.localize("modpack.tooltip.afflatus_of_crafting.completed");
-        }
-        var info = craftingAfflatusInfo(item);
-        var strShift = game.localize("modpack.tooltip.afflatus_of_crafting.shift");
-        //var str1 = game.localize("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
-        //var str1 = crafttweaker.text.ITextComponent.fromTranslation("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]) as string;
-        var str1 = mods.zenutils.I18n.format("modpack.tooltip.afflatus_of_crafting.requirement",[info[0],requiredNum]);
-        var str2 = game.localize("modpack.tooltip.afflatus_of_crafting.next");
-        var t = info[1];
-        var i = affFindI[t];
-        var j = t+i+1 - i*(17-i)/2;
-        var str3 = "";
-        for k in 0 to 9{
-            str3 = str3 ~ ((k==i || k==j) ? "O" : "X") ~ ((k%3==2) ? ";"~NEWLINE : "");
-        }
-        return strShift~NEWLINE~str1~NEWLINE~str2~NEWLINE~str3;
     });
 
     recipes.addShaped(<botania:manaresource:11>*16, Mp.read("_X_;__X;X__;",{"X":affc}));
