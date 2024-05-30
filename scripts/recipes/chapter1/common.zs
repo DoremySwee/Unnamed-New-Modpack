@@ -241,7 +241,7 @@ static manaCoef as double = (3.0+DIFF)/5;
 
 //Afflatus of Crafting
     static aff as IItemStack = <contenttweaker:afflatus_of_crafting>;
-    T.bot.rune(aff*32, <botania:opencrate:1>, 5000*manaCoef);
+    T.bot.rune(aff*32, [<botania:opencrate:1>], 5000*manaCoef);
     static affc as IItemStack = <contenttweaker:complete_afflatus_of_crafting>;
     static requiredNum as int = ([3,9,18,27,36] as int[]) [DIFF];
     static craftingAfflatusInfo as function(IItemStack)int[] = function(item as IItemStack)as int[]{
