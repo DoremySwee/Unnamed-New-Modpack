@@ -1,11 +1,10 @@
 {
-	x: -3.0d,
+	x: 0.5d,
 	y: 2.5d,
 	shape: "pentagon",
-	hide_dependency_lines: true,
 	dependencies: [
 		"b3319d34",
-		"e054dbe2"
+		"c4762050"
 	],
 	tasks: [{
 		uid: "f01a0f4d",

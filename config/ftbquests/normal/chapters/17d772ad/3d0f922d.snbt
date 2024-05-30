@@ -1,7 +1,7 @@
 {
 	x: -4.0d,
 	y: -2.5d,
-	shape: "pentagon",
+	shape: "circle",
 	hide_dependency_lines: true,
 	dependencies: [
 		"e054dbe2"

@@ -6,7 +6,22 @@
 		"4d3ce438"
 	],
 	tasks: [{
-		uid: "d707dd66",
+		uid: "c2107e32",
+		type: "item",
+		items: [{
+			id: "tconstruct:tooltables",
+			Damage: 1s,
+			tag: {
+				textureBlock: {
+					id: "chisel:planks-birch",
+					Count: 1b,
+					Damage: 1s
+				}
+			}
+		}]
+	},
+	{
+		uid: "f84a6bb1",
 		type: "item",
 		items: [{
 			item: "tconstruct:tooltables 1 3"

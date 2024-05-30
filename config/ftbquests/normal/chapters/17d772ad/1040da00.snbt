@@ -1,0 +1,18 @@
+{
+	x: -3.0d,
+	y: 0.0d,
+	shape: "hexagon",
+	dependencies: [
+		"741e4f9a",
+		"5680fe96",
+		"5457d4b9"
+	],
+	size: 1.5d,
+	tasks: [{
+		uid: "3e4f343f",
+		type: "item",
+		items: [{
+			item: "modularmachinery:color_engine_b_controller"
+		}]
+	}]
+}

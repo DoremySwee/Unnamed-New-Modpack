@@ -20,5 +20,12 @@
 		items: [{
 			item: "minecraft:blaze_powder"
 		}]
+	},
+	{
+		uid: "4c96dd39",
+		type: "item",
+		items: [{
+			item: "minecraft:nether_brick_fence"
+		}]
 	}]
 }

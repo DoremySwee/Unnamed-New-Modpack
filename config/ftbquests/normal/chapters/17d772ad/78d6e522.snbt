@@ -2,7 +2,7 @@
 	x: -9.5d,
 	y: 2.5d,
 	text: [
-		"最好把铁镐换成别的……"
+		""
 	],
 	dependencies: [
 		"f7228ede"

@@ -12,5 +12,12 @@
 		items: [{
 			item: "botania:spark"
 		}]
+	},
+	{
+		uid: "c6a2798f",
+		type: "item",
+		items: [{
+			item: "botania:sparkupgrade 1 2"
+		}]
 	}]
 }

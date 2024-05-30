@@ -1,0 +1,18 @@
+{
+	x: -3.0d,
+	y: -4.0d,
+	text: [
+		"有了镐子实际上就能做了"
+	],
+	hide_dependency_lines: true,
+	dependencies: [
+		"e054dbe2"
+	],
+	tasks: [{
+		uid: "715c6f9e",
+		type: "item",
+		items: [{
+			item: "appliedenergistics2:grindstone"
+		}]
+	}]
+}

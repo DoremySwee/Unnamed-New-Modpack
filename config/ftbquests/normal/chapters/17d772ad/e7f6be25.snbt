@@ -1,0 +1,14 @@
+{
+	x: -3.0d,
+	y: -6.0d,
+	text: [
+		"液态泥土、粘土、玻璃、石头"
+	],
+	dependencies: [
+		"6cd7cd01"
+	],
+	tasks: [{
+		uid: "d06df887",
+		type: "checkmark"
+	}]
+}

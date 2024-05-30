@@ -1,17 +1,17 @@
 {
-	x: -6.5d,
-	y: -6.5d,
+	x: -1.0d,
+	y: -5.0d,
 	dependencies: [
-		"43e13d3d"
+		"c4a7f34e"
 	],
 	tasks: [{
-		uid: "e0c6b866",
+		uid: "ac3866d6",
 		type: "item",
 		items: [{
 			id: "tconstruct:toolforge",
 			tag: {
 				textureBlock: {
-					id: "minecraft:redstone_block",
+					id: "minecraft:glowstone",
 					Count: 1b,
 					Damage: 0s
 				}
