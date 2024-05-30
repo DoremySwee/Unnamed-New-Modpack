@@ -86,6 +86,9 @@ zenClass Bot{
     function daisy (output as It, input as In, time as int = 60)as void{
         mods.botania.PureDaisy.addRecipe(input, output, time);
     }
+    function petal (output as It, inputs as In[]) as void{
+        mods.botania.Apothecary.addRecipe(output, inputs);
+    }
     //Agglomeration is quite complicated. It's suggested to be direcly imported.
 }
 static bot as Bot = Bot();

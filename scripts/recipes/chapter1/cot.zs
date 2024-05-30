@@ -11,3 +11,4 @@ import scripts.libs.CotLib as CL;
     }
 //Misc
     CL.createItem("afflatus_of_crafting");
+    CL.createItem("complete_afflatus_of_crafting",{"glowing":true});

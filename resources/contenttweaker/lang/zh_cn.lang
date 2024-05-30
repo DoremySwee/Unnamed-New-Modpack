@@ -3,6 +3,7 @@ modpack.general.difficulty.confirm=你正在创建一个生存世界。生存世
 modpack.chat.alphaversion=您下载的整合包是alpha版，即测试版。如果遇到任何问题请加群881296266
 
 modpack.tooltip.dup0=§e可以通过合成复制！§r
+modpack.tooltip.dup1=§e可以通过合成“复制”！§r
 modpack.tooltip.dupMana=§b可以在魔力池复制！§r
 modpack.tooltip.dupSpark=§f可以与火花结合复制！§r
 modpack.tooltip.dupInscribe=§f可以在压印器复制！§r
@@ -29,6 +30,7 @@ item.contenttweaker.broken_terra_rune.name=劣质的地符文
 item.contenttweaker.broken_aqua_rune.name=劣质的水符文
 item.contenttweaker.broken_aer_rune.name=劣质的风符文
 item.contenttweaker.afflatus_of_crafting.name=合成之脑
+item.contenttweaker.complete_afflatus_of_crafting.name=完备的合成之脑
 
 tile.contenttweaker.heated_netherrack_1.name=§c暖的地狱岩§r
 tile.contenttweaker.heated_netherrack_2.name=§c热的地狱岩§r

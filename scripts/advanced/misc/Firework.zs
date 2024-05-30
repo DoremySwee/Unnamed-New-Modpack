@@ -260,7 +260,7 @@ val spawnFirework as ZenCommand = ZenCommand.create("firework");
     spawnFirework.requiredPermissionLevel = 0;
     spawnFirework.tabCompletionGetters = [
         function(server, sender, pos) {
-            return mods.zenutils.StringList.create(["spawn","count","disable","enable","clear"]);
+            return mods.zenutils.StringList.create(["spawn","count"/*,"disable","enable","clear"*/]);
         }  as IGetTabCompletion,
         function(server, sender, pos) {
             return mods.zenutils.StringList.create(FIREWORKS.keys);

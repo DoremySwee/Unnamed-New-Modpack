@@ -196,6 +196,8 @@ static manaCoef as double = (3.0+DIFF)/5;
             "A":<minecraft:string>, "B":<botania:manaresource:22>, "C":<botania:felpumpkin>, "D":item
         }));
     }
+    recipes.addShapeless(<minecraft:pumpkin>,[<minecraft:wheat>,<minecraft:dye:15>,<minecraft:pumpkin_seeds>]);
+    <minecraft:pumpkin>.addTooltip(game.localize("modpack.tooltip.dup1"));
 
 //Runes
     var runeBase = <botania:livingrock1slab>;
@@ -239,6 +241,8 @@ static manaCoef as double = (3.0+DIFF)/5;
 
 //Afflatus of Crafting
     static aff as IItemStack = <contenttweaker:afflatus_of_crafting>;
+    T.bot.rune(aff*32, <botania:opencrate:1>, 5000*manaCoef);
+    static affc as IItemStack = <contenttweaker:complete_afflatus_of_crafting>;
     static requiredNum as int = ([3,9,18,27,36] as int[]) [DIFF];
     static craftingAfflatusInfo as function(IItemStack)int[] = function(item as IItemStack)as int[]{
         //return [numberOfCompletedCrafts, leastUncompletedCrafts]
@@ -262,7 +266,7 @@ static manaCoef as double = (3.0+DIFF)/5;
         }
         return [count,minMissing] as int[];
     };
-    recipes.addShapeless("afflatus_of_crafting_process", aff*7, [aff,aff,aff,aff,aff,aff,aff],
+    recipes.addShapeless("afflatus_of_crafting_process", affc*7, [aff,aff,aff,aff,aff,aff,aff],
         function(out, ins, cinfo){
             var nullsT = [] as int[];
             if(cinfo.inventory.width!=3) return null;
@@ -296,7 +300,7 @@ static manaCoef as double = (3.0+DIFF)/5;
             else b=b|V.pow2(index - 24);
             var out2 = aff.withTag(lastNBT + {"affCounting0":a, "affCounting1":b} as IData);
             var affInfo = craftingAfflatusInfo(out2);
-            if(affInfo[0]>=requiredNum) return M.shimmer(aff).withTag({"completed":true})*7;
+            if(affInfo[0]>=requiredNum) return affc;//M.shimmer(aff).withTag({"completed":true})*7;
             return out2*7;
         }, null
     );
@@ -349,3 +353,46 @@ static manaCoef as double = (3.0+DIFF)/5;
         }
         return strShift~NEWLINE~str1~NEWLINE~str2~NEWLINE~str3;
     });
+
+    recipes.addShaped(<botania:manaresource:11>*16, Mp.read("_X_;__X;X__;",{"X":affc}));
+    recipes.addShaped(<appliedenergistics2:part:180>,Mp.read("ABA;ACA;ABA;",{"A":<tconstruct:clear_stained_glass:10>,"B":<appliedenergistics2:quartz_glass>,"C":<minecraft:glowstone_dust>}));
+    T.ae.inscribe(<appliedenergistics2:part:380>,[<appliedenergistics2:part:180>,affc,affc]);
+    recipes.addShaped(<appliedenergistics2:part:360>,Mp.read("AAA;ABA;AAA;",{"A":affc,"B":<appliedenergistics2:part:380>}));
+    recipes.addShaped(<minecraft:crafting_table>,Mp.read("AAA;ABA;AAA;",{"A":affc,"B":<minecraft:planks>}));
+
+//Spawn Eggs
+    T.ae.inscribe(<minecraft:spawn_egg>.withTag({EntityTag: {id: "minecraft:creeper"}}),[<minecraft:egg>,powder,infDust]);
+    T.ae.inscribe(<minecraft:spawn_egg>.withTag({EntityTag: {id: "minecraft:skeleton"}}),[<minecraft:egg>,<minecraft:bone>,<minecraft:bone>]);
+//quartz
+    T.bot.pureDaisy(<minecraft:quartz_block>,<appliedenergistics2:quartz_block>);
+    recipes.addShapeless(<minecraft:quartz>*4, [<minecraft:quartz_block>]);
+//Spark
+    //TODO
+//Bonsai
+    recipes.addShaped(<botanicbonsai:bonsai_pot_manager>,Mp.read("XAX;BCD;XEX;",{
+        "X":<botania:pool>,"A":<botania:spark>,
+        "B":<botania:sparkupgrade:2>,"C":<ore:record>,
+        "D":<botania:sparkupgrade:1>,"E":<appliedenergistics2:fluix_slab>
+    }));
+    recipes.remove(<botanicbonsai:botanic_bonsai_pot>);
+    recipes.addShaped(<botanicbonsai:botanic_bonsai_pot>,Mp.read("ABA;AAA;",{"B":<contenttweaker:broken_aer_rune>,"A":<botania:livingrock0slab>}));
+//Flowers
+    static wools as IItemStack[] = [] as IItemStack[];
+    for i in 0 to 16{ wools = wools + <minecraft:wool>.definition.makeStack(i);}
+    static spectrolus as IItemStack = <botania:specialflower>.withTag({type: "spectrolus"});
+    static whispee as IItemStack = <botania:specialflower>.withTag({type: "whispee"});
+    recipes.addShaped(<botania:altar>,Mp.read("AXA;_B_;BBB;",{"B":<botania:livingrock>,"A":<botania:livingrock0slab>,"X":<contenttweaker:broken_aqua_rune>}));
+    T.bot.petal(spectrolus, wools);
+    T.bot.petal(whispee*4, [<contenttweaker:broken_aer_rune>,<botania:flower:2>,DIFF<3?<thaumcraft:scribing_tools>:<minecraft:writable_book>,<botania:flower:3>,<botania:flower:4>]);
+    recipes.addShapeless(<thermalfoundation:material:800>, Mp.read1d("ACBBB;",{"A":M.reuse(<botania:pestleandmortar>),"B":M.reuse(<minecraft:planks>),"C":<minecraft:planks>}));
+//Obi
+    Agg.addRecipe(powder*7,
+        [ <contenttweaker:broken_aqua_rune>, <contenttweaker:broken_terra_rune>, <contenttweaker:broken_ignis_rune> ],
+        10000*manaCoef, 0xCC0000, 0xCC0099,
+        <minecraft:snow>, <minecraft:magma>, <minecraft:concrete:15>, water, <minecraft:concrete:15>, <minecraft:obsidian>
+    );
+//Marble
+    T.bot.daisy(<astralsorcery:blockmarble>, <minecraft:stone:4>, 60);
+    T.bot.daisy(<chisel:marble2:7>, <astralsorcery:blockmarble>, 10);
+//Color Engine B
+    T.ae.inscribe(<modularmachinery:color_engine_b_controller>,[spectrolus,<tconstruct:large_plate>.withTag({Material: "obsidian"}),<tconstruct:large_plate>.withTag({Material: "obsidian"})]);

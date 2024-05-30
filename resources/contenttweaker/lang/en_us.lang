@@ -3,6 +3,7 @@ modpack.general.difficulty.confirm=You are creating a survival world. It's not s
 modpack.chat.alphaversion=The modpack is alpha version. Issue https://github.com/DoremySwee/Unnamed-New-Modpack if you encounter any problem.
 
 modpack.tooltip.dup0=§eCan be duplicated through crafting!§r
+modpack.tooltip.dup1=§eCan be "duplicated" through crafting!§r
 modpack.tooltip.dupMana=§bCan be duplicated at mana pool!§r
 modpack.tooltip.dupSpark=§fCan be duplicated by combining with spark!§r
 modpack.tooltip.dupInscribe=§fCan be duplicated at Inscriber (AE2)!§r
@@ -29,6 +30,7 @@ item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
 item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
 item.contenttweaker.broken_aer_rune.name=Broken Rune of Air
 item.contenttweaker.afflatus_of_crafting.name=Afflatus of Crafting
+item.contenttweaker.complete_afflatus_of_crafting.name=Complete Afflatus of Crafting
 
 tile.contenttweaker.heated_netherrack_1.name=§cWarm Netherrack§r
 tile.contenttweaker.heated_netherrack_2.name=§cHot Netherrack§r

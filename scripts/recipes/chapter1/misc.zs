@@ -36,3 +36,6 @@ import crafttweaker.item.IItemDefinition;
 
 //Builder's wand
     recipes.addShaped(<betterbuilderswands:wandstone>,Mp.read("__R;_S_;S__;",{"R":<botania:livingrock>,"S":<botania:manaresource:3>}));
+
+//Easter Egg
+    <modularmachinery:color_engine_a_controller>.addTooltip("色擎");
