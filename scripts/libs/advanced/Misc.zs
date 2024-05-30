@@ -40,9 +40,9 @@ import crafttweaker.text.ITextComponent;
         "expandingWave":3, "contractingWave":4, "final":5
     };
 
-IBotaniaFXHelper.setWispFXDistanceLimit(false);
-IBotaniaFXHelper.setWispFXDistanceLimit(false);
-IBotaniaFXHelper.setSparkleFXNoClip(true);
+//IBotaniaFXHelper.setWispFXDistanceLimit(false);
+//IBotaniaFXHelper.setSparkleFXNoClip(true);
+//TODO
 
 function executeCommand(s as string){
     server.commandManager.executeCommandSilent(server,s);

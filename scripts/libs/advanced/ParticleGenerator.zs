@@ -16,7 +16,6 @@ import mods.zenutils.IByteBuf;
 //Time Unit: GameTick (0.05s if full tps)
 //SpeedUnit: block/s  (ATTENTION!)
 
-mods.randomtweaker.botania.IBotaniaFXHelper.setWispFXDistanceLimit(false);
 zenClass FXGenerator{
     var name as string;
     var serializeKey as string;
