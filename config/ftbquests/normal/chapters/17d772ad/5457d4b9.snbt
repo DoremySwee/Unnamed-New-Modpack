@@ -2,7 +2,8 @@
 	x: -3.5d,
 	y: -1.5d,
 	text: [
-		"黑曜石谜题：凝聚板合成黑曜石，黑曜石合成xxx、摆放地狱门"
+		"黑曜石谜题：凝聚板合成黑曜石，黑曜石合成xxx、摆放地狱门",
+		"<Hard可以领取该奖励"
 	],
 	dependencies: [
 		"8219eb16"
@@ -10,5 +11,11 @@
 	tasks: [{
 		uid: "cc6a3989",
 		type: "checkmark"
+	}],
+	rewards: [{
+		uid: "b3fe33ec",
+		type: "item",
+		item: "minecraft:obsidian",
+		count: 30
 	}]
 }

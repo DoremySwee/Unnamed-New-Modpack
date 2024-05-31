@@ -25,6 +25,11 @@ function dupSpark(item as IItemStack, recipe as bool = true){
     if(recipe)
         recipes.addShapeless(item*8, [item, <botania:spark>]);
 }
+function dupFluix(item as IItemStack, recipe as bool = true){
+    item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.dupFluix"))));
+    if(recipe)
+        recipes.addShapeless(item*8, [item, <appliedenergistics2:material:7>]);
+}
 function flower(name as string)as IItemStack{
     return <botania:specialflower>.withTag({"type":name});
 }

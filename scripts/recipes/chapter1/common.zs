@@ -5,10 +5,12 @@ import scripts.libs.recipe.Mapping as Mp;
 import scripts.libs.recipe.Misc as M;
 import scripts.libs.basic.Vector3D as V;
 import scripts.libs.advanced.Misc as M2;
+import scripts.advanced.machines.ColorEngine as CE;
 import crafttweaker.item.IItemStack;
 import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemDefinition;
 import crafttweaker.data.IData;
+import crafttweaker.block.IBlock;
 
 static DIFF as int = scripts.Config.DIFF;
 static manaCoef as double = (3.0+DIFF)/5;
@@ -27,6 +29,28 @@ static manaCoef as double = (3.0+DIFF)/5;
         <botania:prism>
     ];
     for i in craftingDuplication{M.dup(i);}
+    static fluixDuplication as IItemStack[] = [
+        <appliedenergistics2:part:240>,
+        <appliedenergistics2:part:260>,
+        <appliedenergistics2:part:220>,
+        <appliedenergistics2:part:241>,
+        <appliedenergistics2:part:261>,
+        <appliedenergistics2:part:221>,
+        <appliedenergistics2:part:440>,
+        <appliedenergistics2:part:441>,
+        <appliedenergistics2:part:320>,
+        <appliedenergistics2:part:300>,
+        <appliedenergistics2:part:301>,
+        <appliedenergistics2:part:321>,
+        <appliedenergistics2:part:302>,
+        <appliedenergistics2:part:281>,
+        <appliedenergistics2:part:280>,
+        <appliedenergistics2:part:80>,
+        <appliedenergistics2:part:140>,
+        <appliedenergistics2:part:460>,
+        <appliedenergistics2:part:100>
+    ];
+    for i in fluixDuplication {M.dupFluix(i);}
 
 //Bans
     recipes.remove(<minecraft:crafting_table>);
@@ -241,7 +265,7 @@ static manaCoef as double = (3.0+DIFF)/5;
 
 //Afflatus of Crafting
     static aff as IItemStack = <contenttweaker:afflatus_of_crafting>;
-    T.bot.rune(aff*32, [<botania:opencrate:1>], 5000*manaCoef);
+    T.bot.rune(aff*32, [<botania:opencrate:1>,<botania:managlasspane>,<botania:managlasspane>,<botania:managlasspane>,<botania:managlasspane>], 5000*manaCoef);
     static affc as IItemStack = <contenttweaker:complete_afflatus_of_crafting>;
     static requiredNum as int = ([3,9,18,27,36] as int[]) [DIFF];
     static craftingAfflatusInfo as function(IItemStack)int[] = function(item as IItemStack)as int[]{
@@ -368,11 +392,26 @@ static manaCoef as double = (3.0+DIFF)/5;
 //Spawn Eggs
     T.ae.inscribe(<minecraft:spawn_egg>.withTag({EntityTag: {id: "minecraft:creeper"}}),[<minecraft:egg>,powder,infDust]);
     T.ae.inscribe(<minecraft:spawn_egg>.withTag({EntityTag: {id: "minecraft:skeleton"}}),[<minecraft:egg>,<minecraft:bone>,<minecraft:bone>]);
-//quartz
+//quartz & Marble
     T.bot.pureDaisy(<minecraft:quartz_block>,<appliedenergistics2:quartz_block>);
     recipes.addShapeless(<minecraft:quartz>*4, [<minecraft:quartz_block>]);
+    T.bot.daisy(<astralsorcery:blockmarble>, <minecraft:stone:4>, 60);
+    T.bot.daisy(<chisel:marble2:7>, <astralsorcery:blockmarble>, ([60,60,40,20,10]as int[])[DIFF]);
 //Spark
-    //TODO
+    recipes.remove(<botania:spark>);
+    recipes.addShaped(<botania:spark>*(6-DIFF),Mp.read("_A_;BCB;_A_;",{
+        "A":<contenttweaker:shard_nether>,"B":<minecraft:blaze_powder>,"C":<enderio:item_material:20>
+    }));
+    static runeListSpark as IItemStack[] = [
+        <contenttweaker:broken_aqua_rune>, <contenttweaker:broken_terra_rune>, <contenttweaker:broken_ignis_rune>, <contenttweaker:broken_aer_rune>,
+    ] as IItemStack[];
+    for i in 0 to 4{
+        CE.addRecipe([<botania:sparkupgrade>.definition.makeStack(i)],[
+            <botania:spark>, <botania:managlasspane>, <minecraft:redstone>, runeListSpark[i]*(1+DIFF/2)
+        ],[
+            <minecraft:wool:11> * (16*manaCoef), <minecraft:wool:14> * (4*manaCoef)
+        ]);
+    }
 //Bonsai
     recipes.addShaped(<botanicbonsai:bonsai_pot_manager>,Mp.read("XAX;BCD;XEX;",{
         "X":<botania:pool>,"A":<botania:spark>,
@@ -390,14 +429,58 @@ static manaCoef as double = (3.0+DIFF)/5;
     T.bot.petal(spectrolus, wools);
     T.bot.petal(whispee*4, [<contenttweaker:broken_aer_rune>,<botania:flower:2>,DIFF<3?<thaumcraft:scribing_tools>:<minecraft:writable_book>,<botania:flower:3>,<botania:flower:4>]);
     recipes.addShapeless(<thermalfoundation:material:800>, Mp.read1d("ACBBB;",{"A":M.reuse(<botania:pestleandmortar>),"B":M.reuse(<minecraft:planks>),"C":<minecraft:planks>}));
-//Obi
+    T.tic.casting(<minecraft:paper>,<thermalfoundation:material:800>,<liquid:water>*100,1200);
+//Obi & Color Engine B
     Agg.addRecipe(powder*7,
         [ <contenttweaker:broken_aqua_rune>, <contenttweaker:broken_terra_rune>, <contenttweaker:broken_ignis_rune> ],
         10000*manaCoef, 0xCC0000, 0xCC0099,
         <minecraft:snow>, <minecraft:magma>, <minecraft:concrete:15>, water, <minecraft:concrete:15>, <minecraft:obsidian>
     );
-//Marble
-    T.bot.daisy(<astralsorcery:blockmarble>, <minecraft:stone:4>, 60);
-    T.bot.daisy(<chisel:marble2:7>, <astralsorcery:blockmarble>, 10);
-//Color Engine B
-    T.ae.inscribe(<modularmachinery:color_engine_b_controller>,[spectrolus,<tconstruct:large_plate>.withTag({Material: "obsidian"}),<tconstruct:large_plate>.withTag({Material: "obsidian"})]);
+    if(DIFF>1)Agg.addRecipe(
+        deadBush, [spectrolus], 30000*manaCoef*V.sqrt(manaCoef), 0x6699CC, 0xFF66FF,
+        <botania:quartzslabdarkhalf>, <minecraft:obsidian>, <chisel:futura:4>, //whispee,
+        <modularmachinery:color_engine_b_controller>, <minecraft:obsidian>, deadBush
+    );
+    else T.ae.inscribe(<modularmachinery:color_engine_b_controller>,[spectrolus,<tconstruct:large_plate>.withTag({Material: "obsidian"}),<tconstruct:large_plate>.withTag({Material: "obsidian"})]);
+    (<modularmachinery:color_engine_b_controller> as IBlock).definition.setHarvestLevel("Pickaxe",3);
+    mods.jei.JEI.addDescription(<modularmachinery:color_engine_b_controller>,game.localize("modpack.jei.mmce.color_engine_b.harvest"));
+//Redstone & Ice & Fluix
+    CE.addRecipe([<minecraft:redstone>*(6-DIFF)],[<botania:manaresource:23>*(6-DIFF)],[<minecraft:wool:14>*(20*manaCoef)]);
+    recipes.remove(<thermalfoundation:material:1025>);
+    T.bot.rune(<appliedenergistics2:material:1>,[<appliedenergistics2:material>,<minecraft:redstone>],10000*manaCoef);
+    T.tic.casting(<thermalfoundation:material:2049>,<minecraft:snowball>,<liquid:redstone>*(([1,2,4,8,12]as int[])[DIFF]),3);
+    T.tic.melting(<liquid:cryotheum>*1,<thermalfoundation:material:2049>,1);
+
+    T.bot.rune(<appliedenergistics2:part:221>, Mp.read1d("@#$%&$*&~$", {
+        "@":<contenttweaker:broken_aqua_rune>,
+        "#":<contenttweaker:broken_aer_rune>,
+        "$":<appliedenergistics2:material:7>,
+        "%":<botania:sparkupgrade:1>,
+        "&":<appliedenergistics2:material:1>,
+        "*":<contenttweaker:broken_terra_rune>,
+        "~":<botania:sparkupgrade:2>
+    }), 7000*manaCoef);
+    T.bot.rune(<appliedenergistics2:part:241>, [
+        <botania:sparkupgrade:2>,
+        <contenttweaker:broken_aer_rune>,
+        <appliedenergistics2:material:1>,
+        <appliedenergistics2:material:7>,
+        <contenttweaker:broken_aqua_rune>,
+        <minecraft:redstone>,
+        affc
+    ], 3000*manaCoef);
+    T.bot.rune(<appliedenergistics2:part:261>,[
+        <botania:sparkupgrade:1>,
+        <contenttweaker:broken_terra_rune>,
+        <appliedenergistics2:material:1>,
+        <appliedenergistics2:material:7>,
+        <contenttweaker:broken_aqua_rune>,
+        <minecraft:redstone>,
+        affc
+    ], 3000*manaCoef);
+
+    recipes.addShaped(<chisel:futura:4>,Mp.read("AAA;ABA;AAA;",{"A":<chisel:futura:4>,"B":<appliedenergistics2:material:7>}));
+    recipes.addShapeless(<appliedenergistics2:part:301>,[<appliedenergistics2:part:300>,<appliedenergistics2:material:7>]);
+    //Todo: recipes for panels
+//Inf water
+    T.tic.casting(<mysticalagriculture:crafting:48>,<contenttweaker:broken_aqua_rune>,<liquid:water>*16777216);

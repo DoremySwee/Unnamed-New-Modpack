@@ -130,6 +130,10 @@ controllerB.addTooltip(game.localize("modpack.tooltip.color_engine_b_real"));
 (controllerB as IBlock).definition.resistance = 13.0;
 //TODO: Add JEI descriptions to two controllers
 
+mods.jei.JEI.addDescription(
+    [<modularmachinery:color_engine_a_controller>,<modularmachinery:color_engine_b_controller>],
+    M.format("modpack.jei.mmce.color_engine.description1",[])
+);
 MMEvents.onStructureFormed("color_engine_b", function(event as MachineStructureFormedEvent) {
     var controller = event.controller;
     var world = controller.world;
@@ -188,8 +192,9 @@ function addRecipe(outputs as IItemStack[], inputs as IIngredient[], colors as I
     RecipeBuilder.newBuilder(id, "color_engine_b", 114)
         .addItemInputs(jeiInputs)
         .addItemOutputs(outputs)
-        .addRecipeTooltip(game.localize("modpack.jei.mmce.color_engine_b.tolerance",""~((1.0+tolerance)*100)~"%"))
+        .addRecipeTooltip(M.format("modpack.jei.mmce.color_engine_b.tolerance",[""~((1.0+tolerance)*100)~"%"]))
         .build();
+    //M.shout(id);
     COLOR_ENGINE_RECIPES_INPUTS[id]=inputs;
     COLOR_ENGINE_RECIPES_OUTPUTS[id]=outputs;
     COLOR_ENGINE_RECIPES_COLORS[id]=colors;
@@ -411,4 +416,3 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
     }
 });
 
-addRecipe([<minecraft:redstone>],[<botania:manaresource:23>],[<minecraft:wool:14>*20]);

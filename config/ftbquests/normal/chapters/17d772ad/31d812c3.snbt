@@ -2,6 +2,10 @@
 	x: 0.5d,
 	y: 2.5d,
 	shape: "pentagon",
+	text: [
+		"临时任务奖励",
+		"后续补完合成表"
+	],
 	dependencies: [
 		"b3319d34",
 		"c4762050"
@@ -26,5 +30,30 @@
 		items: [{
 			item: "appliedenergistics2:part 1 261"
 		}]
+	}],
+	rewards: [{
+		uid: "a71f7ed9",
+		type: "item",
+		item: "appliedenergistics2:part 1 300"
+	},
+	{
+		uid: "d289907c",
+		type: "item",
+		item: "appliedenergistics2:part 1 301"
+	},
+	{
+		uid: "ad30d59e",
+		type: "item",
+		item: "appliedenergistics2:part 1 302"
+	},
+	{
+		uid: "4fde3025",
+		type: "item",
+		item: "appliedenergistics2:part 1 320"
+	},
+	{
+		uid: "ae540af7",
+		type: "item",
+		item: "appliedenergistics2:part 1 321"
 	}]
 }

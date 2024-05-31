@@ -315,7 +315,7 @@ events.onWorldTick(function(event as crafttweaker.event.WorldTickEvent){
     }
     //roll1
     if(world.random.nextInt(270000)<DCOEF){
-        if(ROLL1.countObjects(world.dimension)<1)ROLL1.create(world,{});
+        //if(ROLL1.countObjects(world.dimension)<1)ROLL1.create(world,{});
     }
 });
 

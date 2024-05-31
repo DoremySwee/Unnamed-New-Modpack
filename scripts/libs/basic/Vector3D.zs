@@ -351,6 +351,9 @@ function randomUnitPositiveVector(world as IWorld)as double[]{
     ];
     return unify(p);
 }
+function randomVector(world as IWorld, length as double)as double[]{
+    return scale(randomUnitVector(world),length);
+}
 
 //Line Related Calculations         //Lines should be represented by giving two points, since all other contents in this file are point based.
 function getFootPoint(point as double[], linePointA as double[], linePointB as double[])as double[]{

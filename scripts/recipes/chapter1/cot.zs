@@ -12,3 +12,7 @@ import scripts.libs.CotLib as CL;
 //Misc
     CL.createItem("afflatus_of_crafting");
     CL.createItem("complete_afflatus_of_crafting",{"glowing":true});
+//Shards
+    for t in ["aer","aqua","ordo","perditio","terra","ignis","balanced","nether","ender"] as string[]{
+        CL.createItem("shard_"~t);
+    }

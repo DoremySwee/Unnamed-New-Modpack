@@ -6,6 +6,7 @@ modpack.tooltip.dup0=§eCan be duplicated through crafting!§r
 modpack.tooltip.dup1=§eCan be "duplicated" through crafting!§r
 modpack.tooltip.dupMana=§bCan be duplicated at mana pool!§r
 modpack.tooltip.dupSpark=§fCan be duplicated by combining with spark!§r
+modpack.tooltip.dupFluix=§5Can be duplicated by combining with Fluix Crystal!§r
 modpack.tooltip.dupInscribe=§fCan be duplicated at Inscriber (AE2)!§r
 modpack.tooltip.haste=§6Eat it for Haste II (1:30)!§r
 modpack.tooltip.netherrackHeating=§cHeated for %s times!§r
@@ -24,6 +25,9 @@ modpack.tooltip.consume=This item §cWILL§r be consumed
 modpack.tooltip.clearnbt=Do a 1->1 Craft to clean up the nbt, for other crafting usages.
 
 modpack.jei.mmce.color_engine_b.tolerance=The recipe §cexplodes§r if you have %s of any required color!
+modpack.jei.mmce.color_engine_b.harvest=Requires Diamond Pickaxe to harvest...
+modpack.jei.mmce.color_engine.description1=By coloring the glass in Color Engine Type A, you generates a special mana burst used for Engine Type B. In the recipe of Engine Type B, items before command blocks should be thrown onto the engine, while the wools remaining represents mana burst required.
+modpack.jei.vanilla.nether_portal.description1=It seems that you can't go to the nether... Try throw something into the portal? Sometimes something happens.
 
 item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
 item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth
@@ -31,6 +35,15 @@ item.contenttweaker.broken_aqua_rune.name=Broken Rune of Water
 item.contenttweaker.broken_aer_rune.name=Broken Rune of Air
 item.contenttweaker.afflatus_of_crafting.name=Afflatus of Crafting
 item.contenttweaker.complete_afflatus_of_crafting.name=Complete Afflatus of Crafting
+item.contenttweaker.shard_aer.name=Air Shard
+item.contenttweaker.shard_terra.name=Earth Shard
+item.contenttweaker.shard_aqua.name=Water Shard
+item.contenttweaker.shard_ignis.name=Fire Shard
+item.contenttweaker.shard_ordo.name=Order Shard
+item.contenttweaker.shard_perditio.name=Entropy Shard
+item.contenttweaker.shard_balanced.name=Balanced Shard
+item.contenttweaker.shard_nether.name=Nether Shard
+item.contenttweaker.shard_ender.name=Ender Shard
 
 tile.contenttweaker.heated_netherrack_1.name=§cWarm Netherrack§r
 tile.contenttweaker.heated_netherrack_2.name=§cHot Netherrack§r

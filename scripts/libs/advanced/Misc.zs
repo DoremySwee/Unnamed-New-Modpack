@@ -44,6 +44,9 @@ import crafttweaker.text.ITextComponent;
 //IBotaniaFXHelper.setSparkleFXNoClip(true);
 //TODO
 
+function format(key as string, parameters as string[]) as string{
+    return  mods.zenutils.I18n.format(key, parameters);
+}
 function executeCommand(s as string){
     server.commandManager.executeCommandSilent(server,s);
     //print(s);

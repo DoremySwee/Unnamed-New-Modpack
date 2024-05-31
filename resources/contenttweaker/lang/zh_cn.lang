@@ -6,24 +6,25 @@ modpack.tooltip.dup0=§e可以通过合成复制！§r
 modpack.tooltip.dup1=§e可以通过合成“复制”！§r
 modpack.tooltip.dupMana=§b可以在魔力池复制！§r
 modpack.tooltip.dupSpark=§f可以与火花结合复制！§r
+modpack.tooltip.dupFluix=§5可以与福鲁伊克斯水晶结合以复制！§r
 modpack.tooltip.dupInscribe=§f可以在压印器复制！§r
 modpack.tooltip.haste=§6急迫II (90s)§r
 modpack.tooltip.netherrackHeating=§c已加热%s次§r
-
 modpack.tooltip.afflatus_of_crafting.requirement=需要进行%s/%s次不同的合成
 modpack.tooltip.afflatus_of_crafting.next=未进行的合成样例：
 modpack.tooltip.afflatus_of_crafting.shift=按下shift查看未完成的合成编号
 modpack.tooltip.afflatus_of_crafting.shifted=未完成的合成编号列表:
 modpack.tooltip.afflatus_of_crafting.completed=该物品已完成制作，可以进行参与其它物品的合成了。
-
 modpack.tooltip.color_engine_b_real=需要被16种不同的荧光花围绕
 modpack.tooltip.fake_machine=不存在的物品，仅用于显示结构
-
 modpack.tooltip.reuse=该物品§a不会消耗§r
 modpack.tooltip.consume=该物品§c会被消耗§r
 modpack.tooltip.clearnbt=放入合成栏以简化nbt，再用于后续合成
 
 modpack.jei.mmce.color_engine_b.tolerance=如果你加入了%s的任何一种颜色，会发生§c爆炸§r！
+modpack.jei.mmce.color_engine_b.harvest=需要钻石镐来挖掘...
+modpack.jei.mmce.color_engine.description1=给A型引擎的玻璃上色，即可在机器的上方生成特殊的魔力脉冲。B型引擎的配方中，命令方块之前的材料需要丢到引擎上方，剩余的羊毛表示需要的对应颜色的脉冲数量。
+modpack.jei.vanilla.nether_portal.description1=你似乎没法传送到下界……试着往传送门里面丢点东西试试？好像有事情会概率发生。
 
 item.contenttweaker.broken_ignis_rune.name=劣质的火符文
 item.contenttweaker.broken_terra_rune.name=劣质的地符文
@@ -31,6 +32,15 @@ item.contenttweaker.broken_aqua_rune.name=劣质的水符文
 item.contenttweaker.broken_aer_rune.name=劣质的风符文
 item.contenttweaker.afflatus_of_crafting.name=合成之脑
 item.contenttweaker.complete_afflatus_of_crafting.name=完备的合成之脑
+item.contenttweaker.shard_aer.name=风之碎片
+item.contenttweaker.shard_terra.name=地之碎片
+item.contenttweaker.shard_aqua.name=水之碎片
+item.contenttweaker.shard_ignis.name=火之碎片
+item.contenttweaker.shard_ordo.name=秩序碎片
+item.contenttweaker.shard_perditio.name=混沌碎片
+item.contenttweaker.shard_balanced.name=平衡碎片
+item.contenttweaker.shard_nether.name=下界碎片
+item.contenttweaker.shard_ender.name=末影碎片
 
 tile.contenttweaker.heated_netherrack_1.name=§c暖的地狱岩§r
 tile.contenttweaker.heated_netherrack_2.name=§c热的地狱岩§r

@@ -1,9 +1,12 @@
 {
-	x: -1.0d,
-	y: -6.5d,
+	x: 2.0d,
+	y: 2.5d,
 	shape: "square",
 	text: [
 		"液态石头、黑曜石……"
+	],
+	dependencies: [
+		"6b1ed082"
 	],
 	tasks: [{
 		uid: "a95a6bd0",
