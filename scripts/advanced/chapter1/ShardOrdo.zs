@@ -1,4 +1,5 @@
 #reloadable
+#norun
 import crafttweaker.event.PlayerBreakSpeedEvent;
 import crafttweaker.event.BlockBreakEvent;
 import crafttweaker.item.IItemStack;

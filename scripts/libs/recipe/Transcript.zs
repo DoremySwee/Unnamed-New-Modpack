@@ -548,8 +548,18 @@ static astralSocery as AS = AS();
 
 zenClass ExN{
     zenConstructor(){}
-    function hammer(output as It, input as In, toolLevel as int = 0, chance as float=1.0f, fortuneChance as float=0.0f){
-        mods.exnihilocreatio.Hammer.addRecipe(input, output, toolLevel, chance, fortuneChance);
+    function hammer(outputs as WI[], input as It, preciseBlockState as crafttweaker.block.IBlockStateMatcher = null)
+    {
+        for output in outputs{
+            mods.exnihilocreatio.Hammer.addRecipe(input, output.stack, 0, output.chance, 0.0f);
+        }
+        if(isNull(preciseBlockState))scripts.advanced.misc.Smash.addRecipe(outputs, input);
+        else scripts.advanced.misc.Smash.addRecipePrecise(outputs, preciseBlockState);
+    }
+    function hammerChain(items as It[]){
+        for i in 1 to items.length{
+            hammer([items[i]]as WI[],items[i - 1]);
+        }
     }
 
     function sieve(output as It, input as In, chance as float, level as int = 0) {
