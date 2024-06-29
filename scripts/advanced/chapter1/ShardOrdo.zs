@@ -1,6 +1,7 @@
 #reloadable
 import crafttweaker.event.PlayerBreakSpeedEvent;
 import crafttweaker.event.BlockBreakEvent;
+import crafttweaker.item.IItemStack;
 
 static shard as IItemStack = <contenttweaker:shard_ordo>;
 mods.jei.JEI.addDescription([shard],game.localize("modpack.jei.exnihilo.hammer_double_stone_slab.description1"));
