@@ -13,6 +13,7 @@
     import crafttweaker.event.PlayerBreakSpeedEvent;
     import crafttweaker.event.BlockBreakEvent;
     import crafttweaker.event.BlockHarvestDropsEvent;
+    import crafttweaker.event.EntityJoinWorldEvent;
 
     import crafttweaker.block.IBlockState;
     import crafttweaker.block.IBlockStateMatcher;
@@ -22,6 +23,9 @@
     import crafttweaker.item.IItemDefinition;
     import crafttweaker.item.IIngredient;
     import crafttweaker.item.IItemStack;
+
+    import crafttweaker.util.IRandom;
+    import crafttweaker.world.IVector3d;
 
 //Speed
     static Hammers as int[IIngredient] = {
@@ -39,12 +43,12 @@
     static PreciseResults as int[] = [] as int[];
     function addRecipePrecise(outputs as WeightedItemStack[], input as IBlockStateMatcher){
         PreciseResults = PreciseResults + (Inputs.length) as int;
-        Inputs = Inputs + input;
-        Outputs = Outputs + outputs;
+        Inputs += input;
+        Outputs += outputs;
     }
     function addRecipe(outputs as WeightedItemStack[], input as IItemStack){
-        Inputs = Inputs + (input as IBlock).definition.defaultState;
-        Outputs = Outputs + outputs;
+        Inputs += (input as IBlock).definition.getStateFromMeta(input.metadata);
+        Outputs += outputs;
     }
 //////
 //Events for Breaking Blocks
@@ -71,9 +75,10 @@
                 for i in PreciseResults{
                     var state = Inputs[i];
                     if (state.matches(event.blockState)) {
-                        for o in Outputs[i]{
-                            if(world.random.nextFloat()<o.chance)
+                        for o in Outputs[i] {
+                            if(o.chance > world.random.nextFloat()) {
                                 world.spawnEntity(o.stack.createEntityItem(world, event.x + 0.5f, event.y + 0.5f, event.z + 0.5f));
+                            }
                             M.shout("AAAA");
                         }
                     }
@@ -85,7 +90,7 @@
         if (event.isPlayer) {
             val tool = event.player.currentItem;
             val world = event.world;
-            if (tool.definition.id.startsWith("exnihilocreatio:hammer")) {
+            if (!isNull(tool) && tool.definition.id.startsWith("exnihilocreatio:hammer")) {
                 for i in PreciseResults{
                     var state = Inputs[i];
                     if (state.matches(event.blockState)) {
@@ -93,39 +98,49 @@
                     }
                 }
             }
+
         }
     });
 //////
 //Events for Anvils
-    UT.register2(<entity:minecraft:falling_block>, function(entity as IEntity, data as IData)as void{
-        if((["minecraft:anvil","enderio:block_dark_steel_anvil"] as string[]) has data.Block.asString()){
-            var world = entity.world;
-            var res = world.rayTraceBlocks(
-                crafttweaker.world.IVector3d.create(entity.x, entity.y, entity.z), 
-                crafttweaker.world.IVector3d.create(entity.motionX, entity.motionY, entity.motionZ)
-            );
-            if(res.isBlock && res.sideHit == crafttweaker.world.IFacing.up()){
-                var pos = res.blockPos;
-                var state = world.getBlockState(pos);
-
-                var p1 = V.getPos(entity);
-                var p2 = V.add(V.fromBlockPos(pos),[0,0.5,0]);
-                var d = V.subtract(p1,p2);
-                var v = [entity.motionX, entity.motionY, entity.motionZ] as double[];
-                if(V.dot(d,d)>V.dot(v,v)*1.7)return;
-                
-                for i in 0 to Inputs.length{
-                    var matcher = Inputs[i];
-                    if(matcher.matches(state)){
-                        world.destroyBlock(pos,false);
-                        for o in Outputs[i]{
-                            if(world.random.nextFloat()<o.chance)
-                                world.spawnEntity((o.stack).createEntityItem(world,pos));
-                                M.shout(o.stack.amount);
-                        }
-                        entity.motionY = entity.motionY*0.7 + 0.1;
-                    }
-                }
+    events.register(function(event as EntityJoinWorldEvent) {
+        val entity = event.entity;
+        if (entity.world.remote) return;
+        val def = entity.definition;
+        if (!isNull(def) && def.id == "minecraft:falling_block") {
+            if ((["minecraft:anvil","enderio:block_dark_steel_anvil"] as string[]) has entity.nbt.Block.asString()) {
+                M.shout("falling anvil");
+                event.world.catenation()
+                    .repeat(2147483647, function(builder) {
+                        builder.run(function(world, ctx) {
+                            val posVec = IVector3d.create(entity.x, entity.y, entity.z);
+                            val motionVec = posVec.add(IVector3d.create(entity.motionX, entity.motionY, entity.motionZ));
+                            val result = world.rayTraceBlocks(posVec, motionVec);
+                            if (isNull(result) || !result.isBlock) {
+                                return;
+                            }
+                            val pos = result.blockPos;
+                            if (!world.isAirBlock(pos)) {
+                                val state = world.getBlockState(pos);
+                                for i, matcher in Inputs {
+                                    if (matcher.matches(state)) {
+                                        world.destroyBlock(pos, false);
+                                        for output in Outputs[i] {
+                                            if (output.chance > world.random.nextFloat()) {
+                                                // TODO: remove mutable().copy() after crt update
+                                                world.spawnEntity(output.stack.mutable().copy().createEntityItem(world, pos));
+                                            }
+                                        }
+                                        // entity.motionY = min(0.3f, entity.motionY * 0.7 + 0.1);
+                                    }
+                                }
+                            }
+                        });
+                    })
+                    .stopWhen(function(world, ctx) {
+                        return !entity.native.addedToWorld || !entity.alive || entity.y < 0;
+                    })
+                    .start();
             }
         }
     });

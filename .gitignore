@@ -34,6 +34,7 @@ config/brandon3055/ProjectIntelligence/
 config/worldedit/worldwdit.properties
 config/enderio/recipes/examples/
 config/enderio/recipes/*.pdf
+config/mcp_*
 resources/witchery-1.7.10-0.24.1.jar
 usercache.json
 usernamecache.json
