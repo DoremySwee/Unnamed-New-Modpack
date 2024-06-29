@@ -26,6 +26,7 @@ modpack.jei.mmce.color_engine_b.tolerance=如果你加入了%s的任何一种颜
 modpack.jei.mmce.color_engine_b.harvest=需要钻石镐来挖掘...
 modpack.jei.mmce.color_engine.description1=给A型引擎的玻璃上色，即可在机器的上方生成特殊的魔力脉冲。B型引擎的配方中，命令方块之前的材料需要丢到引擎上方，剩余的羊毛表示需要的对应颜色的脉冲数量。
 modpack.jei.vanilla.nether_portal.description1=你似乎没法传送到下界……试着往传送门里面丢点东西试试？好像有事情会概率发生。
+modpack.jei.exnihilo.hammer_double_stone_slab.description1=用锤子敲碎双层石台阶
 
 item.contenttweaker.broken_ignis_rune.name=劣质的火符文
 item.contenttweaker.broken_terra_rune.name=劣质的地符文

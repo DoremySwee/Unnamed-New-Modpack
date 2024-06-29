@@ -26,6 +26,7 @@ modpack.jei.mmce.color_engine_b.tolerance=The recipe §cexplodes§r if you have 
 modpack.jei.mmce.color_engine_b.harvest=Requires Diamond Pickaxe to harvest...
 modpack.jei.mmce.color_engine.description1=By coloring the glass in Color Engine Type A, you generates a special mana burst used for Engine Type B. In the recipe of Engine Type B, items before command blocks should be thrown onto the engine, while the wools remaining represents mana burst required.
 modpack.jei.vanilla.nether_portal.description1=It seems that you can't go to the nether... Try throw something into the portal? Sometimes something happens.
+modpack.jei.exnihilo.hammer_double_stone_slab.description1=Hammer double stone slab
 
 item.contenttweaker.broken_ignis_rune.name=Broken Rune of Fire
 item.contenttweaker.broken_terra_rune.name=Broken Rune of Earth

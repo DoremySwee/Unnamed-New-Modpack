@@ -548,10 +548,20 @@ static astralSocery as AS = AS();
 
 zenClass ExN{
     zenConstructor(){}
-    /*Abandoned
-    function hammer(output as It, input as In, chance as float=1.0, fortuneChance as float=0.0){
-        mods.exnihilocreatio.Hammer.addRecipe(input, output, output.amount, chance, fortuneChance);
-    }*/
-    //Todo: Sieve
+    function hammer(output as It, input as In, toolLevel as int = 0, chance as float=1.0f, fortuneChance as float=0.0f){
+        mods.exnihilocreatio.Hammer.addRecipe(input, output, toolLevel, chance, fortuneChance);
+    }
+
+    function sieve(output as It, input as In, chance as float, level as int = 0) {
+        if (level == 0) {
+            mods.exnihilocreatio.Sieve.addStringMeshRecipe(input, output, chance);
+        } else if (level == 1) {
+            mods.exnihilocreatio.Sieve.addFlintMeshRecipe(input, output, chance);
+        } else if (level == 2) {
+            mods.exnihilocreatio.Sieve.addIronMeshRecipe(input, output, chance);
+        } else if (level == 3) {
+            mods.exnihilocreatio.Sieve.addDiamondMeshRecipe(input, output, chance);
+        }
+    }
 }
 static exN as ExN = ExN();
