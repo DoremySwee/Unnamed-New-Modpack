@@ -66,6 +66,7 @@
         if (event.isPlayer) {
             val tool = event.player.currentItem;
             val world = event.world;
+            if(isNull(tool))return;
             if (tool.definition.id.startsWith("exnihilocreatio:hammer")) {
                 for i in PreciseResults{
                     var state = Inputs[i];
