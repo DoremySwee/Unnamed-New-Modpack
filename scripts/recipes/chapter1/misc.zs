@@ -32,6 +32,7 @@ import crafttweaker.item.IItemDefinition;
         var CC=<minecraft:coal:1>;
         var CCB=<chisel:block_charcoal>;
         recipes.addShapeless(CCB,[CC,CC,CC,CC,CC,CC,CC,CC,CC]);
+        recipes.remove(<thermalfoundation:storage_resource>);
     }
 
 //Builder's wand

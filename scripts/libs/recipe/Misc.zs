@@ -104,10 +104,20 @@ function removeGrind(dust as IItemStack, ingot as IItemStack, ore as IItemStack)
     mods.thermalexpansion.Pulverizer.removeRecipe(ingot);
     mods.enderio.SagMill.removeRecipe(ore);
 }
+//funcion grind(output as IItemStack, output2 as IItemStack)
 function clearNBT(item as IItemStack){
     recipes.addShapeless(item,[item]);
     item.addTooltip(format.aqua(format.italic(game.localize("modpack.tooltip.clearnbt"))));
 }
 function shimmer(item as IItemStack)as IItemStack{
     return item.updateTag({ench: [{lvl: 1 as short, id: 28 as short}]});
-}
+}/*
+function smashSeries(items as IItemStack[]){
+    if(items.length<2){
+        print("ERROR: smashSeries has length<2");
+        return;
+    }
+    for i in 1 to items.length{
+
+    }
+}*/

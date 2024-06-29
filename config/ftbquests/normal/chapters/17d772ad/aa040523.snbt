@@ -5,7 +5,7 @@
 		"我的建议是，多做点"
 	],
 	dependencies: [
-		"fdc9bd01"
+		"83da9cca"
 	],
 	tasks: [{
 		uid: "e79fc2fb",

@@ -20,6 +20,7 @@ modpack.tooltip.fake_machine=不存在的物品，仅用于显示结构
 modpack.tooltip.reuse=该物品§a不会消耗§r
 modpack.tooltip.consume=该物品§c会被消耗§r
 modpack.tooltip.clearnbt=放入合成栏以简化nbt，再用于后续合成
+modpack.tooltip.lensDye=可以被涂色透镜染色！
 
 modpack.jei.mmce.color_engine_b.tolerance=如果你加入了%s的任何一种颜色，会发生§c爆炸§r！
 modpack.jei.mmce.color_engine_b.harvest=需要钻石镐来挖掘...

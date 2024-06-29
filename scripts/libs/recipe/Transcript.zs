@@ -545,3 +545,13 @@ zenClass AS{
     //TODO
 }
 static astralSocery as AS = AS();
+
+zenClass ExN{
+    zenConstructor(){}
+    /*Abandoned
+    function hammer(output as It, input as In, chance as float=1.0, fortuneChance as float=0.0){
+        mods.exnihilocreatio.Hammer.addRecipe(input, output, output.amount, chance, fortuneChance);
+    }*/
+    //Todo: Sieve
+}
+static exN as ExN = ExN();

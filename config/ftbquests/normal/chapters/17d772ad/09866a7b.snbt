@@ -1,0 +1,49 @@
+{
+	x: -8.0d,
+	y: 1.5d,
+	dependencies: [
+		"f7228ede"
+	],
+	tasks: [{
+		uid: "b23e9d5b",
+		type: "item",
+		items: [{
+			item: "minecraft:carrot"
+		}]
+	},
+	{
+		uid: "5cf27e7d",
+		type: "item",
+		items: [{
+			item: "minecraft:potato"
+		}]
+	},
+	{
+		uid: "3d5a4698",
+		type: "item",
+		items: [{
+			item: "minecraft:pumpkin_seeds"
+		}]
+	},
+	{
+		uid: "ee10cbb3",
+		type: "item",
+		items: [{
+			item: "minecraft:melon_seeds"
+		}]
+	},
+	{
+		uid: "a522a3b2",
+		type: "item",
+		items: [{
+			item: "minecraft:beetroot_seeds"
+		}]
+	},
+	{
+		uid: "683d1e6a",
+		type: "item",
+		items: [{
+			item: "minecraft:wheat_seeds"
+		}]
+	}]
+}

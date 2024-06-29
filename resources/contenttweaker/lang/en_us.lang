@@ -10,19 +10,17 @@ modpack.tooltip.dupFluix=§5Can be duplicated by combining with Fluix Crystal!§
 modpack.tooltip.dupInscribe=§fCan be duplicated at Inscriber (AE2)!§r
 modpack.tooltip.haste=§6Eat it for Haste II (1:30)!§r
 modpack.tooltip.netherrackHeating=§cHeated for %s times!§r
-
 modpack.tooltip.afflatus_of_crafting.requirement=Require [%s/%s] Different Crafts.
 modpack.tooltip.afflatus_of_crafting.next=An example of uncompleted craft:
 modpack.tooltip.afflatus_of_crafting.shift=Press shift to see which crafts haven't been done. 
 modpack.tooltip.afflatus_of_crafting.shifted=The indexes for uncompleted crafts:
 modpack.tooltip.afflatus_of_crafting.completed=The afflatus is completed, can be used for further crafting.
-
 modpack.tooltip.color_engine_b_real=Needs to be surrounded by 16 different shiny flowers.
 modpack.tooltip.fake_machine=This item is only used to show the multi-block structure.
-
 modpack.tooltip.reuse=This item will §aNOT§r be consumed 
 modpack.tooltip.consume=This item §cWILL§r be consumed
 modpack.tooltip.clearnbt=Do a 1->1 Craft to clean up the nbt, for other crafting usages.
+modpack.tooltip.lensDye=Can be colored by the Paintslinger!
 
 modpack.jei.mmce.color_engine_b.tolerance=The recipe §cexplodes§r if you have %s of any required color!
 modpack.jei.mmce.color_engine_b.harvest=Requires Diamond Pickaxe to harvest...

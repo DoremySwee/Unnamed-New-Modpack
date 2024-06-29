@@ -15,6 +15,16 @@ import crafttweaker.block.IBlock;
 static DIFF as int = scripts.Config.DIFF;
 static manaCoef as double = (3.0+DIFF)/5;
 
+//Grass
+    for i in vanilla.seeds.seeds {
+        vanilla.seeds.removeSeed(i.stack as crafttweaker.item.IIngredient);
+        vanilla.seeds.removeSeed(i.stack);
+    }
+    vanilla.seeds.removeSeed(<minecraft:wheat_seeds>);
+    for item in [<minecraft:carrot>,<minecraft:potato>,<minecraft:pumpkin_seeds>,<minecraft:melon_seeds>, <minecraft:beetroot_seeds>,<minecraft:wheat_seeds>,<minecraft:wheat_seeds>]as IItemStack[]{
+        vanilla.seeds.addSeed(item % 2);
+    }
+
 //Duplication
     static craftingDuplication as IItemStack[] = [
         <appliedenergistics2:nether_quartz_wrench>,
@@ -93,15 +103,21 @@ static manaCoef as double = (3.0+DIFF)/5;
     var pool2 = <botania:pool>;
     var quartzSlab = <appliedenergistics2:quartz_slab>;
     //furnace & glass
-    if(DIFF<3) Agg.addRecipe(
-        deadBush,[sapling],1500*manaCoef,0x202020,0x808080,
-        sand,cobbleStone,cobbleStone,
-        <minecraft:furnace>,<minecraft:glass>,<minecraft:glass>
-    );
+    if(DIFF<3){
+        Agg.addRecipe(
+            deadBush,[sapling],1500*manaCoef,0x202020,0x808080,
+            sand,cobbleStone,cobbleStone,
+            <minecraft:furnace>,<minecraft:stained_glass:4>,<minecraft:glass>
+        );
+        <minecraft:stained_glass:*>.addTooltip(game.localize("modpack.tooltip.lensDye"));
+        <minecraft:stained_hardened_clay:*>.addTooltip(game.localize("modpack.tooltip.lensDye"));
+        //TODO: Make everything easier in low difficulty
+        //TODO: Solve the problem for strings
+    }
     else Agg.addRecipe(
         deadBush,[sapling],1500*manaCoef,0x202020,0x808080,
         sand,cobbleStone,cobbleStone,
-        <minecraft:glass>,<minecraft:glass>,<minecraft:glass>
+        <minecraft:stained_glass:4>,<minecraft:glass>,<minecraft:glass>
     );
     //pool1
     if(DIFF<1) Agg.addRecipe(output1,[infDust],600*manaCoef,0x202020,0xD0D0D0,
@@ -134,6 +150,7 @@ static manaCoef as double = (3.0+DIFF)/5;
     furnace.remove(<tconstruct:materials>);
     furnace.addRecipe(<tconstruct:materials>,<tconstruct:materials:2>);
 //Crate
+    T.ae.inscribe(<botania:fertilizer>,[<minecraft:dye:15>, <minecraft:dye:11>, <minecraft:dye:1>]);
     var grass=<minecraft:tallgrass:1>;
     var water = <liquid:water>;
     Agg.addRecipe(deadBush,[sapling],1000*manaCoef,0x00FF00,0x0000FF,
@@ -248,12 +265,13 @@ static manaCoef as double = (3.0+DIFF)/5;
 
 //Pyrotheum, Glowstone & Rune Altar
     mods.tconstruct.Melting.addEntityMelting(<entity:minecraft:blaze>,<liquid:pyrotheum>*4);
+    mods.tconstruct.Fuel.registerFuel(<liquid:pyrotheum>, 1200);
     var torch = <minecraft:torch>;
     var coef1 = DIFF>3 ? 32 : 16;
     var corner5 = DIFF>3 ? <botania:shinyflower:3> : <botania:flower:3>;
     recipes.remove(torch);
     recipes.addShaped(torch*coef1,[[<ore:coal>],[<minecraft:stick>]]);
-    T.tic.melting(<liquid:glowstone>,torch);
+    T.tic.melting(<liquid:glowstone>,torch,1);
     
     var c1 = 1+DIFF/3;
     var inputs1 = [<oldresearch:research_table_old>, <botania:manaresource:23>*4, <contenttweaker:broken_aer_rune>*c1,<contenttweaker:broken_aqua_rune>*c1,<contenttweaker:broken_ignis_rune>*c1,<contenttweaker:broken_terra_rune>*c1] as IItemStack[];
@@ -324,7 +342,7 @@ static manaCoef as double = (3.0+DIFF)/5;
             else b=b|V.pow2(index - 24);
             var out2 = aff.withTag(lastNBT + {"affCounting0":a, "affCounting1":b} as IData);
             var affInfo = craftingAfflatusInfo(out2);
-            if(affInfo[0]>=requiredNum) return affc;//M.shimmer(aff).withTag({"completed":true})*7;
+            if(affInfo[0]>=requiredNum) return affc*7;//M.shimmer(aff).withTag({"completed":true})*7;
             return out2*7;
         }, null
     );
@@ -425,6 +443,7 @@ static manaCoef as double = (3.0+DIFF)/5;
     for i in 0 to 16{ wools = wools + <minecraft:wool>.definition.makeStack(i);}
     static spectrolus as IItemStack = <botania:specialflower>.withTag({type: "spectrolus"});
     static whispee as IItemStack = <botania:specialflower>.withTag({type: "whispee"});
+    recipes.remove(<botania:altar>);
     recipes.addShaped(<botania:altar>,Mp.read("AXA;_B_;BBB;",{"B":<botania:livingrock>,"A":<botania:livingrock0slab>,"X":<contenttweaker:broken_aqua_rune>}));
     T.bot.petal(spectrolus, wools);
     T.bot.petal(whispee*4, [<contenttweaker:broken_aer_rune>,<botania:flower:2>,DIFF<3?<thaumcraft:scribing_tools>:<minecraft:writable_book>,<botania:flower:3>,<botania:flower:4>]);
@@ -479,7 +498,7 @@ static manaCoef as double = (3.0+DIFF)/5;
         affc
     ], 3000*manaCoef);
 
-    recipes.addShaped(<chisel:futura:4>,Mp.read("AAA;ABA;AAA;",{"A":<chisel:futura:4>,"B":<appliedenergistics2:material:7>}));
+    recipes.addShaped(<chisel:futura:4>,Mp.read("AAA;ABA;AAA;",{"A":<chisel:futura>,"B":<appliedenergistics2:material:7>}));
     recipes.addShapeless(<appliedenergistics2:part:301>,[<appliedenergistics2:part:300>,<appliedenergistics2:material:7>]);
     //Todo: recipes for panels
 //Inf water
