@@ -2,7 +2,6 @@
 #priority 100000011
 
 //imports
-    import scripts.libs.advanced.UniversalTicker as UT;
     import scripts.libs.basic.Vector3D as V;
     import scripts.libs.advanced.Misc as M;
 

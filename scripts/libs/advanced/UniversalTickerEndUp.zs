@@ -1,5 +1,6 @@
 #reloadable
 #priority -100000111
+#norun
 import scripts.libs.advanced.UniversalTicker as UT;
 import scripts.libs.advanced.Misc as M;
 

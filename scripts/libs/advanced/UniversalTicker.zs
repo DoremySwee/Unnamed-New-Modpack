@@ -1,5 +1,6 @@
 #reloadable
 #priority 100000111
+#norun
 import crafttweaker.data.IData;
 import crafttweaker.world.IWorld;
 import crafttweaker.entity.IEntity;
