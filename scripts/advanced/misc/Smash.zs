@@ -97,9 +97,9 @@
     });
 //////
 //Events for Anvils
-    UT.register2(<entity:minecraft:falling_block>, function(entity as IEntity,event as crafttweaker.event.WorldTickEvent, data as IData)as void{
+    UT.register2(<entity:minecraft:falling_block>, function(entity as IEntity, data as IData)as void{
         if((["minecraft:anvil","enderio:block_dark_steel_anvil"] as string[]) has data.Block.asString()){
-            var world = event.world;
+            var world = entity.world;
             var res = world.rayTraceBlocks(
                 crafttweaker.world.IVector3d.create(entity.x, entity.y, entity.z), 
                 crafttweaker.world.IVector3d.create(entity.motionX, entity.motionY, entity.motionZ)

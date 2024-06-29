@@ -9,28 +9,29 @@ import crafttweaker.entity.IEntityDefinition;
 zenClass Listener{
     var entityType as IEntityDefinition;
     var checkData as bool;
-    var tick as function(IEntity, WorldTickEvent, IData)void;
-    zenConstructor(a  as IEntityDefinition,b as bool,c as function(IEntity, WorldTickEvent, IData)void){
+    var tick as function(IEntity, IData)void;
+    zenConstructor(a  as IEntityDefinition,b as bool,c as function(IEntity, IData)void){
         entityType=a;
         checkData=b;
         tick=c;
     }
 }
 static Listeners as [Listener][IEntityDefinition] = {} as [Listener][IEntityDefinition];
-function register(def as IEntityDefinition, tick as function(IEntity, WorldTickEvent)void){
+function register(def as IEntityDefinition, tick as function(IEntity)void){
     var t = Listener(def, false, 
-        function(a as IEntity,b as WorldTickEvent,c as IData)as void{
-            tick(a,b);
+        function(a as IEntity,c as IData)as void{
+            tick(a);
         }
     );
     if(Listeners has def)Listeners[def] = Listeners[def] + t;
     else Listeners[def] = [t] as [Listener];
 }
-function register2(def as IEntityDefinition, tick as function(IEntity, WorldTickEvent, IData)void){
+function register2(def as IEntityDefinition, tick as function(IEntity, IData)void){
     var t = Listener(def, true, tick);
     if(Listeners has def)Listeners[def] = Listeners[def] + t;
     else Listeners[def] = [t] as [Listener];
 }
+/*
 events.register(function(event as WorldTickEvent){
     var world as IWorld=event.world;
     if(world.remote)return;
@@ -44,4 +45,4 @@ events.register(function(event as WorldTickEvent){
             }
         }
     }
-});
+});*/
