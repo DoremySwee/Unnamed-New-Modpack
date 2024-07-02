@@ -108,12 +108,11 @@
         val def = entity.definition;
         if (!isNull(def) && def.id == "minecraft:falling_block") {
             if ((["minecraft:anvil","enderio:block_dark_steel_anvil"] as string[]) has entity.nbt.Block.asString()) {
-                M.shout("falling anvil");
                 event.world.catenation()
                     .repeat(2147483647, function(builder) {
                         builder.run(function(world, ctx) {
                             val posVec = IVector3d.create(entity.x, entity.y, entity.z);
-                            val motionVec = posVec.add(IVector3d.create(entity.motionX, entity.motionY, entity.motionZ));
+                            val motionVec = posVec.add(IVector3d.create(entity.motionX, entity.motionY - 0.04, entity.motionZ));
                             val result = world.rayTraceBlocks(posVec, motionVec);
                             if (isNull(result) || !result.isBlock) {
                                 return;
@@ -126,11 +125,10 @@
                                         world.destroyBlock(pos, false);
                                         for output in Outputs[i] {
                                             if (output.chance > world.random.nextFloat()) {
-                                                // TODO: remove mutable().copy() after crt update
-                                                world.spawnEntity(output.stack.mutable().copy().createEntityItem(world, pos));
+                                                world.spawnEntity(output.stack.createEntityItem(world, pos));
                                             }
                                         }
-                                        // entity.motionY = min(0.3f, entity.motionY * 0.7 + 0.1);
+                                        // entity.motionY = entity.motionY * 0.7 + 0.1;
                                     }
                                 }
                             }
