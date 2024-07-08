@@ -55,13 +55,10 @@ function playSound(s as string, pos as IBlockPos, volume as double=1.0){
     executeCommand("playsound "~s~" block @p "~pos.x~" "~pos.y~" "~pos.z~" "~volume);
 }
 function isNumber(s as string)as bool{
-    return ["0","1","2","3","4","5","6","7","8","9"] as string[] has s;
+    return "0123456789" has s;
 }
 function isAlphabet(s as string)as bool{
-    return [
-        "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
-        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-    ] as string[] has s;
+    return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" has s;
 }
 function canFromTranslationKey(s as string)as bool{
     return isNumber(s) || isAlphabet(s) || s=="_" || s==".";
