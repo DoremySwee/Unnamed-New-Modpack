@@ -3,6 +3,8 @@
 #debug
 import crafttweaker.item.IIngredient;
 import crafttweaker.item.IItemStack;
+import crafttweaker.block.IBlockState;
+import crafttweaker.block.IBlockStateMatcher;
 
 static TEST as bool = false;
 static TEST2 as bool = true;
@@ -183,6 +185,17 @@ function testShapeless(requirements as IIngredient[], inputs as IItemStack[], me
     return testMatching(output);
 }
 
+function matchBlocks(requirements as IBlockStateMatcher[], inputs as IBlockState[]) as int[] {
+    val m = max(requirements.length, inputs.length);
+    var graph = arrayOf(m,boolArrayOf(m,false)) as bool[][];
+    for i, requirement in requirements {
+        for j, input in inputs{
+            graph[i][j] = requirement.matches(input);
+        }
+    }
+    return hung(graph);
+}
+
 if(TEST2){
     print("Test2 Hungarian Algorithm!");
     print(testShapeless([<appliedenergistics2:io_port>],[<appliedenergistics2:chest>]));
@@ -195,4 +208,10 @@ if(TEST2){
     print(testShapeless([<ore:dye>*30,<ore:dyeRed>,<ore:gemLapis>],[<minecraft:dye:9>,<minecraft:dye:4>*30,<minecraft:dye:1>]));    //False, since did not use split items
     print(testShapeless([<ore:dye>,<ore:dyeRed>,<ore:gemLapis>*128],[<minecraft:dye:9>,<minecraft:dye:4>*64,<minecraft:dye:4>*64,<minecraft:dye:1>]));
     print(testShapeless([<ore:dye>,<ore:dyeRed>,<ore:gemLapis>*160],[<minecraft:dye:9>,<minecraft:dye:4>*64,<minecraft:dye:4>*64,<minecraft:dye:1>, <minecraft:dye:4> * 32]));
+
+    val blockMatchingResult = matchBlocks([<blockstate:tconstruct:casting>, <blockstate:botania:runealtar>], [<blockstate:minecraft:air>, <blockstate:minecraft:air>, <blockstate:botania:runealtar>, <blockstate:minecraft:air>, <blockstate:tconstruct:casting>]);
+    print("Test4 Hungarian Algorithm!");
+    for i in blockMatchingResult {
+        print(i);
+    }
 }

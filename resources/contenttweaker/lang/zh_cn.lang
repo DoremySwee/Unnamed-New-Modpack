@@ -43,6 +43,7 @@ item.contenttweaker.shard_perditio.name=混沌碎片
 item.contenttweaker.shard_balanced.name=平衡碎片
 item.contenttweaker.shard_nether.name=下界碎片
 item.contenttweaker.shard_ender.name=末影碎片
+item.contenttweaker.alchemical_medium.name=炼金介质
 
 tile.contenttweaker.heated_netherrack_1.name=§c暖的地狱岩§r
 tile.contenttweaker.heated_netherrack_2.name=§c热的地狱岩§r
@@ -53,3 +54,4 @@ tile.botania:flower.whispee.name=§d梦呓§r
 
 modularmachinery.color_engine_a=Color Engine (Type A) 中文未命名
 modularmachinery.color_engine_b=Color Engine (Type B) 中文未命名
+modularmachinery.alchemy_constructor=炼金构造机

@@ -43,6 +43,7 @@ item.contenttweaker.shard_perditio.name=Entropy Shard
 item.contenttweaker.shard_balanced.name=Balanced Shard
 item.contenttweaker.shard_nether.name=Nether Shard
 item.contenttweaker.shard_ender.name=Ender Shard
+item.contenttweaker.alchemical_medium.name=Alchemical Medium
 
 tile.contenttweaker.heated_netherrack_1.name=§cWarm Netherrack§r
 tile.contenttweaker.heated_netherrack_2.name=§cHot Netherrack§r
@@ -53,3 +54,4 @@ tile.botania:flower.whispee.name=§dWhispee§r
 
 modularmachinery.color_engine_a=Color Engine (Type A)
 modularmachinery.color_engine_b=Color Engine (Type B)
+modularmachinery.alchemy_constructor=Alchemy Constructor

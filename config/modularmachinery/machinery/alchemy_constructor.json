@@ -1,0 +1,203 @@
+{
+    "registryname": "alchemy_constructor",
+    "localizedname": "alchemy_constructor",
+    "requires-blueprint": false,
+    "dynamic-patterns": [
+        {
+            "name": "line",
+            "faces": [
+                "north"
+            ],
+            "minSize": 3,
+            "maxSize": 12,
+            "parts": [
+                {
+                    "x": -1,
+                    "y": 0,
+                    "z": 2,
+                    "elements": [
+                        "chisel:futura@2"
+                    ]
+                },
+                {
+                    "x": -1,
+                    "y": 0,
+                    "z": 0,
+                    "elements": [
+                        "chisel:futura@2"
+                    ]
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "z": 0,
+                    "elements": [
+                        "chisel:futura@2"
+                    ]
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "z": 2,
+                    "elements": [
+                        "chisel:futura@2"
+                    ]
+                }
+            ],
+            "parts-end": [
+                {
+                    "x": -1,
+                    "y": 0,
+                    "z": 2,
+                    "elements": [
+                        "chisel:futura@4"
+                    ]
+                },
+                {
+                    "x": -1,
+                    "y": 0,
+                    "z": 1,
+                    "elements": [
+                        "casings_item",
+                        "casings_fluid"
+                    ]
+                },
+                {
+                    "x": -1,
+                    "y": 0,
+                    "z": 0,
+                    "elements": [
+                        "chisel:futura@4"
+                    ]
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "z": 2,
+                    "elements": [
+                        "chisel:futura@4"
+                    ]
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "z": 1,
+                    "elements": [
+                        "casings_item",
+                        "casings_fluid"
+                    ]
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "z": 0,
+                    "elements": [
+                        "chisel:futura@4"
+                    ]
+                },
+                {
+                    "x": 0,
+                    "y": 0,
+                    "z": 2,
+                    "elements": [
+                        "casings_item",
+                        "casings_fluid"
+                    ]
+                },
+                {
+                    "x": 0,
+                    "y": 0,
+                    "z": 1,
+                    "elements": [
+                        "chisel:futura@5"
+                    ]
+                },
+                {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "elements": [
+                        "casings_item",
+                        "casings_fluid"
+                    ]
+                }
+            ],
+            "structure-size-offset-start": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "structure-size-offset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            }
+        }
+    ],
+    "parts": [
+        {
+            "x": -1,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "chisel:futura@4"
+            ]
+        },
+        {
+            "x": -1,
+            "y": 0,
+            "z": 1,
+            "elements": [
+                "chisel:futura@3"
+            ]
+        },
+        {
+            "x": -1,
+            "y": 0,
+            "z": 0,
+            "elements": [
+                "chisel:futura@4"
+            ]
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "chisel:futura@4"
+            ]
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 1,
+            "elements": [
+                "chisel:futura@3"
+            ]
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 0,
+            "elements": [
+                "chisel:futura@4"
+            ]
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 2,
+            "elements": [
+                "chisel:futura@3"
+            ]
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 1,
+            "elements": [
+                "chisel:futura@5"
+            ]
+        }
+    ]
+}
