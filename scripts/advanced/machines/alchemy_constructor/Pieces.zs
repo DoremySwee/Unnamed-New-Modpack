@@ -24,13 +24,11 @@ zenClass Piece {
 zenClass CastingTable {
     val item as IIngredient;
     val fluid as ILiquidStack;
-    val basin as bool;
     val medium as IItemStack;
 
     zenConstructor(item as IIngredient, fluid as ILiquidStack) {
         this.item = item;
         this.fluid = fluid;
-        this.basin = basin;
         this.medium = createMedium("Casting", [item], [fluid]);
         T.tic.casting(this.medium, item, fluid, 80);
     }
