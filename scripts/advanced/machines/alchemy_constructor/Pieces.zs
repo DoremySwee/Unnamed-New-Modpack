@@ -113,6 +113,7 @@ zenClass ColorEngine {
 
     zenConstructor(inputs as IIngredient[], colors as IItemStack[]) {
         this.medium = createMedium("ColorEngine", inputs, []);
+        CE.addRecipe([this.medium], inputs, colors);
     }
 
     function isWorking(world as IWorld, pos as IBlockPos) as bool {
