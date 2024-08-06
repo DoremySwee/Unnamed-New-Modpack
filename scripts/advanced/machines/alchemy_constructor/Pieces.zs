@@ -1,5 +1,5 @@
 #reloadable
-#priority 10007
+#priority 9999
 
 import crafttweaker.block.IBlockState;
 import crafttweaker.world.IWorld;
@@ -7,9 +7,13 @@ import crafttweaker.world.IBlockPos;
 import crafttweaker.item.IItemStack;
 import crafttweaker.item.IIngredient;
 import crafttweaker.liquid.ILiquidStack;
+import mods.modularmachinery.MachineController;
+import crafttweaker.util.IAxisAlignedBB;
 import scripts.libs.recipe.Transcript as T;
 import scripts.advanced.machines.alchemy_constructor.Medium.createMedium;
+import scripts.advanced.machines.ColorEngine as CE;
 import scripts.libs.advanced.Hungarian;
+import scripts.libs.basic.Vector3D as V;
 
 zenClass Piece {
     val predicate as function(IWorld,IBlockPos)bool;
@@ -92,6 +96,39 @@ zenClass RuneAltar {
         val inv = world.getItemHandler(pos);
         for i in 0 .. inv.size {
             inv.setStackInSlot(i, null);
+        }
+    }
+
+    function toPiece() as Piece {
+        return Piece(function(world as IWorld, pos as IBlockPos) as bool {
+            return this.isWorking(world, pos);
+        }, function(world as IWorld, pos as IBlockPos) as void {
+            this.clear(world, pos);
+        });
+    }
+}
+
+zenClass ColorEngine {
+    val medium as IItemStack;
+
+    zenConstructor(inputs as IIngredient[], colors as IItemStack[]) {
+        this.medium = createMedium("ColorEngine", inputs, []);
+    }
+
+    function isWorking(world as IWorld, pos as IBlockPos) as bool {
+        for item in world.nearbyEntities(V.asIVector3d(V.fromIBlockPos(pos, true)), 1.0).items() {
+            if (item.tags has "Crafted" && medium.matches(item.item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function clear(world as IWorld, pos as IBlockPos) as void {
+        for item in world.nearbyEntities(V.asIVector3d(V.fromIBlockPos(pos, true)), 1.0).items() {
+            if (item.tags has "Crafted" && medium.matches(item.item)) {
+                item.removeFromWorld();
+            }
         }
     }
 

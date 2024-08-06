@@ -299,7 +299,15 @@ MMEvents.onMachinePreTick("color_engine_b", function(event as MachineTickEvent)a
             }
             var outputs = COLOR_ENGINE_RECIPES_OUTPUTS[recipeId] as IItemStack[];
             for o in outputs{
-                world.spawnEntity(o.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float));
+                val outputEntity = o.createEntityItem(world, (0.5+pos.x)as float, (0.2+pos.y) as float, (0.5+pos.z)as float);
+                outputEntity.addTag("Crafted");
+                world.catenation()
+                    .sleep(10)
+                    .then(function(w, ctx) {
+                        outputEntity.removeTag("Crafted");
+                    })
+                    .start();
+                world.spawnEntity(outputEntity);
             }
             var matching = Hungarian.matchShapeless(requirements,items);
             for i in 0 to requirements.length{

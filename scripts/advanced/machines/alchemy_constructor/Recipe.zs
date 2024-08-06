@@ -1,5 +1,5 @@
 #reloadable
-#priority 10000
+#priority 9998
 
 import crafttweaker.item.IItemStack;
 import crafttweaker.block.IBlockStateMatcher;
@@ -20,6 +20,7 @@ zenClass Recipe {
     // builder arguments
     var casting as Pieces.CastingTable;
     var runeAltar as Pieces.RuneAltar;
+    var colorEngine as Pieces.ColorEngine;
 
     // internal logic pieces
     var machineSlots as IBlockStateMatcher[] = [];
@@ -44,6 +45,11 @@ zenClass Recipe {
             machineSlots += <blockstate:botania:runealtar>;
             machineSlotPieces += runeAltar.toPiece();
             builder.addCatalystInput(runeAltar.medium, [], []).setChance(0);
+        }
+        if (!isNull(colorEngine)) {
+            machineSlots += <blockstate:modularmachinery:color_engine_b_controller>;
+            machineSlotPieces += colorEngine.toPiece();
+            builder.addCatalystInput(colorEngine.medium, [], []).setChance(0);
         }
         builder.addPostCheckHandler(function(event as RecipeCheckEvent) {
             val controller = event.controller;
